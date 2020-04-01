@@ -1,0 +1,2629 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/22/2020 5:14:25 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-DBGFR1O"
+  DTS:CreatorName="DESKTOP-DBGFR1O\batel"
+  DTS:DTSID="{E299B16C-9504-4188-9BFB-EC9B35979DE5}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.68"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="070 ExtractPurchases"
+  DTS:PackageType="5"
+  DTS:VersionBuild="54"
+  DTS:VersionGUID="{F4101FFF-E98C-44FB-BB8F-3EA8826AED46}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{87CFC4DC-CA14-4072-8D85-22112FBA323E}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="GETDATE()"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="CurrentDate">
+      <DTS:VariableValue
+        DTS:DataType="7">3/31/2020 5:06:01 PM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6F18E086-957C-4532-91E1-A3F61442977A}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="IsFirstExtract">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C55413AE-8DE6-4452-AC32-933CC1481EE5}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="LastExtractDate">
+      <DTS:VariableValue
+        DTS:DataType="7">1/27/2020 3:54:57 PM</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{C4A573C2-1126-416F-9490-662C9F5BE485}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Change huge orders on first extract"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{CF78419A-E391-4B11-A169-BF7275985D59}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Change huge orders on first extract"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}"
+              SQLTask:SqlStatementSource="&#xA;--update huge purchases for the first extract&#xA;UPDATE STGPurchases&#xA;SET ProductQuantity = 26&#xA;WHERE ProductKey IN (142,143,134,122,16)&#xA;&#x9;&#x9;&#x9;&#x9;&#xA;UPDATE STGPurchases&#xA;SET ProductQuantity = 67&#xA;WHERE ProductKey IN (125,140,27)&#xA;&#x9;&#x9;&#x9;&#x9;&#xA;UPDATE STGPurchases&#xA;SET ProductQuantity = 200&#xA;WHERE ProductKey = 36&#xA;&#xA;UPDATE STGPurchases&#xA;SET ProductQuantity = 25&#xA;WHERE ProductKey IN (77,78,86,98)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\ChecksFirstExtract"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{f8976ae8-dea2-4881-b968-ac8740612664}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="ChecksFirstExtract"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}"
+              SQLTask:SqlStatementSource="IF NOT EXISTS  (SELECT * FROM [ProjectWWIDW].[dbo].ExtractLog WHERE TableName = 'STGPurchases') &#xA; SELECT 0 IsFirstExtract&#xA;ELSE &#xA;&#xA; SELECT 1 IsFirstExtract&#xA;"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="IsFirstExtract"
+                SQLTask:DtsVariableName="User::IsFirstExtract" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\ExtractPurchase"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{21965845-5FC6-4D5E-94E6-88542473910F}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="ExtractPurchase"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Sequence Container\ExtractPurchase\Lookup"
+                  componentClassID="Microsoft.Lookup"
+                  contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+                  description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+                  name="Lookup"
+                  usesDispositions="true"
+                  version="6">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the SQL statement that generates the lookup table."
+                      expressionType="Notify"
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [Warehouse].[StockItems]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                      expressionType="Notify"
+                      name="SqlCommandParam"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [Warehouse].[StockItems]) [refTable]
+where [refTable].[StockItemID] = ?</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the type of connection used to access the reference dataset."
+                      name="ConnectionType"
+                      typeConverter="LookupConnectionType">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the cache type of the lookup table."
+                      name="CacheType"
+                      typeConverter="CacheType">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                      name="NoMatchBehavior"
+                      typeConverter="LookupNoMatchBehavior">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                      name="NoMatchCachePercentage">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                      name="MaxMemoryUsage">25</property>
+                    <property
+                      dataType="System.Int64"
+                      description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                      name="MaxMemoryUsage64">25</property>
+                    <property
+                      dataType="System.String"
+                      description="Indicates whether to reference metadata in an XML format."
+                      name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="StockItemID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StockItemName" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="SupplierID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ColorID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="UnitPackageID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="OuterPackageID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Brand" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Size" dataType="DT_WSTR" length="20" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="LeadTimeDays" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="QuantityPerOuter" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="IsChillerStock" dataType="DT_BOOL" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Barcode" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="TaxRate" dataType="DT_NUMERIC" length="0" precision="18" scale="3" codePage="0"/&gt;&lt;referenceColumn name="UnitPrice" dataType="DT_NUMERIC" length="0" precision="18" scale="2" codePage="0"/&gt;&lt;referenceColumn name="RecommendedRetailPrice" dataType="DT_NUMERIC" length="0" precision="18" scale="2" codePage="0"/&gt;&lt;referenceColumn name="TypicalWeightPerUnit" dataType="DT_NUMERIC" length="0" precision="18" scale="3" codePage="0"/&gt;&lt;referenceColumn name="MarketingComments" dataType="DT_NTEXT" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="InternalComments" dataType="DT_NTEXT" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Photo" dataType="DT_IMAGE" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CustomFields" dataType="DT_NTEXT" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Tags" dataType="DT_NTEXT" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="SearchDetails" dataType="DT_NTEXT" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="LastEditedBy" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ValidFrom" dataType="DT_DBTIMESTAMP2" length="0" precision="0" scale="7" codePage="0"/&gt;&lt;referenceColumn name="ValidTo" dataType="DT_DBTIMESTAMP2" length="0" precision="0" scale="7" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                      name="ParameterMap">#{Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].Columns[StockItemID]};</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                      name="TreatDuplicateKeysAsError">false</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\ExtractPurchase\Lookup.Connections[OleDbConnection]"
+                      connectionManagerID="{746B0810-B490-44C2-A0AA-C1A8F04752A7}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.WideWorldImporters]"
+                      description="Connection manager used to access lookup data."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\ExtractPurchase\Lookup.Inputs[Lookup Input]"
+                      name="Lookup Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Lookup.Inputs[Lookup Input].Columns[StockItemID]"
+                          cachedDataType="i4"
+                          cachedName="StockItemID"
+                          lineageId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].Columns[StockItemID]">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table that a column joins."
+                              name="JoinToReferenceColumn">StockItemID</property>
+                            <property
+                              dataType="System.Null"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\ExtractPurchase\Lookup.Outputs[Lookup Match Output]"
+                      errorOrTruncationOperation="Lookup"
+                      errorRowDisposition="FailComponent"
+                      exclusionGroup="1"
+                      name="Lookup Match Output"
+                      synchronousInputId="Package\Sequence Container\ExtractPurchase\Lookup.Inputs[Lookup Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Lookup.Outputs[Lookup Match Output].Columns[QuantityPerOuter]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Copy Column"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Lookup.Outputs[Lookup Match Output].Columns[QuantityPerOuter]"
+                          name="QuantityPerOuter"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">QuantityPerOuter</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\ExtractPurchase\Lookup.Outputs[Lookup No Match Output]"
+                      description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                      exclusionGroup="1"
+                      name="Lookup No Match Output"
+                      synchronousInputId="Package\Sequence Container\ExtractPurchase\Lookup.Inputs[Lookup Input]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\ExtractPurchase\Lookup.Outputs[Lookup Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Lookup Error Output"
+                      synchronousInputId="Package\Sequence Container\ExtractPurchase\Lookup.Inputs[Lookup Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\ExtractPurchase\Lookup 1"
+                  componentClassID="Microsoft.Lookup"
+                  contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+                  description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+                  name="Lookup 1"
+                  usesDispositions="true"
+                  version="6">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the SQL statement that generates the lookup table."
+                      expressionType="Notify"
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [dbo].[STGSuppliers]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                      expressionType="Notify"
+                      name="SqlCommandParam"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [dbo].[STGSuppliers]) [refTable]
+where [refTable].[SupplierKey] = ?</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the type of connection used to access the reference dataset."
+                      name="ConnectionType"
+                      typeConverter="LookupConnectionType">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the cache type of the lookup table."
+                      name="CacheType"
+                      typeConverter="CacheType">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                      name="NoMatchBehavior"
+                      typeConverter="LookupNoMatchBehavior">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                      name="NoMatchCachePercentage">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                      name="MaxMemoryUsage">25</property>
+                    <property
+                      dataType="System.Int64"
+                      description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                      name="MaxMemoryUsage64">25</property>
+                    <property
+                      dataType="System.String"
+                      description="Indicates whether to reference metadata in an XML format."
+                      name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="SupplierKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="SupplierName" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="SupplierCategory" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="PaymentDays" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ExtraCosts" dataType="DT_NUMERIC" length="0" precision="28" scale="6" codePage="0"/&gt;&lt;referenceColumn name="Incoterms" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="LeadTime" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Currency" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="LocationKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                      name="ParameterMap">#{Package\Sequence Container\ExtractPurchase\Merge Join 1.Outputs[Merge Join Output].Columns[SupplierKey]};</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                      name="TreatDuplicateKeysAsError">false</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\ExtractPurchase\Lookup 1.Connections[OleDbConnection]"
+                      connectionManagerID="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.ProjectWWIDW]"
+                      description="Connection manager used to access lookup data."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\ExtractPurchase\Lookup 1.Inputs[Lookup Input]"
+                      name="Lookup Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Lookup 1.Inputs[Lookup Input].Columns[SupplierKey]"
+                          cachedDataType="i4"
+                          cachedName="SupplierKey"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Outputs[Merge Join Output].Columns[SupplierKey]">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table that a column joins."
+                              name="JoinToReferenceColumn">SupplierKey</property>
+                            <property
+                              dataType="System.Null"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\ExtractPurchase\Lookup 1.Outputs[Lookup Match Output]"
+                      errorOrTruncationOperation="Lookup"
+                      errorRowDisposition="FailComponent"
+                      exclusionGroup="1"
+                      name="Lookup Match Output"
+                      synchronousInputId="Package\Sequence Container\ExtractPurchase\Lookup 1.Inputs[Lookup Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Lookup 1.Outputs[Lookup Match Output].Columns[LocationKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Copy Column"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Lookup 1.Outputs[Lookup Match Output].Columns[LocationKey]"
+                          name="LocationKey"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">LocationKey</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\ExtractPurchase\Lookup 1.Outputs[Lookup No Match Output]"
+                      description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                      exclusionGroup="1"
+                      name="Lookup No Match Output"
+                      synchronousInputId="Package\Sequence Container\ExtractPurchase\Lookup 1.Inputs[Lookup Input]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\ExtractPurchase\Lookup 1.Outputs[Lookup Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Lookup Error Output"
+                      synchronousInputId="Package\Sequence Container\ExtractPurchase\Lookup 1.Inputs[Lookup Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Lookup 1.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Lookup 1.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Lookup 1.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Lookup 1.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\ExtractPurchase\Merge Join"
+                  componentClassID="Microsoft.MergeJoin"
+                  contactInfo="Merge Join;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Combine two sorted data flows into one using the FULL, LEFT, or INNER join. We recommend this transformation when data flows can be sorted at their sources."
+                  name="Merge Join"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the type of join to perform."
+                      name="JoinType"
+                      typeConverter="JoinType">1</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the number of columns in the ordering key."
+                      name="NumKeyColumns">1</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the null values are treated as equal values."
+                      name="TreatNullsAsEqual">true</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Indicates the requested maximum buffers per input before blocking."
+                      name="MaxBuffersPerInput">5</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\ExtractPurchase\Merge Join.Inputs[Merge Join Left Input]"
+                      hasSideEffects="true"
+                      name="Merge Join Left Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Merge Join.Inputs[Merge Join Left Input].Columns[PurchaseOrderID]"
+                          cachedDataType="i4"
+                          cachedName="PurchaseOrderID"
+                          cachedSortKeyPosition="1"
+                          lineageId="Package\Sequence Container\ExtractPurchase\PurchaseOrders.Outputs[OLE DB Source Output].Columns[PurchaseOrderID]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Merge Join.Inputs[Merge Join Left Input].Columns[SupplierID]"
+                          cachedDataType="i4"
+                          cachedName="SupplierID"
+                          lineageId="Package\Sequence Container\ExtractPurchase\PurchaseOrders.Outputs[OLE DB Source Output].Columns[SupplierID]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Merge Join.Inputs[Merge Join Left Input].Columns[ExpectedDeliveryDate]"
+                          cachedDataType="dbDate"
+                          cachedName="ExpectedDeliveryDate"
+                          lineageId="Package\Sequence Container\ExtractPurchase\PurchaseOrders.Outputs[OLE DB Source Output].Columns[ExpectedDeliveryDate]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                    <input
+                      refId="Package\Sequence Container\ExtractPurchase\Merge Join.Inputs[Merge Join Right Input]"
+                      hasSideEffects="true"
+                      name="Merge Join Right Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Merge Join.Inputs[Merge Join Right Input].Columns[PurchaseOrderID]"
+                          cachedDataType="i4"
+                          cachedName="PurchaseOrderID"
+                          cachedSortKeyPosition="1"
+                          lineageId="Package\Sequence Container\ExtractPurchase\SupplierTransactions.Outputs[OLE DB Source Output].Columns[PurchaseOrderID]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Merge Join.Inputs[Merge Join Right Input].Columns[AmountExcludingTax]"
+                          cachedDataType="numeric"
+                          cachedName="AmountExcludingTax"
+                          cachedPrecision="18"
+                          cachedScale="2"
+                          lineageId="Package\Sequence Container\ExtractPurchase\SupplierTransactions.Outputs[OLE DB Source Output].Columns[AmountExcludingTax]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\ExtractPurchase\Merge Join.Outputs[Merge Join Output]"
+                      isSorted="true"
+                      name="Merge Join Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Merge Join.Outputs[Merge Join Output].Columns[PurchaseOrderID]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Merge Join.Outputs[Merge Join Output].Columns[PurchaseOrderID]"
+                          name="PurchaseOrderID"
+                          sortKeyPosition="1">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\ExtractPurchase\Merge Join.Inputs[Merge Join Left Input].Columns[PurchaseOrderID]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Merge Join.Outputs[Merge Join Output].Columns[SupplierID]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Merge Join.Outputs[Merge Join Output].Columns[SupplierID]"
+                          name="SupplierID">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\ExtractPurchase\Merge Join.Inputs[Merge Join Left Input].Columns[SupplierID]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Merge Join.Outputs[Merge Join Output].Columns[ExpectedDeliveryDate]"
+                          dataType="dbDate"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Merge Join.Outputs[Merge Join Output].Columns[ExpectedDeliveryDate]"
+                          name="ExpectedDeliveryDate">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\ExtractPurchase\Merge Join.Inputs[Merge Join Left Input].Columns[ExpectedDeliveryDate]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Merge Join.Outputs[Merge Join Output].Columns[AmountExcludingTax]"
+                          dataType="numeric"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Merge Join.Outputs[Merge Join Output].Columns[AmountExcludingTax]"
+                          name="AmountExcludingTax"
+                          precision="18"
+                          scale="2">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\ExtractPurchase\Merge Join.Inputs[Merge Join Right Input].Columns[AmountExcludingTax]}</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\ExtractPurchase\Merge Join 1"
+                  componentClassID="Microsoft.MergeJoin"
+                  contactInfo="Merge Join;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Combine two sorted data flows into one using the FULL, LEFT, or INNER join. We recommend this transformation when data flows can be sorted at their sources."
+                  name="Merge Join 1"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the type of join to perform."
+                      name="JoinType"
+                      typeConverter="JoinType">1</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the number of columns in the ordering key."
+                      name="NumKeyColumns">1</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the null values are treated as equal values."
+                      name="TreatNullsAsEqual">true</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Indicates the requested maximum buffers per input before blocking."
+                      name="MaxBuffersPerInput">5</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Inputs[Merge Join Left Input]"
+                      hasSideEffects="true"
+                      name="Merge Join Left Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Inputs[Merge Join Left Input].Columns[PurchaseOrderID]"
+                          cachedDataType="i4"
+                          cachedName="PurchaseOrderID"
+                          cachedSortKeyPosition="1"
+                          lineageId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].Columns[PurchaseOrderID]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Inputs[Merge Join Left Input].Columns[PurchaseOrderLineID]"
+                          cachedDataType="i4"
+                          cachedName="PurchaseOrderLineID"
+                          lineageId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].Columns[PurchaseOrderLineID]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Inputs[Merge Join Left Input].Columns[StockItemID]"
+                          cachedDataType="i4"
+                          cachedName="StockItemID"
+                          lineageId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].Columns[StockItemID]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Inputs[Merge Join Left Input].Columns[ReceivedOuters]"
+                          cachedDataType="i4"
+                          cachedName="ReceivedOuters"
+                          lineageId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].Columns[ReceivedOuters]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Inputs[Merge Join Left Input].Columns[ExpectedUnitPricePerOuter]"
+                          cachedDataType="numeric"
+                          cachedName="ExpectedUnitPricePerOuter"
+                          cachedPrecision="18"
+                          cachedScale="2"
+                          lineageId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].Columns[ExpectedUnitPricePerOuter]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Inputs[Merge Join Left Input].Columns[QuantityPerOuter]"
+                          cachedDataType="i4"
+                          cachedName="QuantityPerOuter"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Lookup.Outputs[Lookup Match Output].Columns[QuantityPerOuter]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Inputs[Merge Join Left Input].Columns[IsOrderLineFinalized]"
+                          cachedDataType="bool"
+                          cachedName="IsOrderLineFinalized"
+                          lineageId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].Columns[IsOrderLineFinalized]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                    <input
+                      refId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Inputs[Merge Join Right Input]"
+                      hasSideEffects="true"
+                      name="Merge Join Right Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Inputs[Merge Join Right Input].Columns[PurchaseOrderID]"
+                          cachedDataType="i4"
+                          cachedName="PurchaseOrderID"
+                          cachedSortKeyPosition="1"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Merge Join.Outputs[Merge Join Output].Columns[PurchaseOrderID]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Inputs[Merge Join Right Input].Columns[SupplierID]"
+                          cachedDataType="i4"
+                          cachedName="SupplierID"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Merge Join.Outputs[Merge Join Output].Columns[SupplierID]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Inputs[Merge Join Right Input].Columns[ExpectedDeliveryDate]"
+                          cachedDataType="dbDate"
+                          cachedName="ExpectedDeliveryDate"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Merge Join.Outputs[Merge Join Output].Columns[ExpectedDeliveryDate]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Inputs[Merge Join Right Input].Columns[AmountExcludingTax]"
+                          cachedDataType="numeric"
+                          cachedName="AmountExcludingTax"
+                          cachedPrecision="18"
+                          cachedScale="2"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Merge Join.Outputs[Merge Join Output].Columns[AmountExcludingTax]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Outputs[Merge Join Output]"
+                      isSorted="true"
+                      name="Merge Join Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Outputs[Merge Join Output].Columns[PurchaseKey]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Outputs[Merge Join Output].Columns[PurchaseKey]"
+                          name="PurchaseKey">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\ExtractPurchase\Merge Join 1.Inputs[Merge Join Left Input].Columns[PurchaseOrderLineID]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Outputs[Merge Join Output].Columns[PurchaseOrderKey]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Outputs[Merge Join Output].Columns[PurchaseOrderKey]"
+                          name="PurchaseOrderKey"
+                          sortKeyPosition="1">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\ExtractPurchase\Merge Join 1.Inputs[Merge Join Left Input].Columns[PurchaseOrderID]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Outputs[Merge Join Output].Columns[ProductKey]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Outputs[Merge Join Output].Columns[ProductKey]"
+                          name="ProductKey">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\ExtractPurchase\Merge Join 1.Inputs[Merge Join Left Input].Columns[StockItemID]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Outputs[Merge Join Output].Columns[ReceivedOuters]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Outputs[Merge Join Output].Columns[ReceivedOuters]"
+                          name="ReceivedOuters">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\ExtractPurchase\Merge Join 1.Inputs[Merge Join Left Input].Columns[ReceivedOuters]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Outputs[Merge Join Output].Columns[PricePerOuter]"
+                          dataType="numeric"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Outputs[Merge Join Output].Columns[PricePerOuter]"
+                          name="PricePerOuter"
+                          precision="18"
+                          scale="2">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\ExtractPurchase\Merge Join 1.Inputs[Merge Join Left Input].Columns[ExpectedUnitPricePerOuter]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Outputs[Merge Join Output].Columns[Quantity]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Outputs[Merge Join Output].Columns[Quantity]"
+                          name="Quantity">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\ExtractPurchase\Merge Join 1.Inputs[Merge Join Left Input].Columns[QuantityPerOuter]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Outputs[Merge Join Output].Columns[SupplierKey]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Outputs[Merge Join Output].Columns[SupplierKey]"
+                          name="SupplierKey">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\ExtractPurchase\Merge Join 1.Inputs[Merge Join Right Input].Columns[SupplierID]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Outputs[Merge Join Output].Columns[DateKey]"
+                          dataType="dbDate"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Outputs[Merge Join Output].Columns[DateKey]"
+                          name="DateKey">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\ExtractPurchase\Merge Join 1.Inputs[Merge Join Right Input].Columns[ExpectedDeliveryDate]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Outputs[Merge Join Output].Columns[AmountExcludingTax]"
+                          dataType="numeric"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Outputs[Merge Join Output].Columns[AmountExcludingTax]"
+                          name="AmountExcludingTax"
+                          precision="18"
+                          scale="2">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\ExtractPurchase\Merge Join 1.Inputs[Merge Join Right Input].Columns[AmountExcludingTax]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Outputs[Merge Join Output].Columns[IsOrderLineFinalized]"
+                          dataType="bool"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Outputs[Merge Join Output].Columns[IsOrderLineFinalized]"
+                          name="IsOrderLineFinalized">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\ExtractPurchase\Merge Join 1.Inputs[Merge Join Left Input].Columns[IsOrderLineFinalized]}</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\ExtractPurchase\ProductQuantity"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="ProductQuantity"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\ExtractPurchase\ProductQuantity.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\ProductQuantity.Inputs[Derived Column Input].Columns[ReceivedOuters]"
+                          cachedDataType="i4"
+                          cachedName="ReceivedOuters"
+                          lineageId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].Columns[ReceivedOuters]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\ProductQuantity.Inputs[Derived Column Input].Columns[Quantity]"
+                          cachedDataType="i4"
+                          cachedName="QuantityPerOuter"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Lookup.Outputs[Lookup Match Output].Columns[QuantityPerOuter]"
+                          name="Quantity"
+                          truncationRowDisposition="FailComponent"
+                          usageType="readWrite">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">#{Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].Columns[ReceivedOuters]} * #{Package\Sequence Container\ExtractPurchase\Lookup.Outputs[Lookup Match Output].Columns[QuantityPerOuter]}</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">ReceivedOuters * Quantity</property>
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\ExtractPurchase\ProductQuantity.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Sequence Container\ExtractPurchase\ProductQuantity.Inputs[Derived Column Input]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\ExtractPurchase\ProductQuantity.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Sequence Container\ExtractPurchase\ProductQuantity.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\ProductQuantity.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractPurchase\ProductQuantity.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\ProductQuantity.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractPurchase\ProductQuantity.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="PurchaseOrderLines"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT [PurchaseOrderLineID]
+      ,[PurchaseOrderID]
+      ,[StockItemID]  
+      ,[OrderedOuters]
+      ,[ReceivedOuters]    
+,[IsOrderLineFinalized]
+      ,[ExpectedUnitPricePerOuter]     
+  FROM [WideWorldImporters].[Purchasing].[PurchaseOrderLines]
+  WHERE LastEditedWhen &gt; ? AND LastEditedWhen &lt;= ?
+ORDER BY PurchaseOrderID</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping">"Parameter0:Input",{C55413AE-8DE6-4452-AC32-933CC1481EE5};"Parameter1:Input",{87CFC4DC-CA14-4072-8D85-22112FBA323E};</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Connections[OleDbConnection]"
+                      connectionManagerID="{746B0810-B490-44C2-A0AA-C1A8F04752A7}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.WideWorldImporters]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output]"
+                      isSorted="true"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].Columns[PurchaseOrderLineID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].ExternalColumns[PurchaseOrderLineID]"
+                          lineageId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].Columns[PurchaseOrderLineID]"
+                          name="PurchaseOrderLineID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].Columns[PurchaseOrderID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].ExternalColumns[PurchaseOrderID]"
+                          lineageId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].Columns[PurchaseOrderID]"
+                          name="PurchaseOrderID"
+                          sortKeyPosition="1"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].Columns[StockItemID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].ExternalColumns[StockItemID]"
+                          lineageId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].Columns[StockItemID]"
+                          name="StockItemID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].Columns[ReceivedOuters]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].ExternalColumns[ReceivedOuters]"
+                          lineageId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].Columns[ReceivedOuters]"
+                          name="ReceivedOuters"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].Columns[ExpectedUnitPricePerOuter]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].ExternalColumns[ExpectedUnitPricePerOuter]"
+                          lineageId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].Columns[ExpectedUnitPricePerOuter]"
+                          name="ExpectedUnitPricePerOuter"
+                          precision="18"
+                          scale="2"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].Columns[OrderedOuters]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].ExternalColumns[OrderedOuters]"
+                          lineageId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].Columns[OrderedOuters]"
+                          name="OrderedOuters"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].Columns[IsOrderLineFinalized]"
+                          dataType="bool"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].ExternalColumns[IsOrderLineFinalized]"
+                          lineageId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].Columns[IsOrderLineFinalized]"
+                          name="IsOrderLineFinalized"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].ExternalColumns[PurchaseOrderLineID]"
+                          dataType="i4"
+                          name="PurchaseOrderLineID" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].ExternalColumns[PurchaseOrderID]"
+                          dataType="i4"
+                          name="PurchaseOrderID" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].ExternalColumns[StockItemID]"
+                          dataType="i4"
+                          name="StockItemID" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].ExternalColumns[ReceivedOuters]"
+                          dataType="i4"
+                          name="ReceivedOuters" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].ExternalColumns[ExpectedUnitPricePerOuter]"
+                          dataType="numeric"
+                          name="ExpectedUnitPricePerOuter"
+                          precision="18"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].ExternalColumns[OrderedOuters]"
+                          dataType="i4"
+                          name="OrderedOuters" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].ExternalColumns[IsOrderLineFinalized]"
+                          dataType="bool"
+                          name="IsOrderLineFinalized" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Error Output].Columns[PurchaseOrderLineID]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Error Output].Columns[PurchaseOrderLineID]"
+                          name="PurchaseOrderLineID" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Error Output].Columns[PurchaseOrderID]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Error Output].Columns[PurchaseOrderID]"
+                          name="PurchaseOrderID" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Error Output].Columns[StockItemID]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Error Output].Columns[StockItemID]"
+                          name="StockItemID" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Error Output].Columns[OrderedOuters]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Error Output].Columns[OrderedOuters]"
+                          name="OrderedOuters" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Error Output].Columns[ReceivedOuters]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Error Output].Columns[ReceivedOuters]"
+                          name="ReceivedOuters" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Error Output].Columns[IsOrderLineFinalized]"
+                          dataType="bool"
+                          lineageId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Error Output].Columns[IsOrderLineFinalized]"
+                          name="IsOrderLineFinalized" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Error Output].Columns[ExpectedUnitPricePerOuter]"
+                          dataType="numeric"
+                          lineageId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Error Output].Columns[ExpectedUnitPricePerOuter]"
+                          name="ExpectedUnitPricePerOuter"
+                          precision="18"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\ExtractPurchase\PurchaseOrders"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="PurchaseOrders"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT PurchaseOrderID, SupplierID, ExpectedDeliveryDate
+FROM   Purchasing.PurchaseOrders
+WHERE (LastEditedWhen &gt; ?) AND (LastEditedWhen &lt;= ?)
+ORDER BY PurchaseOrderID</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping">"Parameter0:Input",{C55413AE-8DE6-4452-AC32-933CC1481EE5};"Parameter1:Input",{87CFC4DC-CA14-4072-8D85-22112FBA323E};</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\ExtractPurchase\PurchaseOrders.Connections[OleDbConnection]"
+                      connectionManagerID="{746B0810-B490-44C2-A0AA-C1A8F04752A7}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.WideWorldImporters]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\ExtractPurchase\PurchaseOrders.Outputs[OLE DB Source Output]"
+                      isSorted="true"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\PurchaseOrders.Outputs[OLE DB Source Output].Columns[PurchaseOrderID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractPurchase\PurchaseOrders.Outputs[OLE DB Source Output].ExternalColumns[PurchaseOrderID]"
+                          lineageId="Package\Sequence Container\ExtractPurchase\PurchaseOrders.Outputs[OLE DB Source Output].Columns[PurchaseOrderID]"
+                          name="PurchaseOrderID"
+                          sortKeyPosition="1"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\PurchaseOrders.Outputs[OLE DB Source Output].Columns[SupplierID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractPurchase\PurchaseOrders.Outputs[OLE DB Source Output].ExternalColumns[SupplierID]"
+                          lineageId="Package\Sequence Container\ExtractPurchase\PurchaseOrders.Outputs[OLE DB Source Output].Columns[SupplierID]"
+                          name="SupplierID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\PurchaseOrders.Outputs[OLE DB Source Output].Columns[ExpectedDeliveryDate]"
+                          dataType="dbDate"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractPurchase\PurchaseOrders.Outputs[OLE DB Source Output].ExternalColumns[ExpectedDeliveryDate]"
+                          lineageId="Package\Sequence Container\ExtractPurchase\PurchaseOrders.Outputs[OLE DB Source Output].Columns[ExpectedDeliveryDate]"
+                          name="ExpectedDeliveryDate"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractPurchase\PurchaseOrders.Outputs[OLE DB Source Output].ExternalColumns[PurchaseOrderID]"
+                          dataType="i4"
+                          name="PurchaseOrderID" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractPurchase\PurchaseOrders.Outputs[OLE DB Source Output].ExternalColumns[SupplierID]"
+                          dataType="i4"
+                          name="SupplierID" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractPurchase\PurchaseOrders.Outputs[OLE DB Source Output].ExternalColumns[ExpectedDeliveryDate]"
+                          dataType="dbDate"
+                          name="ExpectedDeliveryDate" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\ExtractPurchase\PurchaseOrders.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\PurchaseOrders.Outputs[OLE DB Source Error Output].Columns[PurchaseOrderID]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractPurchase\PurchaseOrders.Outputs[OLE DB Source Error Output].Columns[PurchaseOrderID]"
+                          name="PurchaseOrderID" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\PurchaseOrders.Outputs[OLE DB Source Error Output].Columns[SupplierID]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractPurchase\PurchaseOrders.Outputs[OLE DB Source Error Output].Columns[SupplierID]"
+                          name="SupplierID" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\PurchaseOrders.Outputs[OLE DB Source Error Output].Columns[ExpectedDeliveryDate]"
+                          dataType="dbDate"
+                          lineageId="Package\Sequence Container\ExtractPurchase\PurchaseOrders.Outputs[OLE DB Source Error Output].Columns[ExpectedDeliveryDate]"
+                          name="ExpectedDeliveryDate" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\PurchaseOrders.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractPurchase\PurchaseOrders.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\PurchaseOrders.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractPurchase\PurchaseOrders.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\ExtractPurchase\Set ordered outers in case of 0"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Set ordered outers in case of 0"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\ExtractPurchase\Set ordered outers in case of 0.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Set ordered outers in case of 0.Inputs[Derived Column Input].Columns[ReceivedOuters]"
+                          cachedDataType="i4"
+                          cachedName="ReceivedOuters"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].Columns[ReceivedOuters]"
+                          truncationRowDisposition="FailComponent"
+                          usageType="readWrite">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">#{Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].Columns[ReceivedOuters]} == 0 ? #{Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].Columns[OrderedOuters]} : #{Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].Columns[ReceivedOuters]}</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">ReceivedOuters == 0 ? OrderedOuters : ReceivedOuters</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Set ordered outers in case of 0.Inputs[Derived Column Input].Columns[OrderedOuters]"
+                          cachedDataType="i4"
+                          cachedName="OrderedOuters"
+                          lineageId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output].Columns[OrderedOuters]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\ExtractPurchase\Set ordered outers in case of 0.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Sequence Container\ExtractPurchase\Set ordered outers in case of 0.Inputs[Derived Column Input]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\ExtractPurchase\Set ordered outers in case of 0.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Sequence Container\ExtractPurchase\Set ordered outers in case of 0.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Set ordered outers in case of 0.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Set ordered outers in case of 0.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\Set ordered outers in case of 0.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Set ordered outers in case of 0.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\ExtractPurchase\SetLastExtractDate"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="SetLastExtractDate"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\ExtractPurchase\SetLastExtractDate.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\ExtractPurchase\SetLastExtractDate.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Sequence Container\ExtractPurchase\SetLastExtractDate.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\SetLastExtractDate.Outputs[Derived Column Output].Columns[LastExtractDate]"
+                          dataType="date"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Sequence Container\ExtractPurchase\SetLastExtractDate.Outputs[Derived Column Output].Columns[LastExtractDate]"
+                          name="LastExtractDate"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">@[User::CurrentDate]</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">@[User::CurrentDate]</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\ExtractPurchase\SetLastExtractDate.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Sequence Container\ExtractPurchase\SetLastExtractDate.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\SetLastExtractDate.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractPurchase\SetLastExtractDate.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\SetLastExtractDate.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractPurchase\SetLastExtractDate.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\ExtractPurchase\STGPurchases"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="STGPurchases"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[STGPurchases]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\ExtractPurchase\STGPurchases.Connections[OleDbConnection]"
+                      connectionManagerID="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.ProjectWWIDW]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input].Columns[PurchaseKey]"
+                          cachedDataType="i4"
+                          cachedName="PurchaseKey"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input].ExternalColumns[PurchaseKey]"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Outputs[Merge Join Output].Columns[PurchaseKey]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input].Columns[PurchaseOrderKey]"
+                          cachedDataType="i4"
+                          cachedName="PurchaseOrderKey"
+                          cachedSortKeyPosition="1"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input].ExternalColumns[PurchaseOrderKey]"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Outputs[Merge Join Output].Columns[PurchaseOrderKey]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input].Columns[ProductKey]"
+                          cachedDataType="i4"
+                          cachedName="ProductKey"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input].ExternalColumns[ProductKey]"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Outputs[Merge Join Output].Columns[ProductKey]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input].Columns[SupplierKey]"
+                          cachedDataType="i4"
+                          cachedName="SupplierKey"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input].ExternalColumns[SupplierKey]"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Outputs[Merge Join Output].Columns[SupplierKey]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input].Columns[DateKey]"
+                          cachedDataType="dbDate"
+                          cachedName="DateKey"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Outputs[Merge Join Output].Columns[DateKey]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input].Columns[AmountExcludingTax]"
+                          cachedDataType="numeric"
+                          cachedName="AmountExcludingTax"
+                          cachedPrecision="18"
+                          cachedScale="2"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input].ExternalColumns[AmountExcludingTax]"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Outputs[Merge Join Output].Columns[AmountExcludingTax]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input].Columns[PricePerOuter]"
+                          cachedDataType="numeric"
+                          cachedName="PricePerOuter"
+                          cachedPrecision="18"
+                          cachedScale="2"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input].ExternalColumns[PricePerOuter]"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Outputs[Merge Join Output].Columns[PricePerOuter]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input].Columns[ReceivedOuters]"
+                          cachedDataType="i4"
+                          cachedName="ReceivedOuters"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input].ExternalColumns[OutersQuantity]"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Outputs[Merge Join Output].Columns[ReceivedOuters]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input].Columns[Quantity]"
+                          cachedDataType="i4"
+                          cachedName="Quantity"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input].ExternalColumns[ProductQuantity]"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Outputs[Merge Join Output].Columns[Quantity]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input].Columns[IsOrderLineFinalized]"
+                          cachedDataType="bool"
+                          cachedName="IsOrderLineFinalized"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input].ExternalColumns[IsOrderFinalized]"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Outputs[Merge Join Output].Columns[IsOrderLineFinalized]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input].Columns[LocationKey]"
+                          cachedDataType="i4"
+                          cachedName="LocationKey"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input].ExternalColumns[LocationKey]"
+                          lineageId="Package\Sequence Container\ExtractPurchase\Lookup 1.Outputs[Lookup Match Output].Columns[LocationKey]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input].Columns[LastExtractDate]"
+                          cachedDataType="date"
+                          cachedName="LastExtractDate"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input].ExternalColumns[LastExtract]"
+                          lineageId="Package\Sequence Container\ExtractPurchase\SetLastExtractDate.Outputs[Derived Column Output].Columns[LastExtractDate]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input].ExternalColumns[PurchaseKey]"
+                          dataType="i8"
+                          name="PurchaseKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input].ExternalColumns[PurchaseOrderKey]"
+                          dataType="i4"
+                          name="PurchaseOrderKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input].ExternalColumns[ProductKey]"
+                          dataType="i4"
+                          name="ProductKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input].ExternalColumns[PricePerOuter]"
+                          dataType="numeric"
+                          name="PricePerOuter"
+                          precision="18"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input].ExternalColumns[SupplierKey]"
+                          dataType="i4"
+                          name="SupplierKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                          dataType="dbDate"
+                          name="DateKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input].ExternalColumns[AmountExcludingTax]"
+                          dataType="numeric"
+                          name="AmountExcludingTax"
+                          precision="18"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input].ExternalColumns[OutersQuantity]"
+                          dataType="i4"
+                          name="OutersQuantity" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input].ExternalColumns[ProductQuantity]"
+                          dataType="i4"
+                          name="ProductQuantity" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input].ExternalColumns[IsOrderFinalized]"
+                          dataType="bool"
+                          name="IsOrderFinalized" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input].ExternalColumns[LocationKey]"
+                          dataType="i4"
+                          name="LocationKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input].ExternalColumns[LastExtract]"
+                          dataType="dbDate"
+                          name="LastExtract" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\ExtractPurchase\STGPurchases.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\STGPurchases.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractPurchase\STGPurchases.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\STGPurchases.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractPurchase\STGPurchases.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\ExtractPurchase\SupplierTransactions"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="SupplierTransactions"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[Purchasing].[PurchaseOrderLines]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT [PurchaseOrderID]
+      ,[AmountExcludingTax]
+
+  FROM [WideWorldImporters].[Purchasing].[SupplierTransactions]		 
+  WHERE TransactionTypeID = 5 AND LastEditedWhen &gt; ? AND LastEditedWhen &lt;= ?
+  ORDER BY PurchaseOrderID</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping">"Parameter0:Input",{C55413AE-8DE6-4452-AC32-933CC1481EE5};"Parameter1:Input",{87CFC4DC-CA14-4072-8D85-22112FBA323E};</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\ExtractPurchase\SupplierTransactions.Connections[OleDbConnection]"
+                      connectionManagerID="{746B0810-B490-44C2-A0AA-C1A8F04752A7}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.WideWorldImporters]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\ExtractPurchase\SupplierTransactions.Outputs[OLE DB Source Output]"
+                      isSorted="true"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\SupplierTransactions.Outputs[OLE DB Source Output].Columns[PurchaseOrderID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractPurchase\SupplierTransactions.Outputs[OLE DB Source Output].ExternalColumns[PurchaseOrderID]"
+                          lineageId="Package\Sequence Container\ExtractPurchase\SupplierTransactions.Outputs[OLE DB Source Output].Columns[PurchaseOrderID]"
+                          name="PurchaseOrderID"
+                          sortKeyPosition="1"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\SupplierTransactions.Outputs[OLE DB Source Output].Columns[AmountExcludingTax]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractPurchase\SupplierTransactions.Outputs[OLE DB Source Output].ExternalColumns[AmountExcludingTax]"
+                          lineageId="Package\Sequence Container\ExtractPurchase\SupplierTransactions.Outputs[OLE DB Source Output].Columns[AmountExcludingTax]"
+                          name="AmountExcludingTax"
+                          precision="18"
+                          scale="2"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractPurchase\SupplierTransactions.Outputs[OLE DB Source Output].ExternalColumns[PurchaseOrderID]"
+                          dataType="i4"
+                          name="PurchaseOrderID" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractPurchase\SupplierTransactions.Outputs[OLE DB Source Output].ExternalColumns[AmountExcludingTax]"
+                          dataType="numeric"
+                          name="AmountExcludingTax"
+                          precision="18"
+                          scale="2" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\ExtractPurchase\SupplierTransactions.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\SupplierTransactions.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractPurchase\SupplierTransactions.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\SupplierTransactions.Outputs[OLE DB Source Error Output].Columns[AmountExcludingTax]"
+                          dataType="numeric"
+                          lineageId="Package\Sequence Container\ExtractPurchase\SupplierTransactions.Outputs[OLE DB Source Error Output].Columns[AmountExcludingTax]"
+                          name="AmountExcludingTax"
+                          precision="18"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\SupplierTransactions.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractPurchase\SupplierTransactions.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractPurchase\SupplierTransactions.Outputs[OLE DB Source Error Output].Columns[PurchaseOrderID]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractPurchase\SupplierTransactions.Outputs[OLE DB Source Error Output].Columns[PurchaseOrderID]"
+                          name="PurchaseOrderID" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Sequence Container\ExtractPurchase.Paths[Derived Column Output]"
+                  endId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Inputs[Merge Join Left Input]"
+                  name="Derived Column Output"
+                  startId="Package\Sequence Container\ExtractPurchase\ProductQuantity.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\Sequence Container\ExtractPurchase.Paths[Derived Column Output1]"
+                  endId="Package\Sequence Container\ExtractPurchase\ProductQuantity.Inputs[Derived Column Input]"
+                  name="Derived Column Output"
+                  startId="Package\Sequence Container\ExtractPurchase\Set ordered outers in case of 0.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\Sequence Container\ExtractPurchase.Paths[Derived Column Output2]"
+                  endId="Package\Sequence Container\ExtractPurchase\STGPurchases.Inputs[OLE DB Destination Input]"
+                  name="Derived Column Output"
+                  startId="Package\Sequence Container\ExtractPurchase\SetLastExtractDate.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\Sequence Container\ExtractPurchase.Paths[Lookup Match Output]"
+                  endId="Package\Sequence Container\ExtractPurchase\Set ordered outers in case of 0.Inputs[Derived Column Input]"
+                  name="Lookup Match Output"
+                  startId="Package\Sequence Container\ExtractPurchase\Lookup.Outputs[Lookup Match Output]" />
+                <path
+                  refId="Package\Sequence Container\ExtractPurchase.Paths[Lookup Match Output1]"
+                  endId="Package\Sequence Container\ExtractPurchase\SetLastExtractDate.Inputs[Derived Column Input]"
+                  name="Lookup Match Output"
+                  startId="Package\Sequence Container\ExtractPurchase\Lookup 1.Outputs[Lookup Match Output]" />
+                <path
+                  refId="Package\Sequence Container\ExtractPurchase.Paths[Merge Join Output]"
+                  endId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Inputs[Merge Join Right Input]"
+                  name="Merge Join Output"
+                  startId="Package\Sequence Container\ExtractPurchase\Merge Join.Outputs[Merge Join Output]" />
+                <path
+                  refId="Package\Sequence Container\ExtractPurchase.Paths[Merge Join Output1]"
+                  endId="Package\Sequence Container\ExtractPurchase\Lookup 1.Inputs[Lookup Input]"
+                  name="Merge Join Output"
+                  startId="Package\Sequence Container\ExtractPurchase\Merge Join 1.Outputs[Merge Join Output]" />
+                <path
+                  refId="Package\Sequence Container\ExtractPurchase.Paths[OLE DB Source Output]"
+                  endId="Package\Sequence Container\ExtractPurchase\Lookup.Inputs[Lookup Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines.Outputs[OLE DB Source Output]" />
+                <path
+                  refId="Package\Sequence Container\ExtractPurchase.Paths[OLE DB Source Output1]"
+                  endId="Package\Sequence Container\ExtractPurchase\Merge Join.Inputs[Merge Join Left Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Sequence Container\ExtractPurchase\PurchaseOrders.Outputs[OLE DB Source Output]" />
+                <path
+                  refId="Package\Sequence Container\ExtractPurchase.Paths[OLE DB Source Output2]"
+                  endId="Package\Sequence Container\ExtractPurchase\Merge Join.Inputs[Merge Join Right Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Sequence Container\ExtractPurchase\SupplierTransactions.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Get Last Extract Date"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{8CB38F7D-9725-4CC5-A354-5C9668087936}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get Last Extract Date"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}"
+              SQLTask:SqlStatementSource="DECLARE @LastExtractDate date= (SELECT MAX([UpdateDate])&#xA;&#x9;&#x9;&#x9;&#x9;FROM [ProjectWWIDW].[dbo].[ExtractLog]&#xA;&#x9;&#x9;&#x9;&#x9;WHERE [TableName] = 'STGPurchases' AND [Status] = 'Success')&#xA;--If first Load&#xA;IF NOT EXISTS  (SELECT * FROM [ProjectWWIDW].[dbo].ExtractLog WHERE TableName = 'STGPurchases')  &#xA;&#x9;SELECT '01-01-2013' LastExtractDate&#xA;ELSE&#xA;&#x9;SELECT @LastExtractDate LastExtractDate"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="LastExtractDate"
+                SQLTask:DtsVariableName="User::LastExtractDate" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\TRUNCATETable"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{CE2FA32A-EAB3-4448-B136-FE5F34443772}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="TRUNCATETable"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}"
+              SQLTask:SqlStatementSource="IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES&#xA;           WHERE TABLE_NAME = N'STGPurchases')&#xA;TRUNCATE TABLE STGPurchases" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{CB8E311A-60F7-4B46-8F27-AB8FB8E2B5DC}"
+          DTS:From="Package\Sequence Container\TRUNCATETable"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Sequence Container\ChecksFirstExtract" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{0033531E-7822-42FF-9497-6101FE52121B}"
+          DTS:From="Package\Sequence Container\Get Last Extract Date"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Sequence Container\ExtractPurchase" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{9B639289-42D2-4361-9ACF-B63818CF0285}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[User::IsFirstExtract] == 0"
+          DTS:From="Package\Sequence Container\ExtractPurchase"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\Sequence Container\Change huge orders on first extract" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 4]"
+          DTS:CreationName=""
+          DTS:DTSID="{DC457C46-8F0D-45D9-9950-48CC28D3DFCC}"
+          DTS:From="Package\Sequence Container\ChecksFirstExtract"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 4"
+          DTS:To="Package\Sequence Container\Get Last Extract Date" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Write Failure To Log"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{3B8F9968-435D-4BA2-BDDB-A032967B26B2}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Write Failure To Log"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}"
+          SQLTask:SqlStatementSource="INSERT INTO ExtractLog (PackageName,TableName,Status)&#xA;VALUES(?,'STGPurchases','Failure')&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Write Success To Log"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{C3B34015-F78F-441A-B136-AD02278CFDFD}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Write Success To Log"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}"
+          SQLTask:SqlStatementSource="INSERT INTO ExtractLog (PackageName,TableName,Status)&#xA;VALUES(?,'STGPurchases','Success')&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{4E927FDF-95DB-4370-9C4C-C6AF11BDF2C5}"
+      DTS:From="Package\Sequence Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Write Success To Log" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{35A29B2F-DB9C-4267-B570-631792AA4970}"
+      DTS:From="Package\Sequence Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Write Failure To Log"
+      DTS:Value="1" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="246.666666666667,42.6666666666667"
+          Id="Package\Sequence Container\Change huge orders on first extract"
+          TopLeft="5.50000000000007,518.833333333333" />
+        <NodeLayout
+          Size="165.333333333334,42.6666666666667"
+          Id="Package\Sequence Container\ChecksFirstExtract"
+          TopLeft="46.1666666666667,210.833333333333" />
+        <NodeLayout
+          Size="154.666666666667,42.6666666666667"
+          Id="Package\Sequence Container\ExtractPurchase"
+          TopLeft="51.5,416.166666666667" />
+        <NodeLayout
+          Size="180,42.6666666666667"
+          Id="Package\Sequence Container\Get Last Extract Date"
+          TopLeft="38.8333333333334,313.5" />
+        <NodeLayout
+          Size="133.333333333334,42.6666666666667"
+          Id="Package\Sequence Container\TRUNCATETable"
+          TopLeft="62.1666666666667,108.166666666667" />
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          TopLeft="128.833333333333,150.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 1]"
+          TopLeft="128.833333333333,356.166666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 3]"
+          TopLeft="128.833333333333,458.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,18.25,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 4]"
+          TopLeft="128.833333333333,253.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="257.333333333334,616.666666666667"
+          Size="257.333333333334,659.333333333334"
+          Id="Package\Sequence Container"
+          TopLeft="209.833333333333,5.50000000000006" />
+        <NodeLayout
+          Size="184,42.6666666666667"
+          Id="Package\Write Failure To Log"
+          TopLeft="246.5,724.833333333333" />
+        <NodeLayout
+          Size="180,42"
+          Id="Package\Write Success To Log"
+          TopLeft="5.50000000000011,725.166666666667" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="296.944444444445,664.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-201.444444444444,60.3333333333334"
+              Start="0,0"
+              End="-201.444444444444,52.8333333333334">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.3570202540337" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.3570202540337"
+                    Point2="0,24.3570202540337"
+                    Point3="-4,24.3570202540337" />
+                  <mssgle:LineSegment
+                    End="-197.444444444444,24.3570202540337" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-197.444444444444,24.3570202540337"
+                    Point2="-201.444444444444,24.3570202540337"
+                    Point3="-201.444444444444,28.3570202540337" />
+                  <mssgle:LineSegment
+                    End="-201.444444444444,52.8333333333334" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="380.055555555556,664.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-41.5555555555555,60"
+              Start="0,0"
+              End="-41.5555555555555,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.2224510813594" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.2224510813594"
+                    Point2="0,24.2224510813594"
+                    Point3="-4,24.2224510813594" />
+                  <mssgle:LineSegment
+                    End="-37.5555555555555,24.2224510813594" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-37.5555555555555,24.2224510813594"
+                    Point2="-41.5555555555555,24.2224510813594"
+                    Point3="-41.5555555555555,28.2224510813594" />
+                  <mssgle:LineSegment
+                    End="-41.5555555555555,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-36.0191254340277,29.2224510813594,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Sequence Container\ExtractPurchase">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="146.666666666667,42.6666666666667"
+          Id="Package\Sequence Container\ExtractPurchase\STGPurchases"
+          TopLeft="438.833333333333,724.166666666667" />
+        <NodeLayout
+          Size="153.333333333334,42.6666666666667"
+          Id="Package\Sequence Container\ExtractPurchase\PurchaseOrders"
+          TopLeft="5.49999999999996,210.833333333333" />
+        <NodeLayout
+          Size="156,42.6666666666667"
+          Id="Package\Sequence Container\ExtractPurchase\ProductQuantity"
+          TopLeft="434.166666666667,313.5" />
+        <NodeLayout
+          Size="122.666666666667,42.6666666666667"
+          Id="Package\Sequence Container\ExtractPurchase\Lookup 1"
+          TopLeft="450.833333333333,518.833333333333" />
+        <NodeLayout
+          Size="225.333333333334,42.6666666666667"
+          Id="Package\Sequence Container\ExtractPurchase\Set ordered outers in case of 0"
+          TopLeft="457.5,210.833333333333" />
+        <NodeLayout
+          Size="169.333333333334,42.6666666666667"
+          Id="Package\Sequence Container\ExtractPurchase\SetLastExtractDate"
+          TopLeft="427.5,621.5" />
+        <NodeLayout
+          Size="140,42.6666666666667"
+          Id="Package\Sequence Container\ExtractPurchase\Merge Join 1"
+          TopLeft="442.166666666667,416.166666666666" />
+        <NodeLayout
+          Size="177.333333333334,42.6666666666667"
+          Id="Package\Sequence Container\ExtractPurchase\SupplierTransactions"
+          TopLeft="219.5,210.833333333333" />
+        <NodeLayout
+          Size="173.333333333334,42.6666666666667"
+          Id="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines"
+          TopLeft="483.5,5.49999999999993" />
+        <NodeLayout
+          Size="113.333333333334,42.6666666666667"
+          Id="Package\Sequence Container\ExtractPurchase\Lookup"
+          TopLeft="513.5,108.166666666666" />
+        <NodeLayout
+          Size="131.333333333334,42.6666666666667"
+          Id="Package\Sequence Container\ExtractPurchase\Merge Join"
+          TopLeft="242.5,313.5" />
+        <EdgeLayout
+          Id="Package\Sequence Container\ExtractPurchase.Paths[OLE DB Source Output1]"
+          TopLeft="82.1666666666666,253.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="205.444444444444,60"
+              Start="0,0"
+              End="205.444444444444,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.5667001003009" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.5667001003009"
+                    Point2="0,35.5667001003009"
+                    Point3="4,35.5667001003009" />
+                  <mssgle:LineSegment
+                    End="201.444444444444,35.5667001003009" />
+                  <mssgle:CubicBezierSegment
+                    Point1="201.444444444444,35.5667001003009"
+                    Point2="205.444444444444,35.5667001003009"
+                    Point3="205.444444444444,39.5667001003009" />
+                  <mssgle:LineSegment
+                    End="205.444444444444,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\ExtractPurchase.Paths[OLE DB Source Output]"
+          TopLeft="570.166666666667,48.1666666666666">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\ExtractPurchase.Paths[Merge Join Output1]"
+          TopLeft="512.166666666667,458.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\ExtractPurchase.Paths[Merge Join Output]"
+          TopLeft="308.166666666667,356.166666666666">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="182,60.0000000000001"
+              Start="0,0"
+              End="182,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.5932203389831" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.5932203389831"
+                    Point2="0,35.5932203389831"
+                    Point3="4,35.5932203389831" />
+                  <mssgle:LineSegment
+                    End="178,35.5932203389831" />
+                  <mssgle:CubicBezierSegment
+                    Point1="178,35.5932203389831"
+                    Point2="182,35.5932203389831"
+                    Point3="182,39.5932203389831" />
+                  <mssgle:LineSegment
+                    End="182,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\ExtractPurchase.Paths[Lookup Match Output1]"
+          TopLeft="512.166666666667,561.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,20.4453125000001,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\ExtractPurchase.Paths[Lookup Match Output]"
+          TopLeft="570.166666666667,150.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999998"
+              Start="0,0"
+              End="0,52.4999999999998">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999998" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,20.4453124999999,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\ExtractPurchase.Paths[Derived Column Output2]"
+          TopLeft="512.166666666667,664.166666666666">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\ExtractPurchase.Paths[Derived Column Output1]"
+          TopLeft="570.166666666667,253.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-58,60"
+              Start="0,0"
+              End="-58,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26"
+                    Point2="0,30"
+                    Point3="-4,30" />
+                  <mssgle:LineSegment
+                    End="-54,30" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-54,30"
+                    Point2="-58,30"
+                    Point3="-58,34" />
+                  <mssgle:LineSegment
+                    End="-58,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\ExtractPurchase.Paths[Derived Column Output]"
+          TopLeft="512.166666666667,356.166666666666">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="22,60.0000000000001"
+              Start="0,0"
+              End="22,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.5932203389831" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.5932203389831"
+                    Point2="0,35.5932203389831"
+                    Point3="4,35.5932203389831" />
+                  <mssgle:LineSegment
+                    End="18,35.5932203389831" />
+                  <mssgle:CubicBezierSegment
+                    Point1="18,35.5932203389831"
+                    Point2="22,35.5932203389831"
+                    Point3="22,39.5932203389831" />
+                  <mssgle:LineSegment
+                    End="22,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\ExtractPurchase.Paths[OLE DB Source Output2]"
+          TopLeft="308.166666666667,253.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="20.5555555555555,60"
+              Start="0,0"
+              End="20.5555555555555,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.5667001003009" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.5667001003009"
+                    Point2="0,35.5667001003009"
+                    Point3="4,35.5667001003009" />
+                  <mssgle:LineSegment
+                    End="16.5555555555555,35.5667001003009" />
+                  <mssgle:CubicBezierSegment
+                    Point1="16.5555555555555,35.5667001003009"
+                    Point2="20.5555555555555,35.5667001003009"
+                    Point3="20.5555555555555,39.5667001003009" />
+                  <mssgle:LineSegment
+                    End="20.5555555555555,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\ExtractPurchase\STGPurchases">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\ExtractPurchase\PurchaseOrders">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\ExtractPurchase\Lookup 1">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[STGSuppliers]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\ExtractPurchase\SupplierTransactions">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\ExtractPurchase\PurchaseOrderLines">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\ExtractPurchase\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[Warehouse].[StockItems]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

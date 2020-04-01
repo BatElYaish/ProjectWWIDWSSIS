@@ -1,0 +1,968 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/10/2020 3:03:07 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-DBGFR1O"
+  DTS:CreatorName="DESKTOP-DBGFR1O\batel"
+  DTS:DTSID="{A7BC3DC4-FF24-4B88-81B1-0571ECA4B56C}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.68"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="150 LoadDimSuppliers"
+  DTS:PackageType="5"
+  DTS:VersionBuild="6"
+  DTS:VersionGUID="{FD6DBC32-C78C-4CB8-A67F-2A4868DF5466}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{636492a0-e60f-4587-9a49-a26f2677766a}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Load Dim Suppliers"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{87ce416f-4638-45a7-841d-a94a5ac1ef27}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Load Dim Suppliers"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="DIM Suppliers"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[DIMSuppliers]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Connections[OleDbConnection]"
+                      connectionManagerID="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.ProjectWWIDW]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Inputs[OLE DB Destination Input].Columns[SupplierKey]"
+                          cachedDataType="i4"
+                          cachedName="SupplierKey"
+                          externalMetadataColumnId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Inputs[OLE DB Destination Input].ExternalColumns[SupplierKey]"
+                          lineageId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].Columns[SupplierKey]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Inputs[OLE DB Destination Input].Columns[SupplierName]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="SupplierName"
+                          externalMetadataColumnId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Inputs[OLE DB Destination Input].ExternalColumns[SupplierName]"
+                          lineageId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].Columns[SupplierName]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Inputs[OLE DB Destination Input].Columns[SupplierCategory]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="SupplierCategory"
+                          externalMetadataColumnId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Inputs[OLE DB Destination Input].ExternalColumns[SupplierCategory]"
+                          lineageId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].Columns[SupplierCategory]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Inputs[OLE DB Destination Input].Columns[PaymentDays]"
+                          cachedDataType="i4"
+                          cachedName="PaymentDays"
+                          externalMetadataColumnId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Inputs[OLE DB Destination Input].ExternalColumns[PaymentDays]"
+                          lineageId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].Columns[PaymentDays]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Inputs[OLE DB Destination Input].Columns[ExtraCosts]"
+                          cachedDataType="numeric"
+                          cachedName="ExtraCosts"
+                          cachedPrecision="28"
+                          cachedScale="6"
+                          externalMetadataColumnId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Inputs[OLE DB Destination Input].ExternalColumns[ExtraCosts]"
+                          lineageId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].Columns[ExtraCosts]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Inputs[OLE DB Destination Input].Columns[Incoterms]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Incoterms"
+                          externalMetadataColumnId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Inputs[OLE DB Destination Input].ExternalColumns[Incoterms]"
+                          lineageId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].Columns[Incoterms]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Inputs[OLE DB Destination Input].Columns[LeadTime]"
+                          cachedDataType="i4"
+                          cachedName="LeadTime"
+                          externalMetadataColumnId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Inputs[OLE DB Destination Input].ExternalColumns[LeadTime]"
+                          lineageId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].Columns[LeadTime]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Inputs[OLE DB Destination Input].Columns[Currency]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Currency"
+                          externalMetadataColumnId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Inputs[OLE DB Destination Input].ExternalColumns[Currency]"
+                          lineageId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].Columns[Currency]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Inputs[OLE DB Destination Input].Columns[LocationKey]"
+                          cachedDataType="i4"
+                          cachedName="LocationKey"
+                          externalMetadataColumnId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Inputs[OLE DB Destination Input].ExternalColumns[LocationKey]"
+                          lineageId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].Columns[LocationKey]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Inputs[OLE DB Destination Input].Columns[LastExtract]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="LastExtract"
+                          externalMetadataColumnId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Inputs[OLE DB Destination Input].ExternalColumns[LastExtract]"
+                          lineageId="Package\Sequence Container\Load Dim Suppliers\Get Last Extract Date.Outputs[Derived Column Output].Columns[LastExtract]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Inputs[OLE DB Destination Input].ExternalColumns[SupplierKey]"
+                          dataType="i4"
+                          name="SupplierKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Inputs[OLE DB Destination Input].ExternalColumns[SupplierName]"
+                          dataType="wstr"
+                          length="100"
+                          name="SupplierName" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Inputs[OLE DB Destination Input].ExternalColumns[SupplierCategory]"
+                          dataType="wstr"
+                          length="50"
+                          name="SupplierCategory" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Inputs[OLE DB Destination Input].ExternalColumns[PaymentDays]"
+                          dataType="i4"
+                          name="PaymentDays" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Inputs[OLE DB Destination Input].ExternalColumns[ExtraCosts]"
+                          dataType="numeric"
+                          name="ExtraCosts"
+                          precision="28"
+                          scale="6" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Inputs[OLE DB Destination Input].ExternalColumns[Incoterms]"
+                          dataType="wstr"
+                          length="50"
+                          name="Incoterms" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Inputs[OLE DB Destination Input].ExternalColumns[LeadTime]"
+                          dataType="i4"
+                          name="LeadTime" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Inputs[OLE DB Destination Input].ExternalColumns[Currency]"
+                          dataType="wstr"
+                          length="50"
+                          name="Currency" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Inputs[OLE DB Destination Input].ExternalColumns[LocationKey]"
+                          dataType="i4"
+                          name="LocationKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Inputs[OLE DB Destination Input].ExternalColumns[LastExtract]"
+                          dataType="dbDate"
+                          name="LastExtract" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\Load Dim Suppliers\Get Last Extract Date"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Get Last Extract Date"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\Load Dim Suppliers\Get Last Extract Date.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Load Dim Suppliers\Get Last Extract Date.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Sequence Container\Load Dim Suppliers\Get Last Extract Date.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\Get Last Extract Date.Outputs[Derived Column Output].Columns[LastExtract]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Sequence Container\Load Dim Suppliers\Get Last Extract Date.Outputs[Derived Column Output].Columns[LastExtract]"
+                          name="LastExtract"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">[GETDATE]()</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">GETDATE()</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\Load Dim Suppliers\Get Last Extract Date.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Sequence Container\Load Dim Suppliers\Get Last Extract Date.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\Get Last Extract Date.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Load Dim Suppliers\Get Last Extract Date.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\Get Last Extract Date.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Load Dim Suppliers\Get Last Extract Date.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="STG Suppliers"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[STGSuppliers]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Connections[OleDbConnection]"
+                      connectionManagerID="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.ProjectWWIDW]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].Columns[SupplierKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].ExternalColumns[SupplierKey]"
+                          lineageId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].Columns[SupplierKey]"
+                          name="SupplierKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].Columns[SupplierName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].ExternalColumns[SupplierName]"
+                          length="100"
+                          lineageId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].Columns[SupplierName]"
+                          name="SupplierName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].Columns[SupplierCategory]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].ExternalColumns[SupplierCategory]"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].Columns[SupplierCategory]"
+                          name="SupplierCategory"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].Columns[PaymentDays]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].ExternalColumns[PaymentDays]"
+                          lineageId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].Columns[PaymentDays]"
+                          name="PaymentDays"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].Columns[ExtraCosts]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].ExternalColumns[ExtraCosts]"
+                          lineageId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].Columns[ExtraCosts]"
+                          name="ExtraCosts"
+                          precision="28"
+                          scale="6"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].Columns[Incoterms]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].ExternalColumns[Incoterms]"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].Columns[Incoterms]"
+                          name="Incoterms"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].Columns[LeadTime]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].ExternalColumns[LeadTime]"
+                          lineageId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].Columns[LeadTime]"
+                          name="LeadTime"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].Columns[Currency]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].ExternalColumns[Currency]"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].Columns[Currency]"
+                          name="Currency"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].Columns[LocationKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].ExternalColumns[LocationKey]"
+                          lineageId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].Columns[LocationKey]"
+                          name="LocationKey"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].ExternalColumns[SupplierKey]"
+                          dataType="i4"
+                          name="SupplierKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].ExternalColumns[SupplierName]"
+                          dataType="wstr"
+                          length="100"
+                          name="SupplierName" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].ExternalColumns[SupplierCategory]"
+                          dataType="wstr"
+                          length="50"
+                          name="SupplierCategory" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].ExternalColumns[PaymentDays]"
+                          dataType="i4"
+                          name="PaymentDays" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].ExternalColumns[ExtraCosts]"
+                          dataType="numeric"
+                          name="ExtraCosts"
+                          precision="28"
+                          scale="6" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].ExternalColumns[Incoterms]"
+                          dataType="wstr"
+                          length="50"
+                          name="Incoterms" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].ExternalColumns[LeadTime]"
+                          dataType="i4"
+                          name="LeadTime" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].ExternalColumns[Currency]"
+                          dataType="wstr"
+                          length="50"
+                          name="Currency" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output].ExternalColumns[LocationKey]"
+                          dataType="i4"
+                          name="LocationKey" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Error Output].Columns[SupplierKey]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Error Output].Columns[SupplierKey]"
+                          name="SupplierKey" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Error Output].Columns[SupplierName]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Error Output].Columns[SupplierName]"
+                          name="SupplierName" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Error Output].Columns[SupplierCategory]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Error Output].Columns[SupplierCategory]"
+                          name="SupplierCategory" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Error Output].Columns[PaymentDays]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Error Output].Columns[PaymentDays]"
+                          name="PaymentDays" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Error Output].Columns[ExtraCosts]"
+                          dataType="numeric"
+                          lineageId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Error Output].Columns[ExtraCosts]"
+                          name="ExtraCosts"
+                          precision="28"
+                          scale="6" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Error Output].Columns[Incoterms]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Error Output].Columns[Incoterms]"
+                          name="Incoterms" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Error Output].Columns[LeadTime]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Error Output].Columns[LeadTime]"
+                          name="LeadTime" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Error Output].Columns[Currency]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Error Output].Columns[Currency]"
+                          name="Currency" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Error Output].Columns[LocationKey]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Error Output].Columns[LocationKey]"
+                          name="LocationKey" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Sequence Container\Load Dim Suppliers.Paths[Derived Column Output]"
+                  endId="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers.Inputs[OLE DB Destination Input]"
+                  name="Derived Column Output"
+                  startId="Package\Sequence Container\Load Dim Suppliers\Get Last Extract Date.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\Sequence Container\Load Dim Suppliers.Paths[OLE DB Source Output]"
+                  endId="Package\Sequence Container\Load Dim Suppliers\Get Last Extract Date.Inputs[Derived Column Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Sequence Container\Load Dim Suppliers\STG Suppliers.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\TRUNCATETable"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{107141ac-c30c-475b-acb5-632e5a4063d3}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="TRUNCATETable"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}"
+              SQLTask:SqlStatementSource="IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES&#xA;           WHERE TABLE_NAME = N'DIMSuppliers')&#xA;TRUNCATE TABLE DIMSuppliers" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{78574c3c-1c25-4457-8314-055c2c11482a}"
+          DTS:From="Package\Sequence Container\TRUNCATETable"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Sequence Container\Load Dim Suppliers" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Write Failure To Log"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{feae21a0-deee-49f0-8bae-05e58ada55e7}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Write Failure To Log"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}"
+          SQLTask:SqlStatementSource="INSERT INTO ExtractLog (PackageName,TableName,Status)&#xA;VALUES(?,'DIMSuppliers','Failure')&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Write Success To Log"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{5d3e8223-172e-48b8-8af8-04236ee3f5ff}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Write Success To Log"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}"
+          SQLTask:SqlStatementSource="INSERT INTO ExtractLog (PackageName,TableName,Status)&#xA;VALUES(?,'DIMSuppliers','Success')&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{d1e87fa5-4348-47db-b8da-758c347adb81}"
+      DTS:From="Package\Sequence Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Write Success To Log" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{5cacc5e8-542d-49e2-8bb8-64223637ffe7}"
+      DTS:From="Package\Sequence Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Write Failure To Log"
+      DTS:Value="1" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="170.666666666667,42.6666666666667"
+          Id="Package\Sequence Container\Load Dim Suppliers"
+          TopLeft="30.499997826914,84.4999972492456" />
+        <NodeLayout
+          Size="133.333333333334,42.6666666666667"
+          Id="Package\Sequence Container\TRUNCATETable"
+          TopLeft="34.3333298812311,7.96666958789024" />
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          TopLeft="100.999996547898,50.6333362545569">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="14.8333346123495,33.8666609946887"
+              Start="0,0"
+              End="14.8333346123495,26.3666609946887">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,12.9333304973443" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,12.9333304973443"
+                    Point2="0,16.9333304973443"
+                    Point3="4,16.9333304973443" />
+                  <mssgle:LineSegment
+                    End="10.8333346123495,16.9333304973443" />
+                  <mssgle:CubicBezierSegment
+                    Point1="10.8333346123495,16.9333304973443"
+                    Point2="14.8333346123495,16.9333304973443"
+                    Point3="14.8333346123495,20.9333304973443" />
+                  <mssgle:LineSegment
+                    End="14.8333346123495,26.3666609946887" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="230,184"
+          Size="230,226.666666666667"
+          Id="Package\Sequence Container"
+          TopLeft="134.166665561498,60" />
+        <NodeLayout
+          Size="184,42.6666666666667"
+          Id="Package\Write Failure To Log"
+          TopLeft="282.666666939855,361.06666493098" />
+        <NodeLayout
+          Size="180,42"
+          Id="Package\Write Success To Log"
+          TopLeft="60,358.29999772966" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="212.166665561498,286">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-62.1666655614976,72.2999977296597"
+              Start="0,0"
+              End="-62.1666655614976,64.7999977296597">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.2196882016241" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,25.2196882016241"
+                    Point2="0,29.2196882016241"
+                    Point3="-4,29.2196882016241" />
+                  <mssgle:LineSegment
+                    End="-58.1666655614976,29.2196882016241" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-58.1666655614976,29.2196882016241"
+                    Point2="-62.1666655614976,29.2196882016241"
+                    Point3="-62.1666655614976,33.2196882016241" />
+                  <mssgle:LineSegment
+                    End="-62.1666655614976,64.7999977296597" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="286.166665561498,286">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="88.500001378357,75.0666649309797"
+              Start="0,0"
+              End="88.500001378357,67.5666649309797">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.3378231327275" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26.3378231327275"
+                    Point2="0,30.3378231327275"
+                    Point3="4,30.3378231327275" />
+                  <mssgle:LineSegment
+                    End="84.500001378357,30.3378231327275" />
+                  <mssgle:CubicBezierSegment
+                    Point1="84.500001378357,30.3378231327275"
+                    Point2="88.500001378357,30.3378231327275"
+                    Point3="88.500001378357,34.3378231327276" />
+                  <mssgle:LineSegment
+                    End="88.500001378357,67.5666649309797" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="42.7586528280377,41.1170976407852,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Sequence Container\Load Dim Suppliers">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="145.333333333334,42.6666666666667"
+          Id="Package\Sequence Container\Load Dim Suppliers\STG Suppliers"
+          TopLeft="161.666664257646,61.5333322330316" />
+        <NodeLayout
+          Size="145.333333333334,42.6666666666667"
+          Id="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers"
+          TopLeft="141.249997895211,195.866663164298" />
+        <NodeLayout
+          Size="180,42.6666666666667"
+          Id="Package\Sequence Container\Load Dim Suppliers\Get Last Extract Date"
+          TopLeft="122.499998174608,131.299998582006" />
+        <EdgeLayout
+          Id="Package\Sequence Container\Load Dim Suppliers.Paths[OLE DB Source Output]"
+          TopLeft="234.333330924312,104.199998899698">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-21.8333327497045,27.0999996823073"
+              Start="0,0"
+              End="-21.8333327497045,19.5999996823073">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9.54999984115364" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,9.54999984115364"
+                    Point2="0,13.5499998411536"
+                    Point3="-4,13.5499998411536" />
+                  <mssgle:LineSegment
+                    End="-17.8333327497045,13.5499998411536" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-17.8333327497045,13.5499998411536"
+                    Point2="-21.8333327497045,13.5499998411536"
+                    Point3="-21.8333327497045,17.5499998411536" />
+                  <mssgle:LineSegment
+                    End="-21.8333327497045,19.5999996823073" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\Load Dim Suppliers.Paths[Derived Column Output]"
+          TopLeft="122.499998174608,152.633331915339">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="18.7499997206032,64.5666645822922"
+              Start="0,0"
+              End="11.2499997206032,64.5666645822922">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-18.5,0"
+                    Point2="-22.5,0"
+                    Point3="-22.5,4" />
+                  <mssgle:LineSegment
+                    End="-22.5,60.5666645822922" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.5,60.5666645822922"
+                    Point2="-22.5,64.5666645822922"
+                    Point3="-18.5,64.5666645822922" />
+                  <mssgle:LineSegment
+                    End="11.2499997206032,64.5666645822922" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\Load Dim Suppliers\STG Suppliers">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\Load Dim Suppliers\DIM Suppliers">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

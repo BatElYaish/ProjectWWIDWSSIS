@@ -1,0 +1,231 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/23/2020 6:22:19 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-DBGFR1O"
+  DTS:CreatorName="DESKTOP-DBGFR1O\batel"
+  DTS:DTSID="{5FDE7487-30A1-443F-9B9C-8677F68A0CF5}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.68"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="170 LoadFactPurchase"
+  DTS:PackageType="5"
+  DTS:VersionBuild="21"
+  DTS:VersionGUID="{B74B1AB0-1D45-4B5E-8701-EA2CBD668A33}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.PurchasingImportStaging 1]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{4144D171-9727-4CCE-B418-61D59AFB0EE6}"
+      DTS:ObjectName="localhost.PurchasingImportStaging 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=PurchasingImportStaging;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{AF8CA696-CC5F-4B78-A07C-6F75D1980C8B}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Load Fact Purchase"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{96E8FC64-A2A6-4DAF-9EEA-D0CBD2FBE3E5}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Load Fact Purchase"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}"
+              SQLTask:SqlStatementSource="--Synchronize the target table with refreshed data from source table&#xA;MERGE [ProjectWWIDW].[dbo].[FACTPurchases] AS TARGET&#xA;USING [ProjectWWIDW].[dbo].[STGPurchases] AS SOURCE &#xA;ON (TARGET.[PurchaseKey] = SOURCE.[PurchaseKey] ) &#xA;--When records are matched, update the records if there is any change&#xA;WHEN MATCHED AND (  &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;TARGET.[PurchaseOrderKey] &lt;&gt; SOURCE.[PurchaseOrderKey] OR&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;TARGET.[ProductKey] &lt;&gt; SOURCE.[ProductKey] OR&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;TARGET.[OutersQuantity] &lt;&gt; SOURCE.[OutersQuantity] OR&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;TARGET.[PricePerOuter] &lt;&gt; SOURCE.[PricePerOuter] OR&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;TARGET.[ProductQuantity] &lt;&gt; SOURCE.[ProductQuantity] OR&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;TARGET.[SupplierKey] &lt;&gt; SOURCE.[SupplierKey] OR&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;TARGET.[DateKey] &lt;&gt; SOURCE.[DateKey] OR&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;TARGET.[AmountExcludingTax] &lt;&gt; SOURCE.[AmountExcludingTax] OR&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;TARGET.[IsOrderFinalized] &lt;&gt; SOURCE.[IsOrderFinalized] OR&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;TARGET.[LocationKey] &lt;&gt; SOURCE.[LocationKey] )&#xA;THEN UPDATE SET   &#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;TARGET.[PurchaseOrderKey] = SOURCE.[PurchaseOrderKey] ,&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;TARGET.[ProductKey] = SOURCE.[ProductKey] ,&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;TARGET.[OutersQuantity] = SOURCE.[OutersQuantity] ,&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;TARGET.[PricePerOuter] = SOURCE.[PricePerOuter] ,&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;TARGET.[ProductQuantity] = SOURCE.[ProductQuantity] ,&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;TARGET.[SupplierKey] = SOURCE.[SupplierKey] ,&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;TARGET.[DateKey] = SOURCE.[DateKey] ,&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;TARGET.[AmountExcludingTax] = SOURCE.[AmountExcludingTax] ,&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;TARGET.[IsOrderFinalized] = SOURCE.[IsOrderFinalized] ,&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;TARGET.[LocationKey] = SOURCE.[LocationKey] ,&#xA;&#x9;&#x9;&#x9;&#x9;  &#x9;TARGET.[LastExtract] = GETDATE()&#xA;--When no records are matched, insert the incoming records from source table to target table&#xA;WHEN NOT MATCHED BY TARGET &#xA;THEN INSERT (  &#x9;[PurchaseKey] ,&#xA;&#x9;&#x9;&#x9;&#x9;[PurchaseOrderKey] ,&#xA;&#x9;&#x9;&#x9;&#x9;[ProductKey] ,&#xA;&#x9;&#x9;&#x9;&#x9;[OutersQuantity] ,&#xA;&#x9;&#x9;&#x9;&#x9;[PricePerOuter] ,&#xA;&#x9;&#x9;&#x9;&#x9;[ProductQuantity] ,&#xA;&#x9;&#x9;&#x9;&#x9;[SupplierKey] ,&#xA;&#x9;&#x9;&#x9;&#x9;[DateKey] ,&#xA;&#x9;&#x9;&#x9;&#x9;[AmountExcludingTax] ,&#xA;&#x9;&#x9;&#x9;&#x9;[IsOrderFinalized] ,&#xA;&#x9;&#x9;&#x9;&#x9;[LocationKey] ,&#xA;&#x9;&#x9;&#x9;&#x9;[LastExtract] ) &#xA;VALUES (        SOURCE.[PurchaseKey] ,&#xA;&#x9;&#x9;&#x9;SOURCE.[PurchaseOrderKey] ,&#xA;&#x9;&#x9;&#x9;SOURCE.[ProductKey] ,&#xA;&#x9;&#x9;&#x9;SOURCE.[OutersQuantity] ,&#xA;&#x9;&#x9;&#x9;SOURCE.[PricePerOuter] ,&#xA;&#x9;&#x9;&#x9;SOURCE.[ProductQuantity] ,&#xA;&#x9;&#x9;&#x9;SOURCE.[SupplierKey] ,&#xA;&#x9;&#x9;&#x9;SOURCE.[DateKey] ,&#xA;&#x9;&#x9;&#x9;SOURCE.[AmountExcludingTax] ,&#xA;&#x9;&#x9;&#x9;SOURCE.[IsOrderFinalized] ,&#xA;&#x9;&#x9;&#x9;SOURCE.[LocationKey] ,  &#xA;&#x9;&#x9;    GETDATE()) ;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Write Failure To Log"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{86A4897E-0ACE-47C2-978C-8BEBB9BF2CD4}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Write Failure To Log"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}"
+          SQLTask:SqlStatementSource="INSERT INTO ExtractLog (PackageName,TableName,Status)&#xA;VALUES(?,'FactPurchase','Failure')&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Write Success To Log"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{C31B3651-DE2D-4381-8F39-20481A4E9A13}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Write Success To Log"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}"
+          SQLTask:SqlStatementSource="INSERT INTO ExtractLog (PackageName,TableName,Status)&#xA;VALUES(?,'FactPurchase','Success')&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{D7EBA4B2-A164-41E3-832B-3609E568C8B2}"
+      DTS:From="Package\Sequence Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Write Success To Log" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{90B4F31F-C896-4318-A3AA-3EE06128B204}"
+      DTS:From="Package\Sequence Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Write Failure To Log"
+      DTS:Value="1" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="170.666666666667,42.6666666666667"
+          Id="Package\Sequence Container\Load Fact Purchase"
+          TopLeft="44.5833308808506,17.4999993413687" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="266,114.666666666667"
+          Size="266,158"
+          Id="Package\Sequence Container"
+          TopLeft="89.5833328925077,32.700000488162" />
+        <NodeLayout
+          Size="184,42.6666666666667"
+          Id="Package\Write Failure To Log"
+          TopLeft="274.333333730698,241.03333374401" />
+        <NodeLayout
+          Size="180,42"
+          Id="Package\Write Success To Log"
+          TopLeft="47.5000001862645,242.166666472953" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="179.583332892508,190.700000488162">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-42.0833327062432,51.466665984791"
+              Start="0,0"
+              End="-42.0833327062432,43.966665984791">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.771300173234" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.771300173234"
+                    Point2="0,20.771300173234"
+                    Point3="-4,20.771300173234" />
+                  <mssgle:LineSegment
+                    End="-38.0833327062432,20.771300173234" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-38.0833327062432,20.771300173234"
+                    Point2="-42.0833327062432,20.771300173234"
+                    Point3="-42.0833327062432,24.771300173234" />
+                  <mssgle:LineSegment
+                    End="-42.0833327062432,43.966665984791" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="265.583332892508,190.700000488162">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="100.75000083819,50.3333332558479"
+              Start="0,0"
+              End="100.75000083819,42.8333332558479">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.3139013140193" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.3139013140193"
+                    Point2="0,20.3139013140193"
+                    Point3="4,20.3139013140193" />
+                  <mssgle:LineSegment
+                    End="96.7500008381902,20.3139013140193" />
+                  <mssgle:CubicBezierSegment
+                    Point1="96.7500008381902,20.3139013140193"
+                    Point2="100.75000083819,20.3139013140193"
+                    Point3="100.75000083819,24.3139013140193" />
+                  <mssgle:LineSegment
+                    End="100.75000083819,42.8333332558479" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="35.1336527628451,25.3139013140193,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

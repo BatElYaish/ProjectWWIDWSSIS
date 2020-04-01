@@ -1,0 +1,2214 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/18/2020 5:30:13 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-DBGFR1O"
+  DTS:CreatorName="DESKTOP-DBGFR1O\batel"
+  DTS:DTSID="{AAA24370-110D-4115-843C-7631DE26BC17}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.68"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="050 ExtractSuppliers"
+  DTS:PackageType="5"
+  DTS:VersionBuild="32"
+  DTS:VersionGUID="{8F7F9BE6-0794-4EE8-82BF-C00F45501708}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Suppliers_FF]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{46C5366E-BA3B-41E2-A95F-39338748EB91}"
+      DTS:ObjectName="Suppliers_FF">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::v_FilesPath]+"SuppliersInfo.csv"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\Users\batel\Documents\פרוייקט רכש\ProjectWWIDW\Sources\SuppliersInfo.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Supplier Key"
+              DTS:DTSID="{03508763-FC4E-4281-BCE1-67B1BA567A8E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="14"
+              DTS:DataScale="6"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ExtraCosts"
+              DTS:DTSID="{B56BC417-4373-4926-A7C7-F7859C3758C1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Incoterms"
+              DTS:DTSID="{F557EFFD-9F01-40A5-BF69-BF335AA73615}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="LeadTime"
+              DTS:DTSID="{4D76959B-14F0-4587-9EA1-76DFAD2B494F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Currency"
+              DTS:DTSID="{487C474F-CD60-427B-A916-850482583153}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ISO"
+              DTS:DTSID="{D82D3074-E94A-4F2B-A4BD-A258B0D2B73F}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{A3FFC207-F947-4AED-BFFA-8FFA0A62D3DA}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\ExtractSuppliers"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{335DDAE3-28F9-4106-ADCF-0F16D6C6C5E2}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="ExtractSuppliers"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Sequence Container\ExtractSuppliers\DIM Supplier"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="DIM Supplier"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[Dimension].[Supplier]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT [SupplierID]
+      ,[SupplierName]
+      ,[SupplierCategoryID]      
+      ,[PaymentDays]     
+  FROM [WideWorldImporters].[Purchasing].[Suppliers]
+  WHERE SupplierID IN (SELECT DISTINCT [SupplierID] FROM [WideWorldImporters].[Warehouse].[StockItems])</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\ExtractSuppliers\DIM Supplier.Connections[OleDbConnection]"
+                      connectionManagerID="{746B0810-B490-44C2-A0AA-C1A8F04752A7}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.WideWorldImporters]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Output].Columns[SupplierID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Output].ExternalColumns[SupplierID]"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Output].Columns[SupplierID]"
+                          name="SupplierID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Output].Columns[SupplierName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Output].ExternalColumns[SupplierName]"
+                          length="100"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Output].Columns[SupplierName]"
+                          name="SupplierName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Output].Columns[SupplierCategoryID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Output].ExternalColumns[SupplierCategoryID]"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Output].Columns[SupplierCategoryID]"
+                          name="SupplierCategoryID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Output].Columns[PaymentDays]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Output].ExternalColumns[PaymentDays]"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Output].Columns[PaymentDays]"
+                          name="PaymentDays"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Output].ExternalColumns[SupplierID]"
+                          dataType="i4"
+                          name="SupplierID" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Output].ExternalColumns[SupplierName]"
+                          dataType="wstr"
+                          length="100"
+                          name="SupplierName" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Output].ExternalColumns[SupplierCategoryID]"
+                          dataType="i4"
+                          name="SupplierCategoryID" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Output].ExternalColumns[PaymentDays]"
+                          dataType="i4"
+                          name="PaymentDays" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Error Output].Columns[SupplierID]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Error Output].Columns[SupplierID]"
+                          name="SupplierID" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Error Output].Columns[SupplierName]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Error Output].Columns[SupplierName]"
+                          name="SupplierName" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Error Output].Columns[SupplierCategoryID]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Error Output].Columns[SupplierCategoryID]"
+                          name="SupplierCategoryID" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Error Output].Columns[PaymentDays]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Error Output].Columns[PaymentDays]"
+                          name="PaymentDays" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\ExtractSuppliers\Lookup Category Name"
+                  componentClassID="Microsoft.Lookup"
+                  contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+                  description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+                  name="Lookup Category Name"
+                  usesDispositions="true"
+                  version="6">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the SQL statement that generates the lookup table."
+                      expressionType="Notify"
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [Purchasing].[SupplierCategories]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                      expressionType="Notify"
+                      name="SqlCommandParam"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [Purchasing].[SupplierCategories]) [refTable]
+where [refTable].[SupplierCategoryID] = ?</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the type of connection used to access the reference dataset."
+                      name="ConnectionType"
+                      typeConverter="LookupConnectionType">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the cache type of the lookup table."
+                      name="CacheType"
+                      typeConverter="CacheType">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                      name="NoMatchBehavior"
+                      typeConverter="LookupNoMatchBehavior">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                      name="NoMatchCachePercentage">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                      name="MaxMemoryUsage">25</property>
+                    <property
+                      dataType="System.Int64"
+                      description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                      name="MaxMemoryUsage64">25</property>
+                    <property
+                      dataType="System.String"
+                      description="Indicates whether to reference metadata in an XML format."
+                      name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="SupplierCategoryID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="SupplierCategoryName" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="LastEditedBy" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ValidFrom" dataType="DT_DBTIMESTAMP2" length="0" precision="0" scale="7" codePage="0"/&gt;&lt;referenceColumn name="ValidTo" dataType="DT_DBTIMESTAMP2" length="0" precision="0" scale="7" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                      name="ParameterMap">#{Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Output].Columns[SupplierCategoryID]};</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                      name="TreatDuplicateKeysAsError">false</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\ExtractSuppliers\Lookup Category Name.Connections[OleDbConnection]"
+                      connectionManagerID="{746B0810-B490-44C2-A0AA-C1A8F04752A7}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.WideWorldImporters]"
+                      description="Connection manager used to access lookup data."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\ExtractSuppliers\Lookup Category Name.Inputs[Lookup Input]"
+                      name="Lookup Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Lookup Category Name.Inputs[Lookup Input].Columns[SupplierCategoryID]"
+                          cachedDataType="i4"
+                          cachedName="SupplierCategoryID"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Output].Columns[SupplierCategoryID]">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table that a column joins."
+                              name="JoinToReferenceColumn">SupplierCategoryID</property>
+                            <property
+                              dataType="System.Null"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\ExtractSuppliers\Lookup Category Name.Outputs[Lookup Match Output]"
+                      errorOrTruncationOperation="Lookup"
+                      errorRowDisposition="FailComponent"
+                      exclusionGroup="1"
+                      name="Lookup Match Output"
+                      synchronousInputId="Package\Sequence Container\ExtractSuppliers\Lookup Category Name.Inputs[Lookup Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Lookup Category Name.Outputs[Lookup Match Output].Columns[SupplierCategoryName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Copy Column"
+                          length="50"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Lookup Category Name.Outputs[Lookup Match Output].Columns[SupplierCategoryName]"
+                          name="SupplierCategoryName"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">SupplierCategoryName</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\ExtractSuppliers\Lookup Category Name.Outputs[Lookup No Match Output]"
+                      description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                      exclusionGroup="1"
+                      name="Lookup No Match Output"
+                      synchronousInputId="Package\Sequence Container\ExtractSuppliers\Lookup Category Name.Inputs[Lookup Input]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\ExtractSuppliers\Lookup Category Name.Outputs[Lookup Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Lookup Error Output"
+                      synchronousInputId="Package\Sequence Container\ExtractSuppliers\Lookup Category Name.Inputs[Lookup Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Lookup Category Name.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Lookup Category Name.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Lookup Category Name.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Lookup Category Name.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\ExtractSuppliers\Lookup LocationKey"
+                  componentClassID="Microsoft.Lookup"
+                  contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+                  description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+                  name="Lookup LocationKey"
+                  usesDispositions="true"
+                  version="6">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the SQL statement that generates the lookup table."
+                      expressionType="Notify"
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [dbo].[STGLoctions]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                      expressionType="Notify"
+                      name="SqlCommandParam"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [dbo].[STGLoctions]) [refTable]
+where [refTable].[ISOCode] = ?</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the type of connection used to access the reference dataset."
+                      name="ConnectionType"
+                      typeConverter="LookupConnectionType">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the cache type of the lookup table."
+                      name="CacheType"
+                      typeConverter="CacheType">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                      name="NoMatchBehavior"
+                      typeConverter="LookupNoMatchBehavior">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                      name="NoMatchCachePercentage">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                      name="MaxMemoryUsage">25</property>
+                    <property
+                      dataType="System.Int64"
+                      description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                      name="MaxMemoryUsage64">25</property>
+                    <property
+                      dataType="System.String"
+                      description="Indicates whether to reference metadata in an XML format."
+                      name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="LocationKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CountryID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CountryName" dataType="DT_WSTR" length="60" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Continent" dataType="DT_WSTR" length="30" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Region" dataType="DT_WSTR" length="30" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Subregion" dataType="DT_WSTR" length="30" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ISOCode" dataType="DT_WSTR" length="3" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StateProvinceID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StateProvinceName" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="SalesTerritory" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                      name="ParameterMap">#{Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Output].Columns[ISO]};</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                      name="TreatDuplicateKeysAsError">false</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\ExtractSuppliers\Lookup LocationKey.Connections[OleDbConnection]"
+                      connectionManagerID="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.ProjectWWIDW]"
+                      description="Connection manager used to access lookup data."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\ExtractSuppliers\Lookup LocationKey.Inputs[Lookup Input]"
+                      name="Lookup Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Lookup LocationKey.Inputs[Lookup Input].Columns[ISO]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="ISO"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Output].Columns[ISO]">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table that a column joins."
+                              name="JoinToReferenceColumn">ISOCode</property>
+                            <property
+                              dataType="System.Null"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\ExtractSuppliers\Lookup LocationKey.Outputs[Lookup Match Output]"
+                      errorOrTruncationOperation="Lookup"
+                      errorRowDisposition="FailComponent"
+                      exclusionGroup="1"
+                      name="Lookup Match Output"
+                      synchronousInputId="Package\Sequence Container\ExtractSuppliers\Lookup LocationKey.Inputs[Lookup Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Lookup LocationKey.Outputs[Lookup Match Output].Columns[LocationKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Copy Column"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Lookup LocationKey.Outputs[Lookup Match Output].Columns[LocationKey]"
+                          name="LocationKey"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">LocationKey</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\ExtractSuppliers\Lookup LocationKey.Outputs[Lookup No Match Output]"
+                      description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                      exclusionGroup="1"
+                      name="Lookup No Match Output"
+                      synchronousInputId="Package\Sequence Container\ExtractSuppliers\Lookup LocationKey.Inputs[Lookup Input]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\ExtractSuppliers\Lookup LocationKey.Outputs[Lookup Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Lookup Error Output"
+                      synchronousInputId="Package\Sequence Container\ExtractSuppliers\Lookup LocationKey.Inputs[Lookup Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Lookup LocationKey.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Lookup LocationKey.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Lookup LocationKey.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Lookup LocationKey.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\ExtractSuppliers\Merge Left Join"
+                  componentClassID="Microsoft.MergeJoin"
+                  contactInfo="Merge Join;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Combine two sorted data flows into one using the FULL, LEFT, or INNER join. We recommend this transformation when data flows can be sorted at their sources."
+                  name="Merge Left Join"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the type of join to perform."
+                      name="JoinType"
+                      typeConverter="JoinType">2</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the number of columns in the ordering key."
+                      name="NumKeyColumns">1</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the null values are treated as equal values."
+                      name="TreatNullsAsEqual">true</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Indicates the requested maximum buffers per input before blocking."
+                      name="MaxBuffersPerInput">5</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Inputs[Merge Join Left Input]"
+                      hasSideEffects="true"
+                      name="Merge Join Left Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Inputs[Merge Join Left Input].Columns[SupplierID]"
+                          cachedDataType="i4"
+                          cachedName="SupplierID"
+                          cachedSortKeyPosition="1"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers DB.Outputs[Sort Output].Columns[SupplierID]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Inputs[Merge Join Left Input].Columns[SupplierName]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="SupplierName"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers DB.Outputs[Sort Output].Columns[SupplierName]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Inputs[Merge Join Left Input].Columns[SupplierCategoryName]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="SupplierCategoryName"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers DB.Outputs[Sort Output].Columns[SupplierCategoryName]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Inputs[Merge Join Left Input].Columns[PaymentDays]"
+                          cachedDataType="i4"
+                          cachedName="PaymentDays"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers DB.Outputs[Sort Output].Columns[PaymentDays]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                    <input
+                      refId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Inputs[Merge Join Right Input]"
+                      hasSideEffects="true"
+                      name="Merge Join Right Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Inputs[Merge Join Right Input].Columns[Supplier Key]"
+                          cachedDataType="i4"
+                          cachedName="Supplier Key"
+                          cachedSortKeyPosition="1"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers FF.Outputs[Sort Output].Columns[Supplier Key]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Inputs[Merge Join Right Input].Columns[ExtraCosts]"
+                          cachedDataType="decimal"
+                          cachedName="ExtraCosts"
+                          cachedScale="6"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers FF.Outputs[Sort Output].Columns[ExtraCosts]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Inputs[Merge Join Right Input].Columns[Incoterms]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Incoterms"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers FF.Outputs[Sort Output].Columns[Incoterms]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Inputs[Merge Join Right Input].Columns[LeadTime]"
+                          cachedDataType="i4"
+                          cachedName="LeadTime"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers FF.Outputs[Sort Output].Columns[LeadTime]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Inputs[Merge Join Right Input].Columns[Currency]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Currency"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers FF.Outputs[Sort Output].Columns[Currency]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Inputs[Merge Join Right Input].Columns[LocationKey]"
+                          cachedDataType="i4"
+                          cachedName="LocationKey"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers FF.Outputs[Sort Output].Columns[LocationKey]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Outputs[Merge Join Output]"
+                      isSorted="true"
+                      name="Merge Join Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Outputs[Merge Join Output].Columns[SupplierKey]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Outputs[Merge Join Output].Columns[SupplierKey]"
+                          name="SupplierKey"
+                          sortKeyPosition="1">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\ExtractSuppliers\Merge Left Join.Inputs[Merge Join Left Input].Columns[SupplierID]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Outputs[Merge Join Output].Columns[SupplierName]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Outputs[Merge Join Output].Columns[SupplierName]"
+                          name="SupplierName">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\ExtractSuppliers\Merge Left Join.Inputs[Merge Join Left Input].Columns[SupplierName]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Outputs[Merge Join Output].Columns[SupplierCategoryName]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Outputs[Merge Join Output].Columns[SupplierCategoryName]"
+                          name="SupplierCategoryName">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\ExtractSuppliers\Merge Left Join.Inputs[Merge Join Left Input].Columns[SupplierCategoryName]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Outputs[Merge Join Output].Columns[PaymentDays]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Outputs[Merge Join Output].Columns[PaymentDays]"
+                          name="PaymentDays">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\ExtractSuppliers\Merge Left Join.Inputs[Merge Join Left Input].Columns[PaymentDays]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Outputs[Merge Join Output].Columns[ExtraCosts]"
+                          dataType="decimal"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Outputs[Merge Join Output].Columns[ExtraCosts]"
+                          name="ExtraCosts"
+                          scale="6">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\ExtractSuppliers\Merge Left Join.Inputs[Merge Join Right Input].Columns[ExtraCosts]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Outputs[Merge Join Output].Columns[Incoterms]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Outputs[Merge Join Output].Columns[Incoterms]"
+                          name="Incoterms">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\ExtractSuppliers\Merge Left Join.Inputs[Merge Join Right Input].Columns[Incoterms]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Outputs[Merge Join Output].Columns[LeadTime]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Outputs[Merge Join Output].Columns[LeadTime]"
+                          name="LeadTime">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\ExtractSuppliers\Merge Left Join.Inputs[Merge Join Right Input].Columns[LeadTime]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Outputs[Merge Join Output].Columns[Currency]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Outputs[Merge Join Output].Columns[Currency]"
+                          name="Currency">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\ExtractSuppliers\Merge Left Join.Inputs[Merge Join Right Input].Columns[Currency]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Outputs[Merge Join Output].Columns[LocationKey]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Outputs[Merge Join Output].Columns[LocationKey]"
+                          name="LocationKey">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\ExtractSuppliers\Merge Left Join.Inputs[Merge Join Right Input].Columns[LocationKey]}</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers DB"
+                  componentClassID="Microsoft.Sort"
+                  contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+                  name="Sort Suppliers DB"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                      name="EliminateDuplicates">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the maximum number of threads to use for sorting."
+                      expressionType="Notify"
+                      name="MaximumThreads">-1</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers DB.Inputs[Sort Input]"
+                      name="Sort Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers DB.Inputs[Sort Input].Columns[SupplierID]"
+                          cachedDataType="i4"
+                          cachedName="SupplierID"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Output].Columns[SupplierID]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">1</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers DB.Inputs[Sort Input].Columns[SupplierName]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="SupplierName"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Output].Columns[SupplierName]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers DB.Inputs[Sort Input].Columns[PaymentDays]"
+                          cachedDataType="i4"
+                          cachedName="PaymentDays"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Output].Columns[PaymentDays]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers DB.Inputs[Sort Input].Columns[SupplierCategoryName]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="SupplierCategoryName"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Lookup Category Name.Outputs[Lookup Match Output].Columns[SupplierCategoryName]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers DB.Outputs[Sort Output]"
+                      isSorted="true"
+                      name="Sort Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers DB.Outputs[Sort Output].Columns[SupplierID]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers DB.Outputs[Sort Output].Columns[SupplierID]"
+                          name="SupplierID"
+                          sortKeyPosition="1">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Output].Columns[SupplierID]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers DB.Outputs[Sort Output].Columns[SupplierName]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers DB.Outputs[Sort Output].Columns[SupplierName]"
+                          name="SupplierName">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Output].Columns[SupplierName]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers DB.Outputs[Sort Output].Columns[PaymentDays]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers DB.Outputs[Sort Output].Columns[PaymentDays]"
+                          name="PaymentDays">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Output].Columns[PaymentDays]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers DB.Outputs[Sort Output].Columns[SupplierCategoryName]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers DB.Outputs[Sort Output].Columns[SupplierCategoryName]"
+                          name="SupplierCategoryName">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\ExtractSuppliers\Lookup Category Name.Outputs[Lookup Match Output].Columns[SupplierCategoryName]}</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers FF"
+                  componentClassID="Microsoft.Sort"
+                  contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+                  name="Sort Suppliers FF"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                      name="EliminateDuplicates">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the maximum number of threads to use for sorting."
+                      expressionType="Notify"
+                      name="MaximumThreads">-1</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers FF.Inputs[Sort Input]"
+                      name="Sort Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers FF.Inputs[Sort Input].Columns[Supplier Key]"
+                          cachedDataType="i4"
+                          cachedName="Supplier Key"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Output].Columns[Supplier Key]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">1</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers FF.Inputs[Sort Input].Columns[ExtraCosts]"
+                          cachedDataType="decimal"
+                          cachedName="ExtraCosts"
+                          cachedScale="6"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Output].Columns[ExtraCosts]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers FF.Inputs[Sort Input].Columns[Incoterms]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Incoterms"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Output].Columns[Incoterms]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers FF.Inputs[Sort Input].Columns[LeadTime]"
+                          cachedDataType="i4"
+                          cachedName="LeadTime"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Output].Columns[LeadTime]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers FF.Inputs[Sort Input].Columns[Currency]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Currency"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Output].Columns[Currency]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers FF.Inputs[Sort Input].Columns[LocationKey]"
+                          cachedDataType="i4"
+                          cachedName="LocationKey"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Lookup LocationKey.Outputs[Lookup Match Output].Columns[LocationKey]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers FF.Outputs[Sort Output]"
+                      isSorted="true"
+                      name="Sort Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers FF.Outputs[Sort Output].Columns[Supplier Key]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers FF.Outputs[Sort Output].Columns[Supplier Key]"
+                          name="Supplier Key"
+                          sortKeyPosition="1">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Output].Columns[Supplier Key]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers FF.Outputs[Sort Output].Columns[ExtraCosts]"
+                          dataType="decimal"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers FF.Outputs[Sort Output].Columns[ExtraCosts]"
+                          name="ExtraCosts"
+                          scale="6">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Output].Columns[ExtraCosts]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers FF.Outputs[Sort Output].Columns[Incoterms]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers FF.Outputs[Sort Output].Columns[Incoterms]"
+                          name="Incoterms">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Output].Columns[Incoterms]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers FF.Outputs[Sort Output].Columns[LeadTime]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers FF.Outputs[Sort Output].Columns[LeadTime]"
+                          name="LeadTime">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Output].Columns[LeadTime]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers FF.Outputs[Sort Output].Columns[Currency]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers FF.Outputs[Sort Output].Columns[Currency]"
+                          name="Currency">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Output].Columns[Currency]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers FF.Outputs[Sort Output].Columns[LocationKey]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers FF.Outputs[Sort Output].Columns[LocationKey]"
+                          name="LocationKey">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\ExtractSuppliers\Lookup LocationKey.Outputs[Lookup Match Output].Columns[LocationKey]}</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\ExtractSuppliers\STGSuppliers"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="STGSuppliers"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[STGSuppliers]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\ExtractSuppliers\STGSuppliers.Connections[OleDbConnection]"
+                      connectionManagerID="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.ProjectWWIDW]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\ExtractSuppliers\STGSuppliers.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\STGSuppliers.Inputs[OLE DB Destination Input].Columns[SupplierKey]"
+                          cachedDataType="i4"
+                          cachedName="SupplierKey"
+                          cachedSortKeyPosition="1"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractSuppliers\STGSuppliers.Inputs[OLE DB Destination Input].ExternalColumns[SupplierKey]"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Outputs[Merge Join Output].Columns[SupplierKey]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\STGSuppliers.Inputs[OLE DB Destination Input].Columns[SupplierName]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="SupplierName"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractSuppliers\STGSuppliers.Inputs[OLE DB Destination Input].ExternalColumns[SupplierName]"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Outputs[Merge Join Output].Columns[SupplierName]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\STGSuppliers.Inputs[OLE DB Destination Input].Columns[PaymentDays]"
+                          cachedDataType="i4"
+                          cachedName="PaymentDays"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractSuppliers\STGSuppliers.Inputs[OLE DB Destination Input].ExternalColumns[PaymentDays]"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Outputs[Merge Join Output].Columns[PaymentDays]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\STGSuppliers.Inputs[OLE DB Destination Input].Columns[ExtraCosts]"
+                          cachedDataType="decimal"
+                          cachedName="ExtraCosts"
+                          cachedScale="6"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractSuppliers\STGSuppliers.Inputs[OLE DB Destination Input].ExternalColumns[ExtraCosts]"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Outputs[Merge Join Output].Columns[ExtraCosts]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\STGSuppliers.Inputs[OLE DB Destination Input].Columns[Incoterms]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Incoterms"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractSuppliers\STGSuppliers.Inputs[OLE DB Destination Input].ExternalColumns[Incoterms]"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Outputs[Merge Join Output].Columns[Incoterms]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\STGSuppliers.Inputs[OLE DB Destination Input].Columns[LeadTime]"
+                          cachedDataType="i4"
+                          cachedName="LeadTime"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractSuppliers\STGSuppliers.Inputs[OLE DB Destination Input].ExternalColumns[LeadTime]"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Outputs[Merge Join Output].Columns[LeadTime]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\STGSuppliers.Inputs[OLE DB Destination Input].Columns[Currency]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Currency"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractSuppliers\STGSuppliers.Inputs[OLE DB Destination Input].ExternalColumns[Currency]"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Outputs[Merge Join Output].Columns[Currency]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\STGSuppliers.Inputs[OLE DB Destination Input].Columns[LocationKey]"
+                          cachedDataType="i4"
+                          cachedName="LocationKey"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractSuppliers\STGSuppliers.Inputs[OLE DB Destination Input].ExternalColumns[LocationKey]"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Outputs[Merge Join Output].Columns[LocationKey]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\STGSuppliers.Inputs[OLE DB Destination Input].Columns[SupplierCategoryName]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="SupplierCategoryName"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractSuppliers\STGSuppliers.Inputs[OLE DB Destination Input].ExternalColumns[SupplierCategory]"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Outputs[Merge Join Output].Columns[SupplierCategoryName]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\STGSuppliers.Inputs[OLE DB Destination Input].ExternalColumns[SupplierKey]"
+                          dataType="i4"
+                          name="SupplierKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\STGSuppliers.Inputs[OLE DB Destination Input].ExternalColumns[SupplierName]"
+                          dataType="wstr"
+                          length="100"
+                          name="SupplierName" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\STGSuppliers.Inputs[OLE DB Destination Input].ExternalColumns[SupplierCategory]"
+                          dataType="wstr"
+                          length="50"
+                          name="SupplierCategory" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\STGSuppliers.Inputs[OLE DB Destination Input].ExternalColumns[PaymentDays]"
+                          dataType="i4"
+                          name="PaymentDays" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\STGSuppliers.Inputs[OLE DB Destination Input].ExternalColumns[ExtraCosts]"
+                          dataType="numeric"
+                          name="ExtraCosts"
+                          precision="28"
+                          scale="6" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\STGSuppliers.Inputs[OLE DB Destination Input].ExternalColumns[Incoterms]"
+                          dataType="wstr"
+                          length="50"
+                          name="Incoterms" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\STGSuppliers.Inputs[OLE DB Destination Input].ExternalColumns[LeadTime]"
+                          dataType="i4"
+                          name="LeadTime" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\STGSuppliers.Inputs[OLE DB Destination Input].ExternalColumns[Currency]"
+                          dataType="wstr"
+                          length="50"
+                          name="Currency" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\STGSuppliers.Inputs[OLE DB Destination Input].ExternalColumns[LocationKey]"
+                          dataType="i4"
+                          name="LocationKey" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\ExtractSuppliers\STGSuppliers.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Sequence Container\ExtractSuppliers\STGSuppliers.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\STGSuppliers.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\STGSuppliers.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\STGSuppliers.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\STGSuppliers.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF"
+                  componentClassID="Microsoft.FlatFileSource"
+                  contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Flat File Source"
+                  localeId="1033"
+                  name="Suppliers_FF"
+                  usesDispositions="true"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether zero-length columns are treated as null."
+                      name="RetainNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                      name="FileNameColumnName"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Connections[FlatFileConnection]"
+                      connectionManagerID="Package.ConnectionManagers[Suppliers_FF]"
+                      connectionManagerRefId="Package.ConnectionManagers[Suppliers_FF]"
+                      name="FlatFileConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Output]"
+                      name="Flat File Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Output].Columns[Supplier Key]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Output].ExternalColumns[Supplier Key]"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Output].Columns[Supplier Key]"
+                          name="Supplier Key"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Output].Columns[ExtraCosts]"
+                          dataType="decimal"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Output].ExternalColumns[ExtraCosts]"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Output].Columns[ExtraCosts]"
+                          name="ExtraCosts"
+                          scale="6"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Output].Columns[Incoterms]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Output].ExternalColumns[Incoterms]"
+                          length="50"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Output].Columns[Incoterms]"
+                          name="Incoterms"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Output].Columns[LeadTime]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Output].ExternalColumns[LeadTime]"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Output].Columns[LeadTime]"
+                          name="LeadTime"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Output].Columns[Currency]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Output].ExternalColumns[Currency]"
+                          length="50"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Output].Columns[Currency]"
+                          name="Currency"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Output].Columns[ISO]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Output].ExternalColumns[ISO]"
+                          length="50"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Output].Columns[ISO]"
+                          name="ISO"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Output].ExternalColumns[Supplier Key]"
+                          dataType="i4"
+                          name="Supplier Key" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Output].ExternalColumns[ExtraCosts]"
+                          dataType="decimal"
+                          name="ExtraCosts"
+                          scale="6" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Output].ExternalColumns[Incoterms]"
+                          dataType="wstr"
+                          length="50"
+                          name="Incoterms" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Output].ExternalColumns[LeadTime]"
+                          dataType="i4"
+                          name="LeadTime" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Output].ExternalColumns[Currency]"
+                          dataType="wstr"
+                          length="50"
+                          name="Currency" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Output].ExternalColumns[ISO]"
+                          dataType="wstr"
+                          length="50"
+                          name="ISO" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Error Output]"
+                      isErrorOut="true"
+                      name="Flat File Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          codePage="1252"
+                          dataType="text"
+                          description="Flat File Source Error Output Column"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          name="Flat File Source Error Output Column" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Sequence Container\ExtractSuppliers.Paths[Flat File Source Output]"
+                  endId="Package\Sequence Container\ExtractSuppliers\Lookup LocationKey.Inputs[Lookup Input]"
+                  name="Flat File Source Output"
+                  startId="Package\Sequence Container\ExtractSuppliers\Suppliers_FF.Outputs[Flat File Source Output]" />
+                <path
+                  refId="Package\Sequence Container\ExtractSuppliers.Paths[Lookup Match Output]"
+                  endId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers DB.Inputs[Sort Input]"
+                  name="Lookup Match Output"
+                  startId="Package\Sequence Container\ExtractSuppliers\Lookup Category Name.Outputs[Lookup Match Output]" />
+                <path
+                  refId="Package\Sequence Container\ExtractSuppliers.Paths[Lookup Match Output1]"
+                  endId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers FF.Inputs[Sort Input]"
+                  name="Lookup Match Output"
+                  startId="Package\Sequence Container\ExtractSuppliers\Lookup LocationKey.Outputs[Lookup Match Output]" />
+                <path
+                  refId="Package\Sequence Container\ExtractSuppliers.Paths[Merge Join Output]"
+                  endId="Package\Sequence Container\ExtractSuppliers\STGSuppliers.Inputs[OLE DB Destination Input]"
+                  name="Merge Join Output"
+                  startId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Outputs[Merge Join Output]" />
+                <path
+                  refId="Package\Sequence Container\ExtractSuppliers.Paths[OLE DB Source Output]"
+                  endId="Package\Sequence Container\ExtractSuppliers\Lookup Category Name.Inputs[Lookup Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Sequence Container\ExtractSuppliers\DIM Supplier.Outputs[OLE DB Source Output]" />
+                <path
+                  refId="Package\Sequence Container\ExtractSuppliers.Paths[Sort Output]"
+                  endId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Inputs[Merge Join Left Input]"
+                  name="Sort Output"
+                  startId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers DB.Outputs[Sort Output]" />
+                <path
+                  refId="Package\Sequence Container\ExtractSuppliers.Paths[Sort Output1]"
+                  endId="Package\Sequence Container\ExtractSuppliers\Merge Left Join.Inputs[Merge Join Right Input]"
+                  name="Sort Output"
+                  startId="Package\Sequence Container\ExtractSuppliers\Sort Suppliers FF.Outputs[Sort Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\TRUNCATETable"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{371CE018-AB20-4BD2-A645-BBBDD2837B56}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="TRUNCATETable"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}"
+              SQLTask:SqlStatementSource="IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES&#xA;           WHERE TABLE_NAME = N'STGSuppliers')&#xA;TRUNCATE TABLE STGSuppliers" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{5CD2DDCA-DFB5-4BBE-9652-44D65F70D959}"
+          DTS:From="Package\Sequence Container\TRUNCATETable"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Sequence Container\ExtractSuppliers" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Write Failure To Log"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{7A9EEAD7-1EC1-4E9E-A5AA-66DC68D50A5A}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Write Failure To Log"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}"
+          SQLTask:SqlStatementSource="INSERT INTO ExtractLog (PackageName,TableName,Status)&#xA;VALUES(?,'STGSuppliers','Failure')&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Write Success To Log"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{1DB7E74D-F680-4D8C-80ED-9BA2FC572C95}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Write Success To Log"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}"
+          SQLTask:SqlStatementSource="INSERT INTO ExtractLog (PackageName,TableName,Status)&#xA;VALUES(?,'STGSuppliers','Success')&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{8E194B93-7ED9-4F4D-96DF-013AC72B41D2}"
+      DTS:From="Package\Sequence Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Write Success To Log" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{B4F7625C-F67D-4D35-B248-B0845835EC6B}"
+      DTS:From="Package\Sequence Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Write Failure To Log"
+      DTS:Value="1" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="154.666666666667,42.6666666666667"
+          Id="Package\Sequence Container\ExtractSuppliers"
+          TopLeft="31.3333311478297,84.4999972492456" />
+        <NodeLayout
+          Size="133.333333333334,42.6666666666667"
+          Id="Package\Sequence Container\TRUNCATETable"
+          TopLeft="34.3333298812311,7.96666958789024" />
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          TopLeft="104.83333051453,50.6333362545569">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33.8666609946887"
+              Start="0,0"
+              End="0,26.3666609946887">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.3666609946887" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="230,182.666666666667"
+          Size="230,226"
+          Id="Package\Sequence Container"
+          TopLeft="125.833331458271,29.8999994653463" />
+        <NodeLayout
+          Size="184,42.6666666666667"
+          Id="Package\Write Failure To Log"
+          TopLeft="274.333332836628,330.966664396326" />
+        <NodeLayout
+          Size="180,42"
+          Id="Package\Write Success To Log"
+          TopLeft="51.6666658967734,328.199997195006" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="203.833331458271,255.899999465346">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-62.1666655614976,72.2999977296597"
+              Start="0,0"
+              End="-62.1666655614976,64.7999977296597">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.2196882016241" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,25.2196882016241"
+                    Point2="0,29.2196882016241"
+                    Point3="-4,29.2196882016241" />
+                  <mssgle:LineSegment
+                    End="-58.1666655614976,29.2196882016241" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-58.1666655614976,29.2196882016241"
+                    Point2="-62.1666655614976,29.2196882016241"
+                    Point3="-62.1666655614976,33.2196882016241" />
+                  <mssgle:LineSegment
+                    End="-62.1666655614976,64.7999977296597" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="277.833331458271,255.899999465346">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="88.500001378357,75.0666649309797"
+              Start="0,0"
+              End="88.500001378357,67.5666649309797">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.3378231327275" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26.3378231327275"
+                    Point2="0,30.3378231327275"
+                    Point3="4,30.3378231327275" />
+                  <mssgle:LineSegment
+                    End="84.500001378357,30.3378231327275" />
+                  <mssgle:CubicBezierSegment
+                    Point1="84.500001378357,30.3378231327275"
+                    Point2="88.500001378357,30.3378231327275"
+                    Point3="88.500001378357,34.3378231327276" />
+                  <mssgle:LineSegment
+                    End="88.500001378357,67.5666649309797" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="29.0086530329285,35.3378231327276,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Sequence Container\ExtractSuppliers">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="161.333333333334,42.6666666666667"
+          Id="Package\Sequence Container\ExtractSuppliers\Sort Suppliers DB"
+          TopLeft="49.749999695768,203.799998000861" />
+        <NodeLayout
+          Size="189.333333333334,42.6666666666667"
+          Id="Package\Sequence Container\ExtractSuppliers\Lookup Category Name"
+          TopLeft="32.6666666169961,95.3333316286405" />
+        <NodeLayout
+          Size="152,42.6666666666667"
+          Id="Package\Sequence Container\ExtractSuppliers\Merge Left Join"
+          TopLeft="154.333331470688,343.099997512698" />
+        <NodeLayout
+          Size="140,42.6666666666667"
+          Id="Package\Sequence Container\ExtractSuppliers\Suppliers_FF"
+          TopLeft="271.666662618518,50.2666657678286" />
+        <NodeLayout
+          Size="141.333333333334,42.6666666666667"
+          Id="Package\Sequence Container\ExtractSuppliers\STGSuppliers"
+          TopLeft="155.833331011236,435.299995637536" />
+        <NodeLayout
+          Size="160,42.6666666666667"
+          Id="Package\Sequence Container\ExtractSuppliers\Sort Suppliers FF"
+          TopLeft="281.416662910333,260.633333000143" />
+        <NodeLayout
+          Size="173.333333333334,42.6666666666667"
+          Id="Package\Sequence Container\ExtractSuppliers\Lookup LocationKey"
+          TopLeft="271.666662668189,184.299998814464" />
+        <NodeLayout
+          Size="140,42.6666666666667"
+          Id="Package\Sequence Container\ExtractSuppliers\DIM Supplier"
+          TopLeft="52.9166658781465,16.8999996978045" />
+        <EdgeLayout
+          Id="Package\Sequence Container\ExtractSuppliers.Paths[Sort Output1]"
+          TopLeft="361.416662910333,303.29999966681">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-107.083331439645,39.7999978458885"
+              Start="0,0"
+              End="-107.083331439645,32.2999978458885">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.6312487209963" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.6312487209963"
+                    Point2="0,23.6312487209963"
+                    Point3="-4,23.6312487209963" />
+                  <mssgle:LineSegment
+                    End="-103.083331439645,23.6312487209963" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-103.083331439645,23.6312487209963"
+                    Point2="-107.083331439645,23.6312487209963"
+                    Point3="-107.083331439645,27.6312487209963" />
+                  <mssgle:LineSegment
+                    End="-107.083331439645,32.2999978458885" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\ExtractSuppliers.Paths[Sort Output]"
+          TopLeft="130.416666362435,246.466664667527">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="75.9166651082534,96.6333328451708"
+              Start="0,0"
+              End="75.9166651082534,89.1333328451708">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,53.3760413768202" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,53.3760413768202"
+                    Point2="0,57.3760413768202"
+                    Point3="4,57.3760413768202" />
+                  <mssgle:LineSegment
+                    End="71.9166651082534,57.3760413768202" />
+                  <mssgle:CubicBezierSegment
+                    Point1="71.9166651082534,57.3760413768202"
+                    Point2="75.9166651082534,57.3760413768202"
+                    Point3="75.9166651082534,61.3760413768202" />
+                  <mssgle:LineSegment
+                    End="75.9166651082534,89.1333328451708" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\ExtractSuppliers.Paths[OLE DB Source Output]"
+          TopLeft="125.124999580905,59.5666663644712">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,35.7666652641694"
+              Start="0,0"
+              End="0,28.2666652641694">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.2666652641694" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\ExtractSuppliers.Paths[Merge Join Output]"
+          TopLeft="228.416664574295,385.766664179365">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,49.5333314581715"
+              Start="0,0"
+              End="0,42.0333314581715">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42.0333314581715" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\ExtractSuppliers.Paths[Lookup Match Output1]"
+          TopLeft="359.874996122594,226.966665481131">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33.6666675190123"
+              Start="0,0"
+              End="0,26.1666675190123">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.1666675190123" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,7.27864625950615,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\ExtractSuppliers.Paths[Lookup Match Output]"
+          TopLeft="128.874999823049,137.999998295307">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,65.7999997055533"
+              Start="0,0"
+              End="0,58.2999997055533">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,58.2999997055533" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,23.3453123527766,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\ExtractSuppliers.Paths[Flat File Source Output]"
+          TopLeft="341.666662618518,92.9333324344953">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="16.6666667163374,91.3666663799686"
+              Start="0,0"
+              End="16.6666667163374,83.8666663799686">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.6833331899843" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,41.6833331899843"
+                    Point2="0,45.6833331899843"
+                    Point3="4,45.6833331899843" />
+                  <mssgle:LineSegment
+                    End="12.6666667163374,45.6833331899843" />
+                  <mssgle:CubicBezierSegment
+                    Point1="12.6666667163374,45.6833331899843"
+                    Point2="16.6666667163374,45.6833331899843"
+                    Point3="16.6666667163374,49.6833331899843" />
+                  <mssgle:LineSegment
+                    End="16.6666667163374,83.8666663799686" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\ExtractSuppliers\Lookup Category Name">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[Purchasing].[SupplierCategories]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\ExtractSuppliers\STGSuppliers">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\ExtractSuppliers\Lookup LocationKey">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[STGLoctions]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\ExtractSuppliers\DIM Supplier">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

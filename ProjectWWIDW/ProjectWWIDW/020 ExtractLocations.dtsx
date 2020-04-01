@@ -1,0 +1,2170 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/23/2020 3:02:48 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-DBGFR1O"
+  DTS:CreatorName="DESKTOP-DBGFR1O\batel"
+  DTS:DTSID="{2C822B3C-45D6-44ED-B05F-D313256D142F}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.68"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="020 ExtractLocations"
+  DTS:PackageType="5"
+  DTS:VersionBuild="36"
+  DTS:VersionGUID="{41E0D91D-9B88-4694-A1EE-F423FADBDAD9}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A28DF5B1-C734-4EF2-B65F-8C3D5E104FA6}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="FirstLoadFlag">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{E44B8CA3-F47B-4F6A-BAC7-5B8C7C733F4F}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\ExtractLocations"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{EB2ECAC9-5844-420E-8B70-C16F2824DE84}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="ExtractLocations"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to Countries"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Add Hardcoded columns to Countries"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to Countries.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to Countries.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to Countries.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to Countries.Outputs[Derived Column Output].Columns[StateProvinceName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="3"
+                          lineageId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to Countries.Outputs[Derived Column Output].Columns[StateProvinceName]"
+                          name="StateProvinceName"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">"N/A"</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">"N/A"</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to Countries.Outputs[Derived Column Output].Columns[SalesTerritory]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="3"
+                          lineageId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to Countries.Outputs[Derived Column Output].Columns[SalesTerritory]"
+                          name="SalesTerritory"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">"N/A"</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">"N/A"</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to Countries.Outputs[Derived Column Output].Columns[StateProvinceID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to Countries.Outputs[Derived Column Output].Columns[StateProvinceID]"
+                          name="StateProvinceID"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">0</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">0</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to Countries.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to Countries.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to Countries.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to Countries.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to Countries.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to Countries.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to States"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Add Hardcoded columns to States"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to States.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to States.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to States.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to States.Outputs[Derived Column Output].Columns[CountryID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to States.Outputs[Derived Column Output].Columns[CountryID]"
+                          name="CountryID"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">230</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">230</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to States.Outputs[Derived Column Output].Columns[CountryName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="13"
+                          lineageId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to States.Outputs[Derived Column Output].Columns[CountryName]"
+                          name="CountryName"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">"United States"</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">"United States"</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to States.Outputs[Derived Column Output].Columns[Continent]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="13"
+                          lineageId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to States.Outputs[Derived Column Output].Columns[Continent]"
+                          name="Continent"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">"North America"</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">"North America"</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to States.Outputs[Derived Column Output].Columns[Region]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="8"
+                          lineageId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to States.Outputs[Derived Column Output].Columns[Region]"
+                          name="Region"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">"Americas"</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">"Americas"</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to States.Outputs[Derived Column Output].Columns[Subregion]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="16"
+                          lineageId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to States.Outputs[Derived Column Output].Columns[Subregion]"
+                          name="Subregion"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">"Northern America"</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">"Northern America"</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to States.Outputs[Derived Column Output].Columns[IsoAlpha3Code]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="3"
+                          lineageId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to States.Outputs[Derived Column Output].Columns[IsoAlpha3Code]"
+                          name="IsoAlpha3Code"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">"USA"</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">"USA"</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to States.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to States.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to States.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to States.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to States.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to States.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\ExtractLocations\Countries"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Countries"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[Application].[Countries]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT CountryID, CountryName, IsoAlpha3Code, Continent, Region, Subregion
+FROM   Application.Countries
+WHERE CountryID &lt;&gt; 230</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\ExtractLocations\Countries.Connections[OleDbConnection]"
+                      connectionManagerID="{746B0810-B490-44C2-A0AA-C1A8F04752A7}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.WideWorldImporters]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Output]"
+                      isSorted="true"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Output].Columns[CountryID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Output].ExternalColumns[CountryID]"
+                          lineageId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Output].Columns[CountryID]"
+                          name="CountryID"
+                          sortKeyPosition="1"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Output].Columns[CountryName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Output].ExternalColumns[CountryName]"
+                          length="60"
+                          lineageId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Output].Columns[CountryName]"
+                          name="CountryName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Output].Columns[Continent]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Output].ExternalColumns[Continent]"
+                          length="30"
+                          lineageId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Output].Columns[Continent]"
+                          name="Continent"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Output].Columns[Region]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Output].ExternalColumns[Region]"
+                          length="30"
+                          lineageId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Output].Columns[Region]"
+                          name="Region"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Output].Columns[Subregion]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Output].ExternalColumns[Subregion]"
+                          length="30"
+                          lineageId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Output].Columns[Subregion]"
+                          name="Subregion"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Output].Columns[IsoAlpha3Code]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Output].ExternalColumns[IsoAlpha3Code]"
+                          length="3"
+                          lineageId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Output].Columns[IsoAlpha3Code]"
+                          name="IsoAlpha3Code"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Output].ExternalColumns[Continent]"
+                          dataType="wstr"
+                          length="30"
+                          name="Continent" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Output].ExternalColumns[Region]"
+                          dataType="wstr"
+                          length="30"
+                          name="Region" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Output].ExternalColumns[Subregion]"
+                          dataType="wstr"
+                          length="30"
+                          name="Subregion" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Output].ExternalColumns[CountryID]"
+                          dataType="i4"
+                          name="CountryID" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Output].ExternalColumns[CountryName]"
+                          dataType="wstr"
+                          length="60"
+                          name="CountryName" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Output].ExternalColumns[IsoAlpha3Code]"
+                          dataType="wstr"
+                          length="3"
+                          name="IsoAlpha3Code" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      isSorted="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Error Output].Columns[CountryID]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Error Output].Columns[CountryID]"
+                          name="CountryID"
+                          sortKeyPosition="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Error Output].Columns[CountryName]"
+                          dataType="wstr"
+                          length="60"
+                          lineageId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Error Output].Columns[CountryName]"
+                          name="CountryName" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Error Output].Columns[Continent]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Error Output].Columns[Continent]"
+                          name="Continent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Error Output].Columns[Region]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Error Output].Columns[Region]"
+                          name="Region" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Error Output].Columns[Subregion]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Error Output].Columns[Subregion]"
+                          name="Subregion" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Error Output].Columns[IsoAlpha3Code]"
+                          dataType="wstr"
+                          length="3"
+                          lineageId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Error Output].Columns[IsoAlpha3Code]"
+                          name="IsoAlpha3Code" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\ExtractLocations\Sort By keys"
+                  componentClassID="Microsoft.Sort"
+                  contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+                  name="Sort By keys"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                      name="EliminateDuplicates">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the maximum number of threads to use for sorting."
+                      expressionType="Notify"
+                      name="MaximumThreads">-1</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\ExtractLocations\Sort By keys.Inputs[Sort Input]"
+                      name="Sort Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Sort By keys.Inputs[Sort Input].Columns[CountryID]"
+                          cachedDataType="i4"
+                          cachedName="CountryID"
+                          lineageId="Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[CountryID]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">1</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Sort By keys.Inputs[Sort Input].Columns[CountryName]"
+                          cachedDataType="wstr"
+                          cachedLength="60"
+                          cachedName="CountryName"
+                          lineageId="Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[CountryName]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Sort By keys.Inputs[Sort Input].Columns[Continent]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="Continent"
+                          lineageId="Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[Continent]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Sort By keys.Inputs[Sort Input].Columns[Region]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="Region"
+                          lineageId="Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[Region]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Sort By keys.Inputs[Sort Input].Columns[Subregion]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="Subregion"
+                          lineageId="Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[Subregion]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Sort By keys.Inputs[Sort Input].Columns[IsoAlpha3Code]"
+                          cachedDataType="wstr"
+                          cachedLength="3"
+                          cachedName="IsoAlpha3Code"
+                          lineageId="Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[IsoAlpha3Code]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Sort By keys.Inputs[Sort Input].Columns[StateProvinceName]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="StateProvinceName"
+                          lineageId="Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[StateProvinceName]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Sort By keys.Inputs[Sort Input].Columns[SalesTerritory]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="SalesTerritory"
+                          lineageId="Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[SalesTerritory]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Sort By keys.Inputs[Sort Input].Columns[StateProvinceID]"
+                          cachedDataType="i4"
+                          cachedName="StateProvinceID"
+                          lineageId="Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[StateProvinceID]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">2</property>
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\ExtractLocations\Sort By keys.Outputs[Sort Output]"
+                      isSorted="true"
+                      name="Sort Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Sort By keys.Outputs[Sort Output].Columns[CountryID]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractLocations\Sort By keys.Outputs[Sort Output].Columns[CountryID]"
+                          name="CountryID"
+                          sortKeyPosition="1">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[CountryID]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Sort By keys.Outputs[Sort Output].Columns[CountryName]"
+                          dataType="wstr"
+                          length="60"
+                          lineageId="Package\Sequence Container\ExtractLocations\Sort By keys.Outputs[Sort Output].Columns[CountryName]"
+                          name="CountryName">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[CountryName]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Sort By keys.Outputs[Sort Output].Columns[Continent]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Sequence Container\ExtractLocations\Sort By keys.Outputs[Sort Output].Columns[Continent]"
+                          name="Continent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[Continent]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Sort By keys.Outputs[Sort Output].Columns[Region]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Sequence Container\ExtractLocations\Sort By keys.Outputs[Sort Output].Columns[Region]"
+                          name="Region">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[Region]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Sort By keys.Outputs[Sort Output].Columns[Subregion]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Sequence Container\ExtractLocations\Sort By keys.Outputs[Sort Output].Columns[Subregion]"
+                          name="Subregion">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[Subregion]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Sort By keys.Outputs[Sort Output].Columns[IsoAlpha3Code]"
+                          dataType="wstr"
+                          length="3"
+                          lineageId="Package\Sequence Container\ExtractLocations\Sort By keys.Outputs[Sort Output].Columns[IsoAlpha3Code]"
+                          name="IsoAlpha3Code">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[IsoAlpha3Code]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Sort By keys.Outputs[Sort Output].Columns[StateProvinceName]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\ExtractLocations\Sort By keys.Outputs[Sort Output].Columns[StateProvinceName]"
+                          name="StateProvinceName">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[StateProvinceName]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Sort By keys.Outputs[Sort Output].Columns[SalesTerritory]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\ExtractLocations\Sort By keys.Outputs[Sort Output].Columns[SalesTerritory]"
+                          name="SalesTerritory">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[SalesTerritory]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Sort By keys.Outputs[Sort Output].Columns[StateProvinceID]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractLocations\Sort By keys.Outputs[Sort Output].Columns[StateProvinceID]"
+                          name="StateProvinceID"
+                          sortKeyPosition="2">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[StateProvinceID]}</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\ExtractLocations\StateProvinces"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="StateProvinces"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[Application].[StateProvinces]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\ExtractLocations\StateProvinces.Connections[OleDbConnection]"
+                      connectionManagerID="{746B0810-B490-44C2-A0AA-C1A8F04752A7}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.WideWorldImporters]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Output].Columns[CountryID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Output].ExternalColumns[CountryID]"
+                          lineageId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Output].Columns[CountryID]"
+                          name="CountryID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Output].Columns[StateProvinceName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Output].ExternalColumns[StateProvinceName]"
+                          length="50"
+                          lineageId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Output].Columns[StateProvinceName]"
+                          name="StateProvinceName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Output].Columns[SalesTerritory]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Output].ExternalColumns[SalesTerritory]"
+                          length="50"
+                          lineageId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Output].Columns[SalesTerritory]"
+                          name="SalesTerritory"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Output].Columns[StateProvinceID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Output].ExternalColumns[StateProvinceID]"
+                          lineageId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Output].Columns[StateProvinceID]"
+                          name="StateProvinceID"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Output].ExternalColumns[StateProvinceID]"
+                          dataType="i4"
+                          name="StateProvinceID" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Output].ExternalColumns[StateProvinceCode]"
+                          dataType="wstr"
+                          length="5"
+                          name="StateProvinceCode" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Output].ExternalColumns[StateProvinceName]"
+                          dataType="wstr"
+                          length="50"
+                          name="StateProvinceName" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Output].ExternalColumns[CountryID]"
+                          dataType="i4"
+                          name="CountryID" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Output].ExternalColumns[SalesTerritory]"
+                          dataType="wstr"
+                          length="50"
+                          name="SalesTerritory" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Output].ExternalColumns[Border]"
+                          dataType="image"
+                          name="Border" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Output].ExternalColumns[LatestRecordedPopulation]"
+                          dataType="i8"
+                          name="LatestRecordedPopulation" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Output].ExternalColumns[LastEditedBy]"
+                          dataType="i4"
+                          name="LastEditedBy" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Output].ExternalColumns[ValidFrom]"
+                          dataType="dbTimeStamp2"
+                          name="ValidFrom"
+                          scale="7" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Output].ExternalColumns[ValidTo]"
+                          dataType="dbTimeStamp2"
+                          name="ValidTo"
+                          scale="7" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Error Output].Columns[CountryID]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Error Output].Columns[CountryID]"
+                          name="CountryID" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Error Output].Columns[StateProvinceName]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Error Output].Columns[StateProvinceName]"
+                          name="StateProvinceName" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Error Output].Columns[SalesTerritory]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Error Output].Columns[SalesTerritory]"
+                          name="SalesTerritory" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Error Output].Columns[StateProvinceID]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Error Output].Columns[StateProvinceID]"
+                          name="StateProvinceID" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\ExtractLocations\STGLoctions"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="STGLoctions"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[STGLoctions]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\ExtractLocations\STGLoctions.Connections[OleDbConnection]"
+                      connectionManagerID="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.ProjectWWIDW]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\ExtractLocations\STGLoctions.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractLocations\STGLoctions.Inputs[OLE DB Destination Input].Columns[CountryName]"
+                          cachedDataType="wstr"
+                          cachedLength="60"
+                          cachedName="CountryName"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractLocations\STGLoctions.Inputs[OLE DB Destination Input].ExternalColumns[CountryName]"
+                          lineageId="Package\Sequence Container\ExtractLocations\Sort By keys.Outputs[Sort Output].Columns[CountryName]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractLocations\STGLoctions.Inputs[OLE DB Destination Input].Columns[Continent]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="Continent"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractLocations\STGLoctions.Inputs[OLE DB Destination Input].ExternalColumns[Continent]"
+                          lineageId="Package\Sequence Container\ExtractLocations\Sort By keys.Outputs[Sort Output].Columns[Continent]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractLocations\STGLoctions.Inputs[OLE DB Destination Input].Columns[Region]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="Region"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractLocations\STGLoctions.Inputs[OLE DB Destination Input].ExternalColumns[Region]"
+                          lineageId="Package\Sequence Container\ExtractLocations\Sort By keys.Outputs[Sort Output].Columns[Region]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractLocations\STGLoctions.Inputs[OLE DB Destination Input].Columns[Subregion]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="Subregion"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractLocations\STGLoctions.Inputs[OLE DB Destination Input].ExternalColumns[Subregion]"
+                          lineageId="Package\Sequence Container\ExtractLocations\Sort By keys.Outputs[Sort Output].Columns[Subregion]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractLocations\STGLoctions.Inputs[OLE DB Destination Input].Columns[StateProvinceName]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="StateProvinceName"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractLocations\STGLoctions.Inputs[OLE DB Destination Input].ExternalColumns[StateProvinceName]"
+                          lineageId="Package\Sequence Container\ExtractLocations\Sort By keys.Outputs[Sort Output].Columns[StateProvinceName]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractLocations\STGLoctions.Inputs[OLE DB Destination Input].Columns[SalesTerritory]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="SalesTerritory"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractLocations\STGLoctions.Inputs[OLE DB Destination Input].ExternalColumns[SalesTerritory]"
+                          lineageId="Package\Sequence Container\ExtractLocations\Sort By keys.Outputs[Sort Output].Columns[SalesTerritory]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractLocations\STGLoctions.Inputs[OLE DB Destination Input].Columns[IsoAlpha3Code]"
+                          cachedDataType="wstr"
+                          cachedLength="3"
+                          cachedName="IsoAlpha3Code"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractLocations\STGLoctions.Inputs[OLE DB Destination Input].ExternalColumns[ISOCode]"
+                          lineageId="Package\Sequence Container\ExtractLocations\Sort By keys.Outputs[Sort Output].Columns[IsoAlpha3Code]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractLocations\STGLoctions.Inputs[OLE DB Destination Input].Columns[CountryID]"
+                          cachedDataType="i4"
+                          cachedName="CountryID"
+                          cachedSortKeyPosition="1"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractLocations\STGLoctions.Inputs[OLE DB Destination Input].ExternalColumns[CountryID]"
+                          lineageId="Package\Sequence Container\ExtractLocations\Sort By keys.Outputs[Sort Output].Columns[CountryID]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractLocations\STGLoctions.Inputs[OLE DB Destination Input].Columns[StateProvinceID]"
+                          cachedDataType="i4"
+                          cachedName="StateProvinceID"
+                          cachedSortKeyPosition="2"
+                          externalMetadataColumnId="Package\Sequence Container\ExtractLocations\STGLoctions.Inputs[OLE DB Destination Input].ExternalColumns[StateProvinceID]"
+                          lineageId="Package\Sequence Container\ExtractLocations\Sort By keys.Outputs[Sort Output].Columns[StateProvinceID]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractLocations\STGLoctions.Inputs[OLE DB Destination Input].ExternalColumns[CountryName]"
+                          dataType="wstr"
+                          length="60"
+                          name="CountryName" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractLocations\STGLoctions.Inputs[OLE DB Destination Input].ExternalColumns[Continent]"
+                          dataType="wstr"
+                          length="30"
+                          name="Continent" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractLocations\STGLoctions.Inputs[OLE DB Destination Input].ExternalColumns[Region]"
+                          dataType="wstr"
+                          length="30"
+                          name="Region" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractLocations\STGLoctions.Inputs[OLE DB Destination Input].ExternalColumns[Subregion]"
+                          dataType="wstr"
+                          length="30"
+                          name="Subregion" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractLocations\STGLoctions.Inputs[OLE DB Destination Input].ExternalColumns[ISOCode]"
+                          dataType="wstr"
+                          length="3"
+                          name="ISOCode" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractLocations\STGLoctions.Inputs[OLE DB Destination Input].ExternalColumns[StateProvinceName]"
+                          dataType="wstr"
+                          length="50"
+                          name="StateProvinceName" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractLocations\STGLoctions.Inputs[OLE DB Destination Input].ExternalColumns[SalesTerritory]"
+                          dataType="wstr"
+                          length="50"
+                          name="SalesTerritory" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractLocations\STGLoctions.Inputs[OLE DB Destination Input].ExternalColumns[LocationKey]"
+                          dataType="i4"
+                          name="LocationKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractLocations\STGLoctions.Inputs[OLE DB Destination Input].ExternalColumns[CountryID]"
+                          dataType="i4"
+                          name="CountryID" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\ExtractLocations\STGLoctions.Inputs[OLE DB Destination Input].ExternalColumns[StateProvinceID]"
+                          dataType="i4"
+                          name="StateProvinceID" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\ExtractLocations\STGLoctions.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Sequence Container\ExtractLocations\STGLoctions.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\STGLoctions.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractLocations\STGLoctions.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\STGLoctions.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractLocations\STGLoctions.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\ExtractLocations\Union All"
+                  componentClassID="Microsoft.UnionAll"
+                  contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+                  name="Union All"
+                  version="1">
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\ExtractLocations\Union All.Inputs[Union All Input 1]"
+                      name="Union All Input 1">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Union All.Inputs[Union All Input 1].Columns[CountryID]"
+                          cachedDataType="i4"
+                          cachedName="CountryID"
+                          cachedSortKeyPosition="1"
+                          lineageId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Output].Columns[CountryID]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[CountryID]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Union All.Inputs[Union All Input 1].Columns[CountryName]"
+                          cachedDataType="wstr"
+                          cachedLength="60"
+                          cachedName="CountryName"
+                          lineageId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Output].Columns[CountryName]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[CountryName]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Union All.Inputs[Union All Input 1].Columns[Continent]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="Continent"
+                          lineageId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Output].Columns[Continent]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[Continent]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Union All.Inputs[Union All Input 1].Columns[Region]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="Region"
+                          lineageId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Output].Columns[Region]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[Region]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Union All.Inputs[Union All Input 1].Columns[Subregion]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="Subregion"
+                          lineageId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Output].Columns[Subregion]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[Subregion]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Union All.Inputs[Union All Input 1].Columns[IsoAlpha3Code]"
+                          cachedDataType="wstr"
+                          cachedLength="3"
+                          cachedName="IsoAlpha3Code"
+                          lineageId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Output].Columns[IsoAlpha3Code]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[IsoAlpha3Code]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Union All.Inputs[Union All Input 1].Columns[StateProvinceName]"
+                          cachedDataType="wstr"
+                          cachedLength="3"
+                          cachedName="StateProvinceName"
+                          lineageId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to Countries.Outputs[Derived Column Output].Columns[StateProvinceName]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[StateProvinceName]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Union All.Inputs[Union All Input 1].Columns[SalesTerritory]"
+                          cachedDataType="wstr"
+                          cachedLength="3"
+                          cachedName="SalesTerritory"
+                          lineageId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to Countries.Outputs[Derived Column Output].Columns[SalesTerritory]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[SalesTerritory]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Union All.Inputs[Union All Input 1].Columns[StateProvinceID]"
+                          cachedDataType="i4"
+                          cachedName="StateProvinceID"
+                          lineageId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to Countries.Outputs[Derived Column Output].Columns[StateProvinceID]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[StateProvinceID]}</property>
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                    <input
+                      refId="Package\Sequence Container\ExtractLocations\Union All.Inputs[Union All Input 2]"
+                      hasSideEffects="true"
+                      name="Union All Input 2">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Union All.Inputs[Union All Input 2].Columns[CountryID]"
+                          cachedDataType="i4"
+                          cachedName="CountryID"
+                          lineageId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Output].Columns[CountryID]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[CountryID]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Union All.Inputs[Union All Input 2].Columns[StateProvinceName]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="StateProvinceName"
+                          lineageId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Output].Columns[StateProvinceName]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[StateProvinceName]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Union All.Inputs[Union All Input 2].Columns[SalesTerritory]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="SalesTerritory"
+                          lineageId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Output].Columns[SalesTerritory]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[SalesTerritory]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Union All.Inputs[Union All Input 2].Columns[CountryName]"
+                          cachedDataType="wstr"
+                          cachedLength="13"
+                          cachedName="CountryName"
+                          lineageId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to States.Outputs[Derived Column Output].Columns[CountryName]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[CountryName]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Union All.Inputs[Union All Input 2].Columns[Continent]"
+                          cachedDataType="wstr"
+                          cachedLength="13"
+                          cachedName="Continent"
+                          lineageId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to States.Outputs[Derived Column Output].Columns[Continent]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[Continent]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Union All.Inputs[Union All Input 2].Columns[Region]"
+                          cachedDataType="wstr"
+                          cachedLength="8"
+                          cachedName="Region"
+                          lineageId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to States.Outputs[Derived Column Output].Columns[Region]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[Region]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Union All.Inputs[Union All Input 2].Columns[Subregion]"
+                          cachedDataType="wstr"
+                          cachedLength="16"
+                          cachedName="Subregion"
+                          lineageId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to States.Outputs[Derived Column Output].Columns[Subregion]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[Subregion]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Union All.Inputs[Union All Input 2].Columns[IsoAlpha3Code]"
+                          cachedDataType="wstr"
+                          cachedLength="3"
+                          cachedName="IsoAlpha3Code"
+                          lineageId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to States.Outputs[Derived Column Output].Columns[IsoAlpha3Code]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[IsoAlpha3Code]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Union All.Inputs[Union All Input 2].Columns[StateProvinceID]"
+                          cachedDataType="i4"
+                          cachedName="StateProvinceID"
+                          lineageId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Output].Columns[StateProvinceID]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[StateProvinceID]}</property>
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                    <input
+                      refId="Package\Sequence Container\ExtractLocations\Union All.Inputs[Union All Input 3]"
+                      dangling="true"
+                      hasSideEffects="true"
+                      name="Union All Input 3">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1]"
+                      name="Union All Output 1">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[CountryID]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[CountryID]"
+                          name="CountryID" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[CountryName]"
+                          dataType="wstr"
+                          length="60"
+                          lineageId="Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[CountryName]"
+                          name="CountryName" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[Continent]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[Continent]"
+                          name="Continent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[Region]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[Region]"
+                          name="Region" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[Subregion]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[Subregion]"
+                          name="Subregion" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[IsoAlpha3Code]"
+                          dataType="wstr"
+                          length="3"
+                          lineageId="Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[IsoAlpha3Code]"
+                          name="IsoAlpha3Code" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[StateProvinceName]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[StateProvinceName]"
+                          name="StateProvinceName" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[SalesTerritory]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[SalesTerritory]"
+                          name="SalesTerritory" />
+                        <outputColumn
+                          refId="Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[StateProvinceID]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1].Columns[StateProvinceID]"
+                          name="StateProvinceID" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Sequence Container\ExtractLocations.Paths[Derived Column Output]"
+                  endId="Package\Sequence Container\ExtractLocations\Union All.Inputs[Union All Input 1]"
+                  name="Derived Column Output"
+                  startId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to Countries.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\Sequence Container\ExtractLocations.Paths[Derived Column Output1]"
+                  endId="Package\Sequence Container\ExtractLocations\Union All.Inputs[Union All Input 2]"
+                  name="Derived Column Output"
+                  startId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to States.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\Sequence Container\ExtractLocations.Paths[OLE DB Source Output]"
+                  endId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to States.Inputs[Derived Column Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Sequence Container\ExtractLocations\StateProvinces.Outputs[OLE DB Source Output]" />
+                <path
+                  refId="Package\Sequence Container\ExtractLocations.Paths[OLE DB Source Output1]"
+                  endId="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to Countries.Inputs[Derived Column Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Sequence Container\ExtractLocations\Countries.Outputs[OLE DB Source Output]" />
+                <path
+                  refId="Package\Sequence Container\ExtractLocations.Paths[Sort Output]"
+                  endId="Package\Sequence Container\ExtractLocations\STGLoctions.Inputs[OLE DB Destination Input]"
+                  name="Sort Output"
+                  startId="Package\Sequence Container\ExtractLocations\Sort By keys.Outputs[Sort Output]" />
+                <path
+                  refId="Package\Sequence Container\ExtractLocations.Paths[Union All Output 1]"
+                  endId="Package\Sequence Container\ExtractLocations\Sort By keys.Inputs[Sort Input]"
+                  name="Union All Output 1"
+                  startId="Package\Sequence Container\ExtractLocations\Union All.Outputs[Union All Output 1]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\TRUNCATETable"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{DCECF13B-B332-45D0-8745-416CEB178CD2}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="TRUNCATETable"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}"
+              SQLTask:SqlStatementSource="  IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES&#xA;           WHERE TABLE_NAME = N'STGLocations')&#xA;TRUNCATE TABLE STGLoctions" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{6B144E4D-E696-4445-99AC-DBEC054AABBB}"
+          DTS:From="Package\Sequence Container\TRUNCATETable"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Sequence Container\ExtractLocations" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Write Failure To Log"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{6789252E-884D-457F-B070-0FEF23C02B93}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Write Failure To Log"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}"
+          SQLTask:SqlStatementSource="INSERT INTO ExtractLog (PackageName,TableName,Status)&#xA;VALUES(?,'STGLoctions','Failure')&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Write Success To Log"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{2963D1E9-CD3B-4261-950B-83ACE03F00AF}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Write Success To Log"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}"
+          SQLTask:SqlStatementSource="INSERT INTO ExtractLog (PackageName,TableName,Status)&#xA;VALUES(?,'STGLoctions','Success')&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{CD373673-9541-4CC6-B756-716D036D87C9}"
+      DTS:From="Package\Sequence Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Write Success To Log" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{FF787E8F-9FE2-4048-8D51-186402F0D9BA}"
+      DTS:From="Package\Sequence Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Write Failure To Log"
+      DTS:Value="1" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="156,42.6666666666667"
+          Id="Package\Sequence Container\ExtractLocations"
+          TopLeft="5.50000000000001,108.166666666667" />
+        <NodeLayout
+          Size="133.333333333334,42.6666666666667"
+          Id="Package\Sequence Container\TRUNCATETable"
+          TopLeft="18.4999999751646,5.50000000000004" />
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          TopLeft="84.3333333209157,48.1666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000003"
+              Start="0,0"
+              End="0,52.5000000000003">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000003" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="166.666666666667,206.666666666667"
+          Size="166.666666666667,249.333333333334"
+          Id="Package\Sequence Container"
+          TopLeft="255.166666666667,5.50000000000004" />
+        <NodeLayout
+          Size="184,42.6666666666667"
+          Id="Package\Write Failure To Log"
+          TopLeft="246.5,314.166666666667" />
+        <NodeLayout
+          Size="180,42"
+          Id="Package\Write Success To Log"
+          TopLeft="5.50000000000006,314.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="312.055555555556,254.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-216.555555555556,59.6666666666666"
+              Start="0,0"
+              End="-216.555555555556,52.1666666666666">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.2070787110407" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.2070787110407"
+                    Point2="0,24.2070787110407"
+                    Point3="-4,24.2070787110407" />
+                  <mssgle:LineSegment
+                    End="-212.555555555556,24.2070787110407" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-212.555555555556,24.2070787110407"
+                    Point2="-216.555555555556,24.2070787110407"
+                    Point3="-216.555555555556,28.2070787110407" />
+                  <mssgle:LineSegment
+                    End="-216.555555555556,52.1666666666666" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="364.944444444445,254.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-26.4444444444448,59.3333333333337"
+              Start="0,0"
+              End="-26.4444444444448,51.8333333333337">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.0718436344428" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.0718436344428"
+                    Point2="0,24.0718436344428"
+                    Point3="-4,24.0718436344428" />
+                  <mssgle:LineSegment
+                    End="-22.4444444444448,24.0718436344428" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.4444444444448,24.0718436344428"
+                    Point2="-26.4444444444448,24.0718436344428"
+                    Point3="-26.4444444444448,28.0718436344428" />
+                  <mssgle:LineSegment
+                    End="-26.4444444444448,51.8333333333337" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-28.4635698784724,29.0718436344428,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Sequence Container\ExtractLocations">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="148,42.6666666666667"
+          Id="Package\Sequence Container\ExtractLocations\StateProvinces"
+          TopLeft="368.333327844739,26.4333328606685" />
+        <NodeLayout
+          Size="238.666666666667,42.6666666666667"
+          Id="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to States"
+          TopLeft="293.749995622784,103.56666481475" />
+        <NodeLayout
+          Size="121.333333333334,42.6666666666667"
+          Id="Package\Sequence Container\ExtractLocations\Union All"
+          TopLeft="226.249996628612,238.533330915769" />
+        <NodeLayout
+          Size="124,42"
+          Id="Package\Sequence Container\ExtractLocations\Countries"
+          TopLeft="85.4166653938593,30.5666661320131" />
+        <NodeLayout
+          Size="138,42.6666666666667"
+          Id="Package\Sequence Container\ExtractLocations\Sort By keys"
+          TopLeft="237.249998391916,317.866664559046" />
+        <NodeLayout
+          Size="254.666666666667,42.6666666666667"
+          Id="Package\Sequence Container\ExtractLocations\Add Hardcoded columns to Countries"
+          TopLeft="0,105.599998326302" />
+        <NodeLayout
+          Size="137.333333333334,42.6666666666667"
+          Id="Package\Sequence Container\ExtractLocations\STGLoctions"
+          TopLeft="241.666663065552,407.999994111061" />
+        <EdgeLayout
+          Id="Package\Sequence Container\ExtractLocations.Paths[Union All Output 1]"
+          TopLeft="286.916663295279,281.199997582436">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="19.3333350966374,36.6666669766105"
+              Start="0,0"
+              End="19.3333350966374,29.1666669766105">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14.3333334883053" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14.3333334883053"
+                    Point2="0,18.3333334883053"
+                    Point3="4,18.3333334883053" />
+                  <mssgle:LineSegment
+                    End="15.3333350966374,18.3333334883053" />
+                  <mssgle:CubicBezierSegment
+                    Point1="15.3333350966374,18.3333334883053"
+                    Point2="19.3333350966374,18.3333334883053"
+                    Point3="19.3333350966374,22.3333334883053" />
+                  <mssgle:LineSegment
+                    End="19.3333350966374,29.1666669766105" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\ExtractLocations.Paths[OLE DB Source Output1]"
+          TopLeft="147.416665393859,72.5666661320131">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-20.083332060526,33.0333321942889"
+              Start="0,0"
+              End="-20.083332060526,25.5333321942889">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,12.5166660971445" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,12.5166660971445"
+                    Point2="0,16.5166660971445"
+                    Point3="-4,16.5166660971445" />
+                  <mssgle:LineSegment
+                    End="-16.083332060526,16.5166660971445" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-16.083332060526,16.5166660971445"
+                    Point2="-20.083332060526,16.5166660971445"
+                    Point3="-20.083332060526,20.5166660971445" />
+                  <mssgle:LineSegment
+                    End="-20.083332060526,25.5333321942889" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\ExtractLocations.Paths[OLE DB Source Output]"
+          TopLeft="442.333327844739,69.0999995273352">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-29.2499988886215,34.4666652874152"
+              Start="0,0"
+              End="-29.2499988886215,26.9666652874152">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.2333326437076" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.2333326437076"
+                    Point2="0,17.2333326437076"
+                    Point3="-4,17.2333326437076" />
+                  <mssgle:LineSegment
+                    End="-25.2499988886215,17.2333326437076" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-25.2499988886215,17.2333326437076"
+                    Point2="-29.2499988886215,17.2333326437076"
+                    Point3="-29.2499988886215,21.2333326437076" />
+                  <mssgle:LineSegment
+                    End="-29.2499988886215,26.9666652874152" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\ExtractLocations.Paths[Derived Column Output1]"
+          TopLeft="413.083328956117,146.233331481417">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-107.277776771949,92.2999994343526"
+              Start="0,0"
+              End="-107.277776771949,84.7999994343526">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50.6592187539659" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,50.6592187539659"
+                    Point2="0,54.6592187539659"
+                    Point3="-4,54.6592187539659" />
+                  <mssgle:LineSegment
+                    End="-103.277776771949,54.6592187539659" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-103.277776771949,54.6592187539659"
+                    Point2="-107.277776771949,54.6592187539659"
+                    Point3="-107.277776771949,58.6592187539659" />
+                  <mssgle:LineSegment
+                    End="-107.277776771949,84.7999994343526" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\ExtractLocations.Paths[Derived Column Output]"
+          TopLeft="127.333333333333,148.266664992969">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="140.694441073057,90.2666659228006"
+              Start="0,0"
+              End="140.694441073057,82.7666659228006">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,49.4550971733722" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,49.4550971733722"
+                    Point2="0,53.4550971733722"
+                    Point3="4,53.4550971733722" />
+                  <mssgle:LineSegment
+                    End="136.694441073057,53.4550971733722" />
+                  <mssgle:CubicBezierSegment
+                    Point1="136.694441073057,53.4550971733722"
+                    Point2="140.694441073057,53.4550971733722"
+                    Point3="140.694441073057,57.4550971733722" />
+                  <mssgle:LineSegment
+                    End="140.694441073057,82.7666659228006" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\ExtractLocations.Paths[Sort Output]"
+          TopLeft="308.291664062067,360.533331225713">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,47.4666628853483"
+              Start="0,0"
+              End="0,39.9666628853483">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.9666628853483" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\ExtractLocations\StateProvinces">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\ExtractLocations\Countries">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\ExtractLocations\STGLoctions">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

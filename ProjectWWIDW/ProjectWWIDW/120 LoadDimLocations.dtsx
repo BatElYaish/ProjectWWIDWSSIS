@@ -1,0 +1,1231 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/10/2020 2:25:22 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-DBGFR1O"
+  DTS:CreatorName="DESKTOP-DBGFR1O\batel"
+  DTS:DTSID="{63C2A34D-8622-40F8-BF7E-42623C3DCDD1}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.68"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="120 LoadDimLocations"
+  DTS:PackageType="5"
+  DTS:VersionBuild="14"
+  DTS:VersionGUID="{811B4419-86FC-459E-9839-21ABF40B29A7}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{08f5f402-fed3-4757-a869-2c053f75102c}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Load DIMLocations"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{C468C45A-BFC3-46EF-A0FA-F4AC09E28930}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Load DIMLocations"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Sequence Container\Load DIMLocations\DIM Locations"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="DIM Locations"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[DIMLoctions]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\Load DIMLocations\DIM Locations.Connections[OleDbConnection]"
+                      connectionManagerID="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.ProjectWWIDW]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\Load DIMLocations\DIM Locations.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\DIM Locations.Inputs[OLE DB Destination Input].Columns[CountryName]"
+                          cachedDataType="wstr"
+                          cachedLength="60"
+                          cachedName="CountryName"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMLocations\DIM Locations.Inputs[OLE DB Destination Input].ExternalColumns[CountryName]"
+                          lineageId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].Columns[CountryName]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\DIM Locations.Inputs[OLE DB Destination Input].Columns[Continent]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="Continent"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMLocations\DIM Locations.Inputs[OLE DB Destination Input].ExternalColumns[Continent]"
+                          lineageId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].Columns[Continent]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\DIM Locations.Inputs[OLE DB Destination Input].Columns[Region]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="Region"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMLocations\DIM Locations.Inputs[OLE DB Destination Input].ExternalColumns[Region]"
+                          lineageId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].Columns[Region]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\DIM Locations.Inputs[OLE DB Destination Input].Columns[Subregion]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="Subregion"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMLocations\DIM Locations.Inputs[OLE DB Destination Input].ExternalColumns[Subregion]"
+                          lineageId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].Columns[Subregion]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\DIM Locations.Inputs[OLE DB Destination Input].Columns[ISOCode]"
+                          cachedDataType="wstr"
+                          cachedLength="3"
+                          cachedName="ISOCode"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMLocations\DIM Locations.Inputs[OLE DB Destination Input].ExternalColumns[ISOCode]"
+                          lineageId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].Columns[ISOCode]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\DIM Locations.Inputs[OLE DB Destination Input].Columns[StateProvinceName]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="StateProvinceName"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMLocations\DIM Locations.Inputs[OLE DB Destination Input].ExternalColumns[StateProvinceName]"
+                          lineageId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].Columns[StateProvinceName]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\DIM Locations.Inputs[OLE DB Destination Input].Columns[SalesTerritory]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="SalesTerritory"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMLocations\DIM Locations.Inputs[OLE DB Destination Input].ExternalColumns[SalesTerritory]"
+                          lineageId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].Columns[SalesTerritory]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMLocations\DIM Locations.Inputs[OLE DB Destination Input].ExternalColumns[LocationKey]"
+                          dataType="i4"
+                          name="LocationKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMLocations\DIM Locations.Inputs[OLE DB Destination Input].ExternalColumns[CountryName]"
+                          dataType="wstr"
+                          length="60"
+                          name="CountryName" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMLocations\DIM Locations.Inputs[OLE DB Destination Input].ExternalColumns[Continent]"
+                          dataType="wstr"
+                          length="30"
+                          name="Continent" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMLocations\DIM Locations.Inputs[OLE DB Destination Input].ExternalColumns[Region]"
+                          dataType="wstr"
+                          length="30"
+                          name="Region" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMLocations\DIM Locations.Inputs[OLE DB Destination Input].ExternalColumns[Subregion]"
+                          dataType="wstr"
+                          length="30"
+                          name="Subregion" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMLocations\DIM Locations.Inputs[OLE DB Destination Input].ExternalColumns[ISOCode]"
+                          dataType="wstr"
+                          length="3"
+                          name="ISOCode" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMLocations\DIM Locations.Inputs[OLE DB Destination Input].ExternalColumns[StateProvinceName]"
+                          dataType="wstr"
+                          length="50"
+                          name="StateProvinceName" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMLocations\DIM Locations.Inputs[OLE DB Destination Input].ExternalColumns[SalesTerritory]"
+                          dataType="wstr"
+                          length="50"
+                          name="SalesTerritory" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMLocations\DIM Locations.Inputs[OLE DB Destination Input].ExternalColumns[LastExtract]"
+                          dataType="dbDate"
+                          name="LastExtract" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Load DIMLocations\DIM Locations.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Sequence Container\Load DIMLocations\DIM Locations.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\DIM Locations.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Load DIMLocations\DIM Locations.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\DIM Locations.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Load DIMLocations\DIM Locations.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\Load DIMLocations\Lookup"
+                  componentClassID="Microsoft.Lookup"
+                  contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+                  description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+                  name="Lookup"
+                  usesDispositions="true"
+                  version="6">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the SQL statement that generates the lookup table."
+                      expressionType="Notify"
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [dbo].[DIMLoctions]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                      expressionType="Notify"
+                      name="SqlCommandParam"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [dbo].[DIMLoctions]) [refTable]
+where [refTable].[CountryName] = ? and [refTable].[Continent] = ? and [refTable].[Region] = ? and [refTable].[Subregion] = ? and [refTable].[ISOCode] = ? and [refTable].[StateProvinceName] = ? and [refTable].[SalesTerritory] = ?</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the type of connection used to access the reference dataset."
+                      name="ConnectionType"
+                      typeConverter="LookupConnectionType">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the cache type of the lookup table."
+                      name="CacheType"
+                      typeConverter="CacheType">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                      name="NoMatchBehavior"
+                      typeConverter="LookupNoMatchBehavior">1</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                      name="NoMatchCachePercentage">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                      name="MaxMemoryUsage">25</property>
+                    <property
+                      dataType="System.Int64"
+                      description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                      name="MaxMemoryUsage64">25</property>
+                    <property
+                      dataType="System.String"
+                      description="Indicates whether to reference metadata in an XML format."
+                      name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="LocationKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CountryName" dataType="DT_WSTR" length="60" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Continent" dataType="DT_WSTR" length="30" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Region" dataType="DT_WSTR" length="30" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Subregion" dataType="DT_WSTR" length="30" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ISOCode" dataType="DT_WSTR" length="3" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StateProvinceName" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="SalesTerritory" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="LastExtract" dataType="DT_DBDATE" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                      name="ParameterMap">#{Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].Columns[CountryName]};#{Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].Columns[Continent]};#{Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].Columns[Region]};#{Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].Columns[Subregion]};#{Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].Columns[ISOCode]};#{Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].Columns[StateProvinceName]};#{Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].Columns[SalesTerritory]};</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                      name="TreatDuplicateKeysAsError">false</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\Load DIMLocations\Lookup.Connections[OleDbConnection]"
+                      connectionManagerID="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.ProjectWWIDW]"
+                      description="Connection manager used to access lookup data."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\Load DIMLocations\Lookup.Inputs[Lookup Input]"
+                      name="Lookup Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\Lookup.Inputs[Lookup Input].Columns[CountryName]"
+                          cachedDataType="wstr"
+                          cachedLength="60"
+                          cachedName="CountryName"
+                          lineageId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].Columns[CountryName]">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table that a column joins."
+                              name="JoinToReferenceColumn">CountryName</property>
+                            <property
+                              dataType="System.Null"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\Lookup.Inputs[Lookup Input].Columns[Continent]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="Continent"
+                          lineageId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].Columns[Continent]">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table that a column joins."
+                              name="JoinToReferenceColumn">Continent</property>
+                            <property
+                              dataType="System.Null"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\Lookup.Inputs[Lookup Input].Columns[Region]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="Region"
+                          lineageId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].Columns[Region]">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table that a column joins."
+                              name="JoinToReferenceColumn">Region</property>
+                            <property
+                              dataType="System.Null"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\Lookup.Inputs[Lookup Input].Columns[Subregion]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="Subregion"
+                          lineageId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].Columns[Subregion]">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table that a column joins."
+                              name="JoinToReferenceColumn">Subregion</property>
+                            <property
+                              dataType="System.Null"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\Lookup.Inputs[Lookup Input].Columns[ISOCode]"
+                          cachedDataType="wstr"
+                          cachedLength="3"
+                          cachedName="ISOCode"
+                          lineageId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].Columns[ISOCode]">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table that a column joins."
+                              name="JoinToReferenceColumn">ISOCode</property>
+                            <property
+                              dataType="System.Null"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\Lookup.Inputs[Lookup Input].Columns[StateProvinceName]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="StateProvinceName"
+                          lineageId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].Columns[StateProvinceName]">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table that a column joins."
+                              name="JoinToReferenceColumn">StateProvinceName</property>
+                            <property
+                              dataType="System.Null"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\Lookup.Inputs[Lookup Input].Columns[SalesTerritory]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="SalesTerritory"
+                          lineageId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].Columns[SalesTerritory]">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table that a column joins."
+                              name="JoinToReferenceColumn">SalesTerritory</property>
+                            <property
+                              dataType="System.Null"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Load DIMLocations\Lookup.Outputs[Lookup Match Output]"
+                      errorOrTruncationOperation="Lookup"
+                      exclusionGroup="1"
+                      name="Lookup Match Output"
+                      synchronousInputId="Package\Sequence Container\Load DIMLocations\Lookup.Inputs[Lookup Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\Lookup.Outputs[Lookup Match Output].Columns[LocationKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Copy Column"
+                          lineageId="Package\Sequence Container\Load DIMLocations\Lookup.Outputs[Lookup Match Output].Columns[LocationKey]"
+                          name="LocationKey"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">LocationKey</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\Lookup.Outputs[Lookup Match Output].Columns[CountryName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Copy Column"
+                          length="60"
+                          lineageId="Package\Sequence Container\Load DIMLocations\Lookup.Outputs[Lookup Match Output].Columns[CountryName]"
+                          name="CountryName"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">CountryName</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\Lookup.Outputs[Lookup Match Output].Columns[Continent]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Copy Column"
+                          length="30"
+                          lineageId="Package\Sequence Container\Load DIMLocations\Lookup.Outputs[Lookup Match Output].Columns[Continent]"
+                          name="Continent"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">Continent</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\Lookup.Outputs[Lookup Match Output].Columns[Region]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Copy Column"
+                          length="30"
+                          lineageId="Package\Sequence Container\Load DIMLocations\Lookup.Outputs[Lookup Match Output].Columns[Region]"
+                          name="Region"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">Region</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\Lookup.Outputs[Lookup Match Output].Columns[Subregion]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Copy Column"
+                          length="30"
+                          lineageId="Package\Sequence Container\Load DIMLocations\Lookup.Outputs[Lookup Match Output].Columns[Subregion]"
+                          name="Subregion"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">Subregion</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\Lookup.Outputs[Lookup Match Output].Columns[ISOCode]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Copy Column"
+                          length="3"
+                          lineageId="Package\Sequence Container\Load DIMLocations\Lookup.Outputs[Lookup Match Output].Columns[ISOCode]"
+                          name="ISOCode"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">ISOCode</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\Lookup.Outputs[Lookup Match Output].Columns[StateProvinceName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Copy Column"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load DIMLocations\Lookup.Outputs[Lookup Match Output].Columns[StateProvinceName]"
+                          name="StateProvinceName"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">StateProvinceName</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\Lookup.Outputs[Lookup Match Output].Columns[SalesTerritory]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Copy Column"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load DIMLocations\Lookup.Outputs[Lookup Match Output].Columns[SalesTerritory]"
+                          name="SalesTerritory"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">SalesTerritory</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\Load DIMLocations\Lookup.Outputs[Lookup No Match Output]"
+                      description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                      exclusionGroup="1"
+                      name="Lookup No Match Output"
+                      synchronousInputId="Package\Sequence Container\Load DIMLocations\Lookup.Inputs[Lookup Input]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\Load DIMLocations\Lookup.Outputs[Lookup Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Lookup Error Output"
+                      synchronousInputId="Package\Sequence Container\Load DIMLocations\Lookup.Inputs[Lookup Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Load DIMLocations\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Load DIMLocations\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\Load DIMLocations\STG Locations"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="STG Locations"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[STGLoctions]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\Load DIMLocations\STG Locations.Connections[OleDbConnection]"
+                      connectionManagerID="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.ProjectWWIDW]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].Columns[CountryName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].ExternalColumns[CountryName]"
+                          length="60"
+                          lineageId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].Columns[CountryName]"
+                          name="CountryName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].Columns[Continent]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].ExternalColumns[Continent]"
+                          length="30"
+                          lineageId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].Columns[Continent]"
+                          name="Continent"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].Columns[Region]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].ExternalColumns[Region]"
+                          length="30"
+                          lineageId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].Columns[Region]"
+                          name="Region"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].Columns[Subregion]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].ExternalColumns[Subregion]"
+                          length="30"
+                          lineageId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].Columns[Subregion]"
+                          name="Subregion"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].Columns[ISOCode]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].ExternalColumns[ISOCode]"
+                          length="3"
+                          lineageId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].Columns[ISOCode]"
+                          name="ISOCode"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].Columns[StateProvinceName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].ExternalColumns[StateProvinceName]"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].Columns[StateProvinceName]"
+                          name="StateProvinceName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].Columns[SalesTerritory]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].ExternalColumns[SalesTerritory]"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].Columns[SalesTerritory]"
+                          name="SalesTerritory"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].ExternalColumns[LocationKey]"
+                          dataType="i4"
+                          name="LocationKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].ExternalColumns[CountryID]"
+                          dataType="i4"
+                          name="CountryID" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].ExternalColumns[CountryName]"
+                          dataType="wstr"
+                          length="60"
+                          name="CountryName" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].ExternalColumns[Continent]"
+                          dataType="wstr"
+                          length="30"
+                          name="Continent" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].ExternalColumns[Region]"
+                          dataType="wstr"
+                          length="30"
+                          name="Region" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].ExternalColumns[Subregion]"
+                          dataType="wstr"
+                          length="30"
+                          name="Subregion" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].ExternalColumns[ISOCode]"
+                          dataType="wstr"
+                          length="3"
+                          name="ISOCode" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].ExternalColumns[StateProvinceID]"
+                          dataType="i4"
+                          name="StateProvinceID" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].ExternalColumns[StateProvinceName]"
+                          dataType="wstr"
+                          length="50"
+                          name="StateProvinceName" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output].ExternalColumns[SalesTerritory]"
+                          dataType="wstr"
+                          length="50"
+                          name="SalesTerritory" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Error Output].Columns[CountryName]"
+                          dataType="wstr"
+                          length="60"
+                          lineageId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Error Output].Columns[CountryName]"
+                          name="CountryName" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Error Output].Columns[Continent]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Error Output].Columns[Continent]"
+                          name="Continent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Error Output].Columns[Region]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Error Output].Columns[Region]"
+                          name="Region" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Error Output].Columns[Subregion]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Error Output].Columns[Subregion]"
+                          name="Subregion" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Error Output].Columns[ISOCode]"
+                          dataType="wstr"
+                          length="3"
+                          lineageId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Error Output].Columns[ISOCode]"
+                          name="ISOCode" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Error Output].Columns[StateProvinceName]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Error Output].Columns[StateProvinceName]"
+                          name="StateProvinceName" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Error Output].Columns[SalesTerritory]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Error Output].Columns[SalesTerritory]"
+                          name="SalesTerritory" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Sequence Container\Load DIMLocations.Paths[Lookup No Match Output]"
+                  endId="Package\Sequence Container\Load DIMLocations\DIM Locations.Inputs[OLE DB Destination Input]"
+                  name="Lookup No Match Output"
+                  startId="Package\Sequence Container\Load DIMLocations\Lookup.Outputs[Lookup No Match Output]" />
+                <path
+                  refId="Package\Sequence Container\Load DIMLocations.Paths[OLE DB Source Output]"
+                  endId="Package\Sequence Container\Load DIMLocations\Lookup.Inputs[Lookup Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Sequence Container\Load DIMLocations\STG Locations.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Set Last Extract"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{32cf34d6-9339-4451-bdf2-84396b229936}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Set Last Extract"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}"
+              SQLTask:SqlStatementSource="DECLARE @CurrentDate date = GETDATE()&#xA;&#xA;UPDATE DIMLoctions&#xA;SET LastExtract = @CurrentDate&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{52A39D4B-E065-4EA8-90A4-91E2078543D2}"
+          DTS:From="Package\Sequence Container\Load DIMLocations"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Sequence Container\Set Last Extract" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Write Failure To Log"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{91481430-6508-4466-ac38-044e155b5622}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Write Failure To Log"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}"
+          SQLTask:SqlStatementSource="INSERT INTO ExtractLog (PackageName,TableName,Status)&#xA;VALUES(?,'DIMLocations','Failure')&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Write Success To Log"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{7b594fa8-62ec-4106-8e4d-0d8b8cd35115}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Write Success To Log"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}"
+          SQLTask:SqlStatementSource="INSERT INTO ExtractLog (PackageName,TableName,Status)&#xA;VALUES(?,'DIMLocations','Success')&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{6373f548-c1a9-4af0-b452-bbc38919f0b9}"
+      DTS:From="Package\Sequence Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Write Success To Log" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{ccff60a6-4c9c-4358-b5d1-5b7d83607cb4}"
+      DTS:From="Package\Sequence Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Write Failure To Log"
+      DTS:Value="1" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="169.333333333334,42.6666666666667"
+          Id="Package\Sequence Container\Load DIMLocations"
+          TopLeft="129.666662916541,50.4999983340502" />
+        <NodeLayout
+          Size="153.333333333334,42.6666666666667"
+          Id="Package\Sequence Container\Set Last Extract"
+          TopLeft="114.24999737367,194.666667906444" />
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          TopLeft="214.333329583208,93.1666650007169">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-23.4166655428707,101.500002905728"
+              Start="0,0"
+              End="-23.4166655428707,94.0000029057276">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,46.7500014528638" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,46.7500014528638"
+                    Point2="0,50.7500014528638"
+                    Point3="-4,50.7500014528638" />
+                  <mssgle:LineSegment
+                    End="-19.4166655428707,50.7500014528638" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-19.4166655428707,50.7500014528638"
+                    Point2="-23.4166655428707,50.7500014528638"
+                    Point3="-23.4166655428707,54.7500014528638" />
+                  <mssgle:LineSegment
+                    End="-23.4166655428707,94.0000029057276" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="304,292.666666666667"
+          Size="304,335.333333333334"
+          Id="Package\Sequence Container"
+          TopLeft="122.08333240822,60" />
+        <NodeLayout
+          Size="184,42.6666666666667"
+          Id="Package\Write Failure To Log"
+          TopLeft="299.750000018627,389.233331093988" />
+        <NodeLayout
+          Size="180,42"
+          Id="Package\Write Success To Log"
+          TopLeft="60,386.466663892668" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="122.08333240822,227.666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="27.91666759178,158.799997226001"
+              Start="0,0"
+              End="27.91666759178,151.299997226001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="23.91666759178,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="23.91666759178,0"
+                    Point2="27.91666759178,0"
+                    Point3="27.91666759178,4" />
+                  <mssgle:LineSegment
+                    End="27.91666759178,151.299997226001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="413.416665741553,227.666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-21.6666657229263,161.566664427321"
+              Start="0,0"
+              End="-21.6666657229263,154.066664427321">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-17.6666657229263,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-17.6666657229263,0"
+                    Point2="-21.6666657229263,0"
+                    Point3="-21.6666657229263,4" />
+                  <mssgle:LineSegment
+                    End="-21.6666657229263,154.066664427321" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-36.9080133791763,-15.7490234375,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Sequence Container\Load DIMLocations">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="146.666666666667,42.6666666666667"
+          Id="Package\Sequence Container\Load DIMLocations\DIM Locations"
+          TopLeft="289.166662357748,209.299996257424" />
+        <NodeLayout
+          Size="146.666666666667,42.6666666666667"
+          Id="Package\Sequence Container\Load DIMLocations\STG Locations"
+          TopLeft="421.666660383344,36.3999993491173" />
+        <NodeLayout
+          Size="113.333333333334,42"
+          Id="Package\Sequence Container\Load DIMLocations\Lookup"
+          TopLeft="355.833328031003,123.499997791648" />
+        <EdgeLayout
+          Id="Package\Sequence Container\Load DIMLocations.Paths[OLE DB Source Output]"
+          TopLeft="494.999993716677,79.066666015784">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-82.499999019007,44.433331775864"
+              Start="0,0"
+              End="-82.499999019007,36.933331775864">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.216665887932" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18.216665887932"
+                    Point2="0,22.216665887932"
+                    Point3="-4,22.216665887932" />
+                  <mssgle:LineSegment
+                    End="-78.499999019007,22.216665887932" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-78.499999019007,22.216665887932"
+                    Point2="-82.499999019007,22.216665887932"
+                    Point3="-82.499999019007,26.216665887932" />
+                  <mssgle:LineSegment
+                    End="-82.499999019007,36.933331775864" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\Load DIMLocations.Paths[Lookup No Match Output]"
+          TopLeft="412.49999469767,165.499997791648">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-49.9999990065888,43.7999984657764"
+              Start="0,0"
+              End="-49.9999990065888,36.2999984657764">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.8999992328882" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.8999992328882"
+                    Point2="0,21.8999992328882"
+                    Point3="-4,21.8999992328882" />
+                  <mssgle:LineSegment
+                    End="-45.9999990065888,21.8999992328882" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-45.9999990065888,21.8999992328882"
+                    Point2="-49.9999990065888,21.8999992328882"
+                    Point3="-49.9999990065888,25.8999992328882" />
+                  <mssgle:LineSegment
+                    End="-49.9999990065888,36.2999984657764" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-80.8063862220444,26.8999992328882,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\Load DIMLocations\DIM Locations">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\Load DIMLocations\STG Locations">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\Load DIMLocations\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DIMLoctions]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

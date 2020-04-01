@@ -1,0 +1,2509 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/23/2020 4:25:29 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-DBGFR1O"
+  DTS:CreatorName="DESKTOP-DBGFR1O\batel"
+  DTS:DTSID="{445AE548-8435-4DDA-8876-40623B6166EF}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.68"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="060 ExtractSales"
+  DTS:PackageType="5"
+  DTS:VersionBuild="28"
+  DTS:VersionGUID="{70105AA3-E078-4C71-86C2-C82D02261ABB}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{1F8A9991-F4AD-4A91-A1FB-445F572F6718}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="GETDATE()"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="CurrentDate">
+      <DTS:VariableValue
+        DTS:DataType="7">4/1/2020 10:47:05 AM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3AC01F66-752D-43D9-8E4E-3F53A6C2256D}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="LastExtractDate">
+      <DTS:VariableValue
+        DTS:DataType="7">2/6/2020 5:23:24 PM</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{EDC6FD23-43FB-42AF-BFFC-5494C85A58A1}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Extract Sales"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{EE837E74-E3F0-4C4F-A030-3BE9A71F4598}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Extract Sales"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Sequence Container\Extract Sales\Derived Column"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Derived Column"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\Extract Sales\Derived Column.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Extract Sales\Derived Column.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Sequence Container\Extract Sales\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Derived Column.Outputs[Derived Column Output].Columns[LastExtract]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Sequence Container\Extract Sales\Derived Column.Outputs[Derived Column Output].Columns[LastExtract]"
+                          name="LastExtract"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">[GETDATE]()</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">GETDATE()</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\Extract Sales\Derived Column.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Sequence Container\Extract Sales\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Extract Sales\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Extract Sales\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\Extract Sales\InvoiceLines"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="InvoiceLines"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT [InvoiceLineID]
+      ,[InvoiceID]
+      ,[StockItemID]
+      ,[Quantity]
+      ,[UnitPrice]
+      ,[LineProfit]
+  FROM [WideWorldImporters].[Sales].[InvoiceLines]
+WHERE (LastEditedWhen &gt; ?) AND (LastEditedWhen &lt;= ?)
+ORDER BY InvoiceID</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping">"Parameter0:Input",{3AC01F66-752D-43D9-8E4E-3F53A6C2256D};"Parameter1:Input",{1F8A9991-F4AD-4A91-A1FB-445F572F6718};</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\Extract Sales\InvoiceLines.Connections[OleDbConnection]"
+                      connectionManagerID="{746B0810-B490-44C2-A0AA-C1A8F04752A7}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.WideWorldImporters]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Output]"
+                      isSorted="true"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Output].Columns[InvoiceLineID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Output].ExternalColumns[InvoiceLineID]"
+                          lineageId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Output].Columns[InvoiceLineID]"
+                          name="InvoiceLineID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Output].Columns[InvoiceID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Output].ExternalColumns[InvoiceID]"
+                          lineageId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Output].Columns[InvoiceID]"
+                          name="InvoiceID"
+                          sortKeyPosition="1"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Output].Columns[StockItemID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Output].ExternalColumns[StockItemID]"
+                          lineageId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Output].Columns[StockItemID]"
+                          name="StockItemID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Output].Columns[Quantity]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Output].ExternalColumns[Quantity]"
+                          lineageId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Output].Columns[Quantity]"
+                          name="Quantity"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Output].Columns[UnitPrice]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Output].ExternalColumns[UnitPrice]"
+                          lineageId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Output].Columns[UnitPrice]"
+                          name="UnitPrice"
+                          precision="18"
+                          scale="2"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Output].Columns[LineProfit]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Output].ExternalColumns[LineProfit]"
+                          lineageId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Output].Columns[LineProfit]"
+                          name="LineProfit"
+                          precision="18"
+                          scale="2"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Output].ExternalColumns[InvoiceLineID]"
+                          dataType="i4"
+                          name="InvoiceLineID" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Output].ExternalColumns[InvoiceID]"
+                          dataType="i4"
+                          name="InvoiceID" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Output].ExternalColumns[StockItemID]"
+                          dataType="i4"
+                          name="StockItemID" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Output].ExternalColumns[Quantity]"
+                          dataType="i4"
+                          name="Quantity" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Output].ExternalColumns[UnitPrice]"
+                          dataType="numeric"
+                          name="UnitPrice"
+                          precision="18"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Output].ExternalColumns[LineProfit]"
+                          dataType="numeric"
+                          name="LineProfit"
+                          precision="18"
+                          scale="2" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Error Output].Columns[InvoiceLineID]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Error Output].Columns[InvoiceLineID]"
+                          name="InvoiceLineID" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Error Output].Columns[InvoiceID]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Error Output].Columns[InvoiceID]"
+                          name="InvoiceID" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Error Output].Columns[StockItemID]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Error Output].Columns[StockItemID]"
+                          name="StockItemID" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Error Output].Columns[Quantity]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Error Output].Columns[Quantity]"
+                          name="Quantity" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Error Output].Columns[UnitPrice]"
+                          dataType="numeric"
+                          lineageId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Error Output].Columns[UnitPrice]"
+                          name="UnitPrice"
+                          precision="18"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Error Output].Columns[LineProfit]"
+                          dataType="numeric"
+                          lineageId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Error Output].Columns[LineProfit]"
+                          name="LineProfit"
+                          precision="18"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\Extract Sales\Invoices"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Invoices"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT [InvoiceID]
+      ,[CustomerID]      
+      ,[OrderID]
+      ,[SalespersonPersonID]    
+      ,[InvoiceDate]     
+      ,[ConfirmedDeliveryTime]
+  FROM [WideWorldImporters].[Sales].[Invoices]
+  WHERE (LastEditedWhen &gt; ?) AND (LastEditedWhen &lt;= ?)
+ORDER BY OrderID</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping">"Parameter0:Input",{3AC01F66-752D-43D9-8E4E-3F53A6C2256D};"Parameter1:Input",{1F8A9991-F4AD-4A91-A1FB-445F572F6718};</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\Extract Sales\Invoices.Connections[OleDbConnection]"
+                      connectionManagerID="{746B0810-B490-44C2-A0AA-C1A8F04752A7}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.WideWorldImporters]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Output]"
+                      isSorted="true"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Output].Columns[InvoiceID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Output].ExternalColumns[InvoiceID]"
+                          lineageId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Output].Columns[InvoiceID]"
+                          name="InvoiceID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Output].Columns[CustomerID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Output].ExternalColumns[CustomerID]"
+                          lineageId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Output].Columns[CustomerID]"
+                          name="CustomerID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Output].Columns[OrderID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Output].ExternalColumns[OrderID]"
+                          lineageId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Output].Columns[OrderID]"
+                          name="OrderID"
+                          sortKeyPosition="1"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Output].Columns[SalespersonPersonID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Output].ExternalColumns[SalespersonPersonID]"
+                          lineageId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Output].Columns[SalespersonPersonID]"
+                          name="SalespersonPersonID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Output].Columns[InvoiceDate]"
+                          dataType="dbDate"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Output].ExternalColumns[InvoiceDate]"
+                          lineageId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Output].Columns[InvoiceDate]"
+                          name="InvoiceDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Output].Columns[ConfirmedDeliveryTime]"
+                          dataType="dbTimeStamp2"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Output].ExternalColumns[ConfirmedDeliveryTime]"
+                          lineageId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Output].Columns[ConfirmedDeliveryTime]"
+                          name="ConfirmedDeliveryTime"
+                          scale="7"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Output].ExternalColumns[InvoiceID]"
+                          dataType="i4"
+                          name="InvoiceID" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Output].ExternalColumns[CustomerID]"
+                          dataType="i4"
+                          name="CustomerID" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Output].ExternalColumns[OrderID]"
+                          dataType="i4"
+                          name="OrderID" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Output].ExternalColumns[SalespersonPersonID]"
+                          dataType="i4"
+                          name="SalespersonPersonID" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Output].ExternalColumns[InvoiceDate]"
+                          dataType="dbDate"
+                          name="InvoiceDate" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Output].ExternalColumns[ConfirmedDeliveryTime]"
+                          dataType="dbTimeStamp2"
+                          name="ConfirmedDeliveryTime"
+                          scale="7" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Error Output].Columns[InvoiceID]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Error Output].Columns[InvoiceID]"
+                          name="InvoiceID" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Error Output].Columns[CustomerID]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Error Output].Columns[CustomerID]"
+                          name="CustomerID" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Error Output].Columns[OrderID]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Error Output].Columns[OrderID]"
+                          name="OrderID" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Error Output].Columns[SalespersonPersonID]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Error Output].Columns[SalespersonPersonID]"
+                          name="SalespersonPersonID" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Error Output].Columns[InvoiceDate]"
+                          dataType="dbDate"
+                          lineageId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Error Output].Columns[InvoiceDate]"
+                          name="InvoiceDate" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Error Output].Columns[ConfirmedDeliveryTime]"
+                          dataType="dbTimeStamp2"
+                          lineageId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Error Output].Columns[ConfirmedDeliveryTime]"
+                          name="ConfirmedDeliveryTime"
+                          scale="7" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\Extract Sales\LookupLocationKey"
+                  componentClassID="Microsoft.Lookup"
+                  contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+                  description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+                  name="LookupLocationKey"
+                  usesDispositions="true"
+                  version="6">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the SQL statement that generates the lookup table."
+                      expressionType="Notify"
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [dbo].[STGcustomers]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                      expressionType="Notify"
+                      name="SqlCommandParam"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [dbo].[STGcustomers]) [refTable]
+where [refTable].[CustomerKey] = ?</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the type of connection used to access the reference dataset."
+                      name="ConnectionType"
+                      typeConverter="LookupConnectionType">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the cache type of the lookup table."
+                      name="CacheType"
+                      typeConverter="CacheType">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                      name="NoMatchBehavior"
+                      typeConverter="LookupNoMatchBehavior">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                      name="NoMatchCachePercentage">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                      name="MaxMemoryUsage">25</property>
+                    <property
+                      dataType="System.Int64"
+                      description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                      name="MaxMemoryUsage64">25</property>
+                    <property
+                      dataType="System.String"
+                      description="Indicates whether to reference metadata in an XML format."
+                      name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="CustomerKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CustomerName" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CustomerCategoryName" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="LocationKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="AccountOpenedDate" dataType="DT_DBDATE" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                      name="ParameterMap">#{Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output].Columns[CustomerKey]};</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                      name="TreatDuplicateKeysAsError">false</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\Extract Sales\LookupLocationKey.Connections[OleDbConnection]"
+                      connectionManagerID="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.ProjectWWIDW]"
+                      description="Connection manager used to access lookup data."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\Extract Sales\LookupLocationKey.Inputs[Lookup Input]"
+                      name="Lookup Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\LookupLocationKey.Inputs[Lookup Input].Columns[CustomerKey]"
+                          cachedDataType="i4"
+                          cachedName="CustomerKey"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output].Columns[CustomerKey]">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table that a column joins."
+                              name="JoinToReferenceColumn">CustomerKey</property>
+                            <property
+                              dataType="System.Null"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Extract Sales\LookupLocationKey.Outputs[Lookup Match Output]"
+                      errorOrTruncationOperation="Lookup"
+                      errorRowDisposition="FailComponent"
+                      exclusionGroup="1"
+                      name="Lookup Match Output"
+                      synchronousInputId="Package\Sequence Container\Extract Sales\LookupLocationKey.Inputs[Lookup Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\LookupLocationKey.Outputs[Lookup Match Output].Columns[LocationKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Copy Column"
+                          lineageId="Package\Sequence Container\Extract Sales\LookupLocationKey.Outputs[Lookup Match Output].Columns[LocationKey]"
+                          name="LocationKey"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">LocationKey</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\Extract Sales\LookupLocationKey.Outputs[Lookup No Match Output]"
+                      description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                      exclusionGroup="1"
+                      name="Lookup No Match Output"
+                      synchronousInputId="Package\Sequence Container\Extract Sales\LookupLocationKey.Inputs[Lookup Input]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\Extract Sales\LookupLocationKey.Outputs[Lookup Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Lookup Error Output"
+                      synchronousInputId="Package\Sequence Container\Extract Sales\LookupLocationKey.Inputs[Lookup Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\LookupLocationKey.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Extract Sales\LookupLocationKey.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\LookupLocationKey.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Extract Sales\LookupLocationKey.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\Extract Sales\Merge Join"
+                  componentClassID="Microsoft.MergeJoin"
+                  contactInfo="Merge Join;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Combine two sorted data flows into one using the FULL, LEFT, or INNER join. We recommend this transformation when data flows can be sorted at their sources."
+                  name="Merge Join"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the type of join to perform."
+                      name="JoinType"
+                      typeConverter="JoinType">1</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the number of columns in the ordering key."
+                      name="NumKeyColumns">1</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the null values are treated as equal values."
+                      name="TreatNullsAsEqual">true</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Indicates the requested maximum buffers per input before blocking."
+                      name="MaxBuffersPerInput">5</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\Extract Sales\Merge Join.Inputs[Merge Join Left Input]"
+                      hasSideEffects="true"
+                      name="Merge Join Left Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join.Inputs[Merge Join Left Input].Columns[InvoiceID]"
+                          cachedDataType="i4"
+                          cachedName="InvoiceID"
+                          cachedSortKeyPosition="1"
+                          lineageId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Output].Columns[InvoiceID]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join.Inputs[Merge Join Left Input].Columns[InvoiceLineID]"
+                          cachedDataType="i4"
+                          cachedName="InvoiceLineID"
+                          lineageId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Output].Columns[InvoiceLineID]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join.Inputs[Merge Join Left Input].Columns[StockItemID]"
+                          cachedDataType="i4"
+                          cachedName="StockItemID"
+                          lineageId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Output].Columns[StockItemID]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join.Inputs[Merge Join Left Input].Columns[Quantity]"
+                          cachedDataType="i4"
+                          cachedName="Quantity"
+                          lineageId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Output].Columns[Quantity]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join.Inputs[Merge Join Left Input].Columns[UnitPrice]"
+                          cachedDataType="numeric"
+                          cachedName="UnitPrice"
+                          cachedPrecision="18"
+                          cachedScale="2"
+                          lineageId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Output].Columns[UnitPrice]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join.Inputs[Merge Join Left Input].Columns[LineProfit]"
+                          cachedDataType="numeric"
+                          cachedName="LineProfit"
+                          cachedPrecision="18"
+                          cachedScale="2"
+                          lineageId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Output].Columns[LineProfit]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                    <input
+                      refId="Package\Sequence Container\Extract Sales\Merge Join.Inputs[Merge Join Right Input]"
+                      hasSideEffects="true"
+                      name="Merge Join Right Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join.Inputs[Merge Join Right Input].Columns[InvoiceID]"
+                          cachedDataType="i4"
+                          cachedName="InvoiceID"
+                          cachedSortKeyPosition="1"
+                          lineageId="Package\Sequence Container\Extract Sales\Sort.Outputs[Sort Output].Columns[InvoiceID]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join.Inputs[Merge Join Right Input].Columns[CustomerID]"
+                          cachedDataType="i4"
+                          cachedName="CustomerID"
+                          lineageId="Package\Sequence Container\Extract Sales\Sort.Outputs[Sort Output].Columns[CustomerID]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join.Inputs[Merge Join Right Input].Columns[SalespersonPersonID]"
+                          cachedDataType="i4"
+                          cachedName="SalespersonPersonID"
+                          lineageId="Package\Sequence Container\Extract Sales\Sort.Outputs[Sort Output].Columns[SalespersonPersonID]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join.Inputs[Merge Join Right Input].Columns[InvoiceDate]"
+                          cachedDataType="dbDate"
+                          cachedName="InvoiceDate"
+                          lineageId="Package\Sequence Container\Extract Sales\Sort.Outputs[Sort Output].Columns[InvoiceDate]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join.Inputs[Merge Join Right Input].Columns[ConfirmedDeliveryTime]"
+                          cachedDataType="dbTimeStamp2"
+                          cachedName="ConfirmedDeliveryTime"
+                          cachedScale="7"
+                          lineageId="Package\Sequence Container\Extract Sales\Sort.Outputs[Sort Output].Columns[ConfirmedDeliveryTime]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join.Inputs[Merge Join Right Input].Columns[OrderDate]"
+                          cachedDataType="dbDate"
+                          cachedName="OrderDate"
+                          lineageId="Package\Sequence Container\Extract Sales\Sort.Outputs[Sort Output].Columns[OrderDate]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join.Inputs[Merge Join Right Input].Columns[ExpectedDeliveryDate]"
+                          cachedDataType="dbDate"
+                          cachedName="ExpectedDeliveryDate"
+                          lineageId="Package\Sequence Container\Extract Sales\Sort.Outputs[Sort Output].Columns[ExpectedDeliveryDate]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output]"
+                      isSorted="true"
+                      name="Merge Join Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output].Columns[SaleKey]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output].Columns[SaleKey]"
+                          name="SaleKey">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\Extract Sales\Merge Join.Inputs[Merge Join Left Input].Columns[InvoiceLineID]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output].Columns[ProductKey]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output].Columns[ProductKey]"
+                          name="ProductKey">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\Extract Sales\Merge Join.Inputs[Merge Join Left Input].Columns[StockItemID]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output].Columns[Quantity]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output].Columns[Quantity]"
+                          name="Quantity">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\Extract Sales\Merge Join.Inputs[Merge Join Left Input].Columns[Quantity]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output].Columns[UnitPrice]"
+                          dataType="numeric"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output].Columns[UnitPrice]"
+                          name="UnitPrice"
+                          precision="18"
+                          scale="2">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\Extract Sales\Merge Join.Inputs[Merge Join Left Input].Columns[UnitPrice]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output].Columns[Profit]"
+                          dataType="numeric"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output].Columns[Profit]"
+                          name="Profit"
+                          precision="18"
+                          scale="2">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\Extract Sales\Merge Join.Inputs[Merge Join Left Input].Columns[LineProfit]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output].Columns[InvoiceKey]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output].Columns[InvoiceKey]"
+                          name="InvoiceKey"
+                          sortKeyPosition="1">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\Extract Sales\Merge Join.Inputs[Merge Join Left Input].Columns[InvoiceID]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output].Columns[CustomerKey]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output].Columns[CustomerKey]"
+                          name="CustomerKey">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\Extract Sales\Merge Join.Inputs[Merge Join Right Input].Columns[CustomerID]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output].Columns[EmployeeKey]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output].Columns[EmployeeKey]"
+                          name="EmployeeKey">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\Extract Sales\Merge Join.Inputs[Merge Join Right Input].Columns[SalespersonPersonID]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output].Columns[SaleDate]"
+                          dataType="dbDate"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output].Columns[SaleDate]"
+                          name="SaleDate">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\Extract Sales\Merge Join.Inputs[Merge Join Right Input].Columns[InvoiceDate]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output].Columns[DeliveryDate]"
+                          dataType="dbTimeStamp2"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output].Columns[DeliveryDate]"
+                          name="DeliveryDate"
+                          scale="7">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\Extract Sales\Merge Join.Inputs[Merge Join Right Input].Columns[ConfirmedDeliveryTime]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output].Columns[OrderDate]"
+                          dataType="dbDate"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output].Columns[OrderDate]"
+                          name="OrderDate">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\Extract Sales\Merge Join.Inputs[Merge Join Right Input].Columns[OrderDate]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output].Columns[EstimatedDeliveryDate]"
+                          dataType="dbDate"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output].Columns[EstimatedDeliveryDate]"
+                          name="EstimatedDeliveryDate">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\Extract Sales\Merge Join.Inputs[Merge Join Right Input].Columns[ExpectedDeliveryDate]}</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\Extract Sales\Merge Join 1"
+                  componentClassID="Microsoft.MergeJoin"
+                  contactInfo="Merge Join;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Combine two sorted data flows into one using the FULL, LEFT, or INNER join. We recommend this transformation when data flows can be sorted at their sources."
+                  name="Merge Join 1"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the type of join to perform."
+                      name="JoinType"
+                      typeConverter="JoinType">2</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the number of columns in the ordering key."
+                      name="NumKeyColumns">1</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the null values are treated as equal values."
+                      name="TreatNullsAsEqual">true</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Indicates the requested maximum buffers per input before blocking."
+                      name="MaxBuffersPerInput">5</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\Extract Sales\Merge Join 1.Inputs[Merge Join Left Input]"
+                      hasSideEffects="true"
+                      name="Merge Join Left Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join 1.Inputs[Merge Join Left Input].Columns[OrderID]"
+                          cachedDataType="i4"
+                          cachedName="OrderID"
+                          cachedSortKeyPosition="1"
+                          lineageId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Output].Columns[OrderID]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join 1.Inputs[Merge Join Left Input].Columns[CustomerID]"
+                          cachedDataType="i4"
+                          cachedName="CustomerID"
+                          lineageId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Output].Columns[CustomerID]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join 1.Inputs[Merge Join Left Input].Columns[SalespersonPersonID]"
+                          cachedDataType="i4"
+                          cachedName="SalespersonPersonID"
+                          lineageId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Output].Columns[SalespersonPersonID]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join 1.Inputs[Merge Join Left Input].Columns[InvoiceDate]"
+                          cachedDataType="dbDate"
+                          cachedName="InvoiceDate"
+                          lineageId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Output].Columns[InvoiceDate]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join 1.Inputs[Merge Join Left Input].Columns[ConfirmedDeliveryTime]"
+                          cachedDataType="dbTimeStamp2"
+                          cachedName="ConfirmedDeliveryTime"
+                          cachedScale="7"
+                          lineageId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Output].Columns[ConfirmedDeliveryTime]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join 1.Inputs[Merge Join Left Input].Columns[InvoiceID]"
+                          cachedDataType="i4"
+                          cachedName="InvoiceID"
+                          lineageId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Output].Columns[InvoiceID]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                    <input
+                      refId="Package\Sequence Container\Extract Sales\Merge Join 1.Inputs[Merge Join Right Input]"
+                      hasSideEffects="true"
+                      name="Merge Join Right Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join 1.Inputs[Merge Join Right Input].Columns[OrderID]"
+                          cachedDataType="i4"
+                          cachedName="OrderID"
+                          cachedSortKeyPosition="1"
+                          lineageId="Package\Sequence Container\Extract Sales\Orders.Outputs[OLE DB Source Output].Columns[OrderID]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join 1.Inputs[Merge Join Right Input].Columns[OrderDate]"
+                          cachedDataType="dbDate"
+                          cachedName="OrderDate"
+                          lineageId="Package\Sequence Container\Extract Sales\Orders.Outputs[OLE DB Source Output].Columns[OrderDate]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join 1.Inputs[Merge Join Right Input].Columns[ExpectedDeliveryDate]"
+                          cachedDataType="dbDate"
+                          cachedName="ExpectedDeliveryDate"
+                          lineageId="Package\Sequence Container\Extract Sales\Orders.Outputs[OLE DB Source Output].Columns[ExpectedDeliveryDate]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Extract Sales\Merge Join 1.Outputs[Merge Join Output]"
+                      name="Merge Join Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join 1.Outputs[Merge Join Output].Columns[CustomerID]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join 1.Outputs[Merge Join Output].Columns[CustomerID]"
+                          name="CustomerID">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\Extract Sales\Merge Join 1.Inputs[Merge Join Left Input].Columns[CustomerID]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join 1.Outputs[Merge Join Output].Columns[SalespersonPersonID]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join 1.Outputs[Merge Join Output].Columns[SalespersonPersonID]"
+                          name="SalespersonPersonID">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\Extract Sales\Merge Join 1.Inputs[Merge Join Left Input].Columns[SalespersonPersonID]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join 1.Outputs[Merge Join Output].Columns[InvoiceDate]"
+                          dataType="dbDate"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join 1.Outputs[Merge Join Output].Columns[InvoiceDate]"
+                          name="InvoiceDate">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\Extract Sales\Merge Join 1.Inputs[Merge Join Left Input].Columns[InvoiceDate]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join 1.Outputs[Merge Join Output].Columns[ConfirmedDeliveryTime]"
+                          dataType="dbTimeStamp2"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join 1.Outputs[Merge Join Output].Columns[ConfirmedDeliveryTime]"
+                          name="ConfirmedDeliveryTime"
+                          scale="7">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\Extract Sales\Merge Join 1.Inputs[Merge Join Left Input].Columns[ConfirmedDeliveryTime]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join 1.Outputs[Merge Join Output].Columns[OrderDate]"
+                          dataType="dbDate"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join 1.Outputs[Merge Join Output].Columns[OrderDate]"
+                          name="OrderDate">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\Extract Sales\Merge Join 1.Inputs[Merge Join Right Input].Columns[OrderDate]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join 1.Outputs[Merge Join Output].Columns[ExpectedDeliveryDate]"
+                          dataType="dbDate"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join 1.Outputs[Merge Join Output].Columns[ExpectedDeliveryDate]"
+                          name="ExpectedDeliveryDate">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\Extract Sales\Merge Join 1.Inputs[Merge Join Right Input].Columns[ExpectedDeliveryDate]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Merge Join 1.Outputs[Merge Join Output].Columns[InvoiceID]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join 1.Outputs[Merge Join Output].Columns[InvoiceID]"
+                          name="InvoiceID">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Sequence Container\Extract Sales\Merge Join 1.Inputs[Merge Join Left Input].Columns[InvoiceID]}</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\Extract Sales\Orders"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Orders"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT [OrderID]     
+      ,[OrderDate]
+      ,[ExpectedDeliveryDate]
+  FROM [WideWorldImporters].[Sales].[Orders]
+   WHERE (LastEditedWhen &gt; ?) AND (LastEditedWhen &lt;= ?)
+ORDER BY [OrderID]</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping">"Parameter0:Input",{3AC01F66-752D-43D9-8E4E-3F53A6C2256D};"Parameter1:Input",{1F8A9991-F4AD-4A91-A1FB-445F572F6718};</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\Extract Sales\Orders.Connections[OleDbConnection]"
+                      connectionManagerID="{746B0810-B490-44C2-A0AA-C1A8F04752A7}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.WideWorldImporters]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Extract Sales\Orders.Outputs[OLE DB Source Output]"
+                      isSorted="true"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Orders.Outputs[OLE DB Source Output].Columns[OrderID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Extract Sales\Orders.Outputs[OLE DB Source Output].ExternalColumns[OrderID]"
+                          lineageId="Package\Sequence Container\Extract Sales\Orders.Outputs[OLE DB Source Output].Columns[OrderID]"
+                          name="OrderID"
+                          sortKeyPosition="1"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Orders.Outputs[OLE DB Source Output].Columns[OrderDate]"
+                          dataType="dbDate"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Extract Sales\Orders.Outputs[OLE DB Source Output].ExternalColumns[OrderDate]"
+                          lineageId="Package\Sequence Container\Extract Sales\Orders.Outputs[OLE DB Source Output].Columns[OrderDate]"
+                          name="OrderDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Orders.Outputs[OLE DB Source Output].Columns[ExpectedDeliveryDate]"
+                          dataType="dbDate"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Extract Sales\Orders.Outputs[OLE DB Source Output].ExternalColumns[ExpectedDeliveryDate]"
+                          lineageId="Package\Sequence Container\Extract Sales\Orders.Outputs[OLE DB Source Output].Columns[ExpectedDeliveryDate]"
+                          name="ExpectedDeliveryDate"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Extract Sales\Orders.Outputs[OLE DB Source Output].ExternalColumns[OrderID]"
+                          dataType="i4"
+                          name="OrderID" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Extract Sales\Orders.Outputs[OLE DB Source Output].ExternalColumns[OrderDate]"
+                          dataType="dbDate"
+                          name="OrderDate" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Extract Sales\Orders.Outputs[OLE DB Source Output].ExternalColumns[ExpectedDeliveryDate]"
+                          dataType="dbDate"
+                          name="ExpectedDeliveryDate" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\Extract Sales\Orders.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Orders.Outputs[OLE DB Source Error Output].Columns[OrderID]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Extract Sales\Orders.Outputs[OLE DB Source Error Output].Columns[OrderID]"
+                          name="OrderID" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Orders.Outputs[OLE DB Source Error Output].Columns[OrderDate]"
+                          dataType="dbDate"
+                          lineageId="Package\Sequence Container\Extract Sales\Orders.Outputs[OLE DB Source Error Output].Columns[OrderDate]"
+                          name="OrderDate" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Orders.Outputs[OLE DB Source Error Output].Columns[ExpectedDeliveryDate]"
+                          dataType="dbDate"
+                          lineageId="Package\Sequence Container\Extract Sales\Orders.Outputs[OLE DB Source Error Output].Columns[ExpectedDeliveryDate]"
+                          name="ExpectedDeliveryDate" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Orders.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Extract Sales\Orders.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Orders.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Extract Sales\Orders.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\Extract Sales\Sort"
+                  componentClassID="Microsoft.Sort"
+                  contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+                  name="Sort"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                      name="EliminateDuplicates">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the maximum number of threads to use for sorting."
+                      expressionType="Notify"
+                      name="MaximumThreads">-1</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\Extract Sales\Sort.Inputs[Sort Input]"
+                      name="Sort Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\Sort.Inputs[Sort Input].Columns[CustomerID]"
+                          cachedDataType="i4"
+                          cachedName="CustomerID"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join 1.Outputs[Merge Join Output].Columns[CustomerID]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\Sort.Inputs[Sort Input].Columns[SalespersonPersonID]"
+                          cachedDataType="i4"
+                          cachedName="SalespersonPersonID"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join 1.Outputs[Merge Join Output].Columns[SalespersonPersonID]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\Sort.Inputs[Sort Input].Columns[InvoiceDate]"
+                          cachedDataType="dbDate"
+                          cachedName="InvoiceDate"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join 1.Outputs[Merge Join Output].Columns[InvoiceDate]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\Sort.Inputs[Sort Input].Columns[ConfirmedDeliveryTime]"
+                          cachedDataType="dbTimeStamp2"
+                          cachedName="ConfirmedDeliveryTime"
+                          cachedScale="7"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join 1.Outputs[Merge Join Output].Columns[ConfirmedDeliveryTime]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\Sort.Inputs[Sort Input].Columns[OrderDate]"
+                          cachedDataType="dbDate"
+                          cachedName="OrderDate"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join 1.Outputs[Merge Join Output].Columns[OrderDate]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\Sort.Inputs[Sort Input].Columns[ExpectedDeliveryDate]"
+                          cachedDataType="dbDate"
+                          cachedName="ExpectedDeliveryDate"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join 1.Outputs[Merge Join Output].Columns[ExpectedDeliveryDate]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\Sort.Inputs[Sort Input].Columns[InvoiceID]"
+                          cachedDataType="i4"
+                          cachedName="InvoiceID"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join 1.Outputs[Merge Join Output].Columns[InvoiceID]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">1</property>
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Extract Sales\Sort.Outputs[Sort Output]"
+                      isSorted="true"
+                      name="Sort Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Sort.Outputs[Sort Output].Columns[CustomerID]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Extract Sales\Sort.Outputs[Sort Output].Columns[CustomerID]"
+                          name="CustomerID">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\Extract Sales\Merge Join 1.Outputs[Merge Join Output].Columns[CustomerID]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Sort.Outputs[Sort Output].Columns[SalespersonPersonID]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Extract Sales\Sort.Outputs[Sort Output].Columns[SalespersonPersonID]"
+                          name="SalespersonPersonID">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\Extract Sales\Merge Join 1.Outputs[Merge Join Output].Columns[SalespersonPersonID]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Sort.Outputs[Sort Output].Columns[InvoiceDate]"
+                          dataType="dbDate"
+                          lineageId="Package\Sequence Container\Extract Sales\Sort.Outputs[Sort Output].Columns[InvoiceDate]"
+                          name="InvoiceDate">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\Extract Sales\Merge Join 1.Outputs[Merge Join Output].Columns[InvoiceDate]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Sort.Outputs[Sort Output].Columns[ConfirmedDeliveryTime]"
+                          dataType="dbTimeStamp2"
+                          lineageId="Package\Sequence Container\Extract Sales\Sort.Outputs[Sort Output].Columns[ConfirmedDeliveryTime]"
+                          name="ConfirmedDeliveryTime"
+                          scale="7">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\Extract Sales\Merge Join 1.Outputs[Merge Join Output].Columns[ConfirmedDeliveryTime]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Sort.Outputs[Sort Output].Columns[OrderDate]"
+                          dataType="dbDate"
+                          lineageId="Package\Sequence Container\Extract Sales\Sort.Outputs[Sort Output].Columns[OrderDate]"
+                          name="OrderDate">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\Extract Sales\Merge Join 1.Outputs[Merge Join Output].Columns[OrderDate]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Sort.Outputs[Sort Output].Columns[ExpectedDeliveryDate]"
+                          dataType="dbDate"
+                          lineageId="Package\Sequence Container\Extract Sales\Sort.Outputs[Sort Output].Columns[ExpectedDeliveryDate]"
+                          name="ExpectedDeliveryDate">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\Extract Sales\Merge Join 1.Outputs[Merge Join Output].Columns[ExpectedDeliveryDate]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\Sort.Outputs[Sort Output].Columns[InvoiceID]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Extract Sales\Sort.Outputs[Sort Output].Columns[InvoiceID]"
+                          name="InvoiceID"
+                          sortKeyPosition="1">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Sequence Container\Extract Sales\Merge Join 1.Outputs[Merge Join Output].Columns[InvoiceID]}</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\Extract Sales\STGSales"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="STGSales"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[STGSales]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\Extract Sales\STGSales.Connections[OleDbConnection]"
+                      connectionManagerID="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.ProjectWWIDW]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].Columns[SaleKey]"
+                          cachedDataType="i4"
+                          cachedName="SaleKey"
+                          externalMetadataColumnId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].ExternalColumns[SaleKey]"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output].Columns[SaleKey]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].Columns[ProductKey]"
+                          cachedDataType="i4"
+                          cachedName="ProductKey"
+                          externalMetadataColumnId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].ExternalColumns[ProductKey]"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output].Columns[ProductKey]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].Columns[Quantity]"
+                          cachedDataType="i4"
+                          cachedName="Quantity"
+                          externalMetadataColumnId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].ExternalColumns[Quantity]"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output].Columns[Quantity]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].Columns[UnitPrice]"
+                          cachedDataType="numeric"
+                          cachedName="UnitPrice"
+                          cachedPrecision="18"
+                          cachedScale="2"
+                          externalMetadataColumnId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].ExternalColumns[UnitPrice]"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output].Columns[UnitPrice]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].Columns[Profit]"
+                          cachedDataType="numeric"
+                          cachedName="Profit"
+                          cachedPrecision="18"
+                          cachedScale="2"
+                          externalMetadataColumnId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].ExternalColumns[Profit]"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output].Columns[Profit]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].Columns[InvoiceKey]"
+                          cachedDataType="i4"
+                          cachedName="InvoiceKey"
+                          cachedSortKeyPosition="1"
+                          externalMetadataColumnId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].ExternalColumns[InvoiceKey]"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output].Columns[InvoiceKey]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].Columns[CustomerKey]"
+                          cachedDataType="i4"
+                          cachedName="CustomerKey"
+                          externalMetadataColumnId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].ExternalColumns[CustomerKey]"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output].Columns[CustomerKey]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].Columns[EmployeeKey]"
+                          cachedDataType="i4"
+                          cachedName="EmployeeKey"
+                          externalMetadataColumnId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeKey]"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output].Columns[EmployeeKey]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].Columns[DeliveryDate]"
+                          cachedDataType="dbTimeStamp2"
+                          cachedName="DeliveryDate"
+                          cachedScale="7"
+                          externalMetadataColumnId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].ExternalColumns[DeliveryDate]"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output].Columns[DeliveryDate]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].Columns[OrderDate]"
+                          cachedDataType="dbDate"
+                          cachedName="OrderDate"
+                          externalMetadataColumnId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].ExternalColumns[OrderDate]"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output].Columns[OrderDate]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].Columns[EstimatedDeliveryDate]"
+                          cachedDataType="dbDate"
+                          cachedName="EstimatedDeliveryDate"
+                          externalMetadataColumnId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].ExternalColumns[EstimatedDeliveryDate]"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output].Columns[EstimatedDeliveryDate]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].Columns[LocationKey]"
+                          cachedDataType="i4"
+                          cachedName="LocationKey"
+                          externalMetadataColumnId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].ExternalColumns[LocationKey]"
+                          lineageId="Package\Sequence Container\Extract Sales\LookupLocationKey.Outputs[Lookup Match Output].Columns[LocationKey]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].Columns[LastExtract]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="LastExtract"
+                          externalMetadataColumnId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].ExternalColumns[LastExtract]"
+                          lineageId="Package\Sequence Container\Extract Sales\Derived Column.Outputs[Derived Column Output].Columns[LastExtract]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].Columns[SaleDate]"
+                          cachedDataType="dbDate"
+                          cachedName="SaleDate"
+                          externalMetadataColumnId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                          lineageId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output].Columns[SaleDate]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].ExternalColumns[SaleKey]"
+                          dataType="i8"
+                          name="SaleKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                          dataType="dbDate"
+                          name="DateKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].ExternalColumns[ProductKey]"
+                          dataType="i4"
+                          name="ProductKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].ExternalColumns[Quantity]"
+                          dataType="i4"
+                          name="Quantity" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].ExternalColumns[UnitPrice]"
+                          dataType="numeric"
+                          name="UnitPrice"
+                          precision="18"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].ExternalColumns[Profit]"
+                          dataType="numeric"
+                          name="Profit"
+                          precision="18"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].ExternalColumns[InvoiceKey]"
+                          dataType="i4"
+                          name="InvoiceKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].ExternalColumns[CustomerKey]"
+                          dataType="i4"
+                          name="CustomerKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeKey]"
+                          dataType="i4"
+                          name="EmployeeKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].ExternalColumns[DeliveryDate]"
+                          dataType="dbDate"
+                          name="DeliveryDate" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].ExternalColumns[OrderDate]"
+                          dataType="dbDate"
+                          name="OrderDate" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].ExternalColumns[EstimatedDeliveryDate]"
+                          dataType="dbDate"
+                          name="EstimatedDeliveryDate" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].ExternalColumns[LocationKey]"
+                          dataType="i4"
+                          name="LocationKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input].ExternalColumns[LastExtract]"
+                          dataType="dbDate"
+                          name="LastExtract" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Extract Sales\STGSales.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\STGSales.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Extract Sales\STGSales.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Extract Sales\STGSales.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Extract Sales\STGSales.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Sequence Container\Extract Sales.Paths[Derived Column Output]"
+                  endId="Package\Sequence Container\Extract Sales\STGSales.Inputs[OLE DB Destination Input]"
+                  name="Derived Column Output"
+                  startId="Package\Sequence Container\Extract Sales\Derived Column.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\Sequence Container\Extract Sales.Paths[Lookup Match Output]"
+                  endId="Package\Sequence Container\Extract Sales\Derived Column.Inputs[Derived Column Input]"
+                  name="Lookup Match Output"
+                  startId="Package\Sequence Container\Extract Sales\LookupLocationKey.Outputs[Lookup Match Output]" />
+                <path
+                  refId="Package\Sequence Container\Extract Sales.Paths[Merge Join Output]"
+                  endId="Package\Sequence Container\Extract Sales\Sort.Inputs[Sort Input]"
+                  name="Merge Join Output"
+                  startId="Package\Sequence Container\Extract Sales\Merge Join 1.Outputs[Merge Join Output]" />
+                <path
+                  refId="Package\Sequence Container\Extract Sales.Paths[Merge Join Output1]"
+                  endId="Package\Sequence Container\Extract Sales\LookupLocationKey.Inputs[Lookup Input]"
+                  name="Merge Join Output"
+                  startId="Package\Sequence Container\Extract Sales\Merge Join.Outputs[Merge Join Output]" />
+                <path
+                  refId="Package\Sequence Container\Extract Sales.Paths[OLE DB Source Output]"
+                  endId="Package\Sequence Container\Extract Sales\Merge Join 1.Inputs[Merge Join Left Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Sequence Container\Extract Sales\Invoices.Outputs[OLE DB Source Output]" />
+                <path
+                  refId="Package\Sequence Container\Extract Sales.Paths[OLE DB Source Output1]"
+                  endId="Package\Sequence Container\Extract Sales\Merge Join 1.Inputs[Merge Join Right Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Sequence Container\Extract Sales\Orders.Outputs[OLE DB Source Output]" />
+                <path
+                  refId="Package\Sequence Container\Extract Sales.Paths[OLE DB Source Output2]"
+                  endId="Package\Sequence Container\Extract Sales\Merge Join.Inputs[Merge Join Left Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Sequence Container\Extract Sales\InvoiceLines.Outputs[OLE DB Source Output]" />
+                <path
+                  refId="Package\Sequence Container\Extract Sales.Paths[Sort Output]"
+                  endId="Package\Sequence Container\Extract Sales\Merge Join.Inputs[Merge Join Right Input]"
+                  name="Sort Output"
+                  startId="Package\Sequence Container\Extract Sales\Sort.Outputs[Sort Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Get Last Extract Date"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{29b833f8-fc57-451d-afa2-7b0941bcb238}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get Last Extract Date"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}"
+              SQLTask:SqlStatementSource="DECLARE @LastExtractDate date= (SELECT MAX([UpdateDate])&#xA;    FROM [ProjectWWIDW].[dbo].[ExtractLog]&#xA;    WHERE [TableName] = 'STGSales' AND [Status] = 'Success')&#xA;--If first Load&#xA;IF NOT EXISTS  (SELECT * FROM [ProjectWWIDW].[dbo].ExtractLog WHERE TableName = 'STGSales')  &#xA; SELECT '01-01-2013' LastExtractDate&#xA;ELSE&#xA; SELECT @LastExtractDate LastExtractDate"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="LastExtractDate"
+                SQLTask:DtsVariableName="User::LastExtractDate" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\TRUNCATETable"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{535DBAC1-9938-4AF2-9C48-680F0B2A7F06}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="TRUNCATETable"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}"
+              SQLTask:SqlStatementSource="IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES&#xA;           WHERE TABLE_NAME = N'STGSales')&#xA;TRUNCATE TABLE STGSales" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{ECEA344F-0D40-47BD-A9A8-9790C2D98C76}"
+          DTS:From="Package\Sequence Container\TRUNCATETable"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Sequence Container\Get Last Extract Date" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{4FD80551-E253-48F2-B00D-A0E6BCE30A34}"
+          DTS:From="Package\Sequence Container\Get Last Extract Date"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Sequence Container\Extract Sales" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Write Failure To Log"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{89D27EF1-421B-4BB0-AFEB-8DC45388F668}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Write Failure To Log"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}"
+          SQLTask:SqlStatementSource="INSERT INTO ExtractLog (PackageName,TableName,Status)&#xA;VALUES(?,'STGSales','Failure')&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Write Success To Log"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{532AA87C-E5FB-4E9A-989A-F3B099BD9EAA}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Write Success To Log"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}"
+          SQLTask:SqlStatementSource="INSERT INTO ExtractLog (PackageName,TableName,Status)&#xA;VALUES(?,'STGSales','Success')&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{A29DA1DC-F732-4F13-92C0-B45B6FDD716F}"
+      DTS:From="Package\Sequence Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Write Success To Log" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{DC339411-232C-48B7-A311-5A2CF464E940}"
+      DTS:From="Package\Sequence Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Write Failure To Log"
+      DTS:Value="1" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="140,42.6666666666667"
+          Id="Package\Sequence Container\Extract Sales"
+          TopLeft="25.5,313.5" />
+        <NodeLayout
+          Size="180,42.6666666666667"
+          Id="Package\Sequence Container\Get Last Extract Date"
+          TopLeft="5.50000000000003,210.833333333334" />
+        <NodeLayout
+          Size="133.333333333334,42.6666666666667"
+          Id="Package\Sequence Container\TRUNCATETable"
+          TopLeft="28.8333333333333,108.166666666667" />
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          TopLeft="95.5,150.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 1]"
+          TopLeft="95.5,253.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="190.666666666667,410.666666666667"
+          Size="190.666666666667,454"
+          Id="Package\Sequence Container"
+          TopLeft="118.166668529312,13.7333331861098" />
+        <NodeLayout
+          Size="184,42.6666666666667"
+          Id="Package\Write Failure To Log"
+          TopLeft="246.5,519.5" />
+        <NodeLayout
+          Size="180,42"
+          Id="Package\Write Success To Log"
+          TopLeft="5.50000000000006,519.833333333333" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="183.055557418201,467.73333318611">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-87.5555574182006,52.1000001472236"
+              Start="0,0"
+              End="-87.5555574182006,44.6000001472236">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.1001387558797" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.1001387558797"
+                    Point2="0,21.1001387558797"
+                    Point3="-4,21.1001387558797" />
+                  <mssgle:LineSegment
+                    End="-83.5555574182006,21.1001387558797" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-83.5555574182006,21.1001387558797"
+                    Point2="-87.5555574182006,21.1001387558797"
+                    Point3="-87.5555574182006,25.1001387558797" />
+                  <mssgle:LineSegment
+                    End="-87.5555574182006,44.6000001472236" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="243.94444630709,467.73333318611">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="94.5555536929105,51.7666668138902"
+              Start="0,0"
+              End="94.5555536929105,44.2666668138902">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.965141067484" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.965141067484"
+                    Point2="0,20.965141067484"
+                    Point3="4,20.965141067484" />
+                  <mssgle:LineSegment
+                    End="90.5555536929105,20.965141067484" />
+                  <mssgle:CubicBezierSegment
+                    Point1="90.5555536929105,20.965141067484"
+                    Point2="94.5555536929105,20.965141067484"
+                    Point3="94.5555536929105,24.965141067484" />
+                  <mssgle:LineSegment
+                    End="94.5555536929105,44.2666668138902" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="32.0364291902052,25.965141067484,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Sequence Container\Extract Sales">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="98.6666666666667,42.6666666666667"
+          Id="Package\Sequence Container\Extract Sales\Sort"
+          TopLeft="203.833333333333,210.833333333333" />
+        <NodeLayout
+          Size="110.666666666667,42.6666666666667"
+          Id="Package\Sequence Container\Extract Sales\Orders"
+          TopLeft="22.8333333333334,5.49999999999993" />
+        <NodeLayout
+          Size="137.333333333334,42.6666666666667"
+          Id="Package\Sequence Container\Extract Sales\InvoiceLines"
+          TopLeft="5.50000000000004,210.833333333333" />
+        <NodeLayout
+          Size="118.666666666667,42.6666666666667"
+          Id="Package\Sequence Container\Extract Sales\Invoices"
+          TopLeft="193.833333333333,5.49999999999993" />
+        <NodeLayout
+          Size="170.666666666667,42.6666666666667"
+          Id="Package\Sequence Container\Extract Sales\LookupLocationKey"
+          TopLeft="167.833333333333,416.166666666667" />
+        <NodeLayout
+          Size="140,42.6666666666667"
+          Id="Package\Sequence Container\Extract Sales\Merge Join 1"
+          TopLeft="183.166666666667,108.166666666666" />
+        <NodeLayout
+          Size="122.666666666667,42.6666666666667"
+          Id="Package\Sequence Container\Extract Sales\STGSales"
+          TopLeft="191.833333333333,621.5" />
+        <NodeLayout
+          Size="154.666666666667,42.6666666666667"
+          Id="Package\Sequence Container\Extract Sales\Derived Column"
+          TopLeft="175.833333333333,518.833333333333" />
+        <NodeLayout
+          Size="131.333333333334,42.6666666666667"
+          Id="Package\Sequence Container\Extract Sales\Merge Join"
+          TopLeft="187.5,313.5" />
+        <EdgeLayout
+          Id="Package\Sequence Container\Extract Sales.Paths[Lookup Match Output]"
+          TopLeft="253.166666666667,458.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,20.4453125,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\Extract Sales.Paths[Derived Column Output]"
+          TopLeft="253.166666666667,561.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\Extract Sales.Paths[Sort Output]"
+          TopLeft="253.166666666667,253.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="20.5555555555556,60.0000000000001"
+              Start="0,0"
+              End="20.5555555555556,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.566700100301" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.566700100301"
+                    Point2="0,35.566700100301"
+                    Point3="4,35.566700100301" />
+                  <mssgle:LineSegment
+                    End="16.5555555555556,35.566700100301" />
+                  <mssgle:CubicBezierSegment
+                    Point1="16.5555555555556,35.566700100301"
+                    Point2="20.5555555555556,35.566700100301"
+                    Point3="20.5555555555556,39.566700100301" />
+                  <mssgle:LineSegment
+                    End="20.5555555555556,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\Extract Sales.Paths[OLE DB Source Output2]"
+          TopLeft="74.1666666666667,253.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="158.444444444444,60.0000000000001"
+              Start="0,0"
+              End="158.444444444444,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.566700100301" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.566700100301"
+                    Point2="0,35.566700100301"
+                    Point3="4,35.566700100301" />
+                  <mssgle:LineSegment
+                    End="154.444444444444,35.566700100301" />
+                  <mssgle:CubicBezierSegment
+                    Point1="154.444444444444,35.566700100301"
+                    Point2="158.444444444444,35.566700100301"
+                    Point3="158.444444444444,39.566700100301" />
+                  <mssgle:LineSegment
+                    End="158.444444444444,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\Extract Sales.Paths[OLE DB Source Output1]"
+          TopLeft="78.1666666666667,48.1666666666666">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="153,59.9999999999999"
+              Start="0,0"
+              End="153,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.593220338983" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.593220338983"
+                    Point2="0,35.593220338983"
+                    Point3="4,35.593220338983" />
+                  <mssgle:LineSegment
+                    End="149,35.593220338983" />
+                  <mssgle:CubicBezierSegment
+                    Point1="149,35.593220338983"
+                    Point2="153,35.593220338983"
+                    Point3="153,39.593220338983" />
+                  <mssgle:LineSegment
+                    End="153,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\Extract Sales.Paths[OLE DB Source Output]"
+          TopLeft="253.166666666667,48.1666666666666">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="22.0000000000001,59.9999999999999"
+              Start="0,0"
+              End="22.0000000000001,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.593220338983" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.593220338983"
+                    Point2="0,35.593220338983"
+                    Point3="4,35.593220338983" />
+                  <mssgle:LineSegment
+                    End="18.0000000000001,35.593220338983" />
+                  <mssgle:CubicBezierSegment
+                    Point1="18.0000000000001,35.593220338983"
+                    Point2="22.0000000000001,35.593220338983"
+                    Point3="22.0000000000001,39.593220338983" />
+                  <mssgle:LineSegment
+                    End="22.0000000000001,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\Extract Sales.Paths[Merge Join Output1]"
+          TopLeft="253.166666666667,356.166666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\Extract Sales.Paths[Merge Join Output]"
+          TopLeft="253.166666666667,150.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\Extract Sales\Orders">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\Extract Sales\InvoiceLines">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\Extract Sales\Invoices">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\Extract Sales\LookupLocationKey">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[STGcustomers]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\Extract Sales\STGSales">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

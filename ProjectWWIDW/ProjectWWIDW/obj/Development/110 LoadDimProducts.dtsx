@@ -1,0 +1,1048 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/20/2020 3:14:07 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-DBGFR1O"
+  DTS:CreatorName="DESKTOP-DBGFR1O\batel"
+  DTS:DTSID="{517CD17F-FED8-4068-B1D0-B75569416144}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.68"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="110 LoadDimProducts"
+  DTS:PackageType="5"
+  DTS:VersionBuild="14"
+  DTS:VersionGUID="{EE1F7D7B-A1AB-4E80-B5E7-9EB7E5412E67}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{0D7DD783-B3E8-49A5-A7FD-66B8902E61AE}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Load DIMProducts"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{E130AF16-32CD-4A88-B460-B410F159EB49}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Load DIMProducts"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Sequence Container\Load DIMProducts\Derived Column"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Derived Column"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\Load DIMProducts\Derived Column.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Load DIMProducts\Derived Column.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Sequence Container\Load DIMProducts\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\Derived Column.Outputs[Derived Column Output].Columns[LastExtract]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Sequence Container\Load DIMProducts\Derived Column.Outputs[Derived Column Output].Columns[LastExtract]"
+                          name="LastExtract"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">[GETDATE]()</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">GETDATE()</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\Load DIMProducts\Derived Column.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Sequence Container\Load DIMProducts\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Load DIMProducts\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Load DIMProducts\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\Load DIMProducts\DIMProducts"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="DIMProducts"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[DIMProducts]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\Load DIMProducts\DIMProducts.Connections[OleDbConnection]"
+                      connectionManagerID="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.ProjectWWIDW]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].Columns[ProductKey]"
+                          cachedDataType="i4"
+                          cachedName="ProductKey"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].ExternalColumns[ProductKey]"
+                          lineageId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].Columns[ProductKey]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].Columns[ProductName]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="ProductName"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].ExternalColumns[ProductName]"
+                          lineageId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].Columns[ProductName]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].Columns[SupplierKey]"
+                          cachedDataType="i4"
+                          cachedName="SupplierKey"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].ExternalColumns[SupplierKey]"
+                          lineageId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].Columns[SupplierKey]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].Columns[TargetStockLevel]"
+                          cachedDataType="i4"
+                          cachedName="TargetStockLevel"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].ExternalColumns[TargetStockLevel]"
+                          lineageId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].Columns[TargetStockLevel]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].Columns[ProductSubCategory]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="ProductSubCategory"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].ExternalColumns[ProductSubCategory]"
+                          lineageId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].Columns[ProductSubCategory]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].Columns[ProductCategory]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="ProductCategory"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].ExternalColumns[ProductCategory]"
+                          lineageId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].Columns[ProductCategory]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].Columns[LeadTimeDays]"
+                          cachedDataType="i4"
+                          cachedName="LeadTimeDays"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].ExternalColumns[LeadTimeDays]"
+                          lineageId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].Columns[LeadTimeDays]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].Columns[QuantityPerOuter]"
+                          cachedDataType="i4"
+                          cachedName="QuantityPerOuter"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].ExternalColumns[QuantityPerOuter]"
+                          lineageId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].Columns[QuantityPerOuter]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].Columns[UnitPackageName]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="UnitPackageName"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].ExternalColumns[UnitPackageName]"
+                          lineageId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].Columns[UnitPackageName]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].Columns[OuterPackageName]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="OuterPackageName"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].ExternalColumns[OuterPackageName]"
+                          lineageId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].Columns[OuterPackageName]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].Columns[Color]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Color"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].ExternalColumns[Color]"
+                          lineageId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].Columns[Color]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].Columns[OuterSize]"
+                          cachedDataType="numeric"
+                          cachedName="OuterSize"
+                          cachedPrecision="28"
+                          cachedScale="6"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].ExternalColumns[OuterSize]"
+                          lineageId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].Columns[OuterSize]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].Columns[LastExtract]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="LastExtract"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].ExternalColumns[LastExtract]"
+                          lineageId="Package\Sequence Container\Load DIMProducts\Derived Column.Outputs[Derived Column Output].Columns[LastExtract]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].ExternalColumns[ProductKey]"
+                          dataType="i4"
+                          name="ProductKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].ExternalColumns[ProductName]"
+                          dataType="wstr"
+                          length="100"
+                          name="ProductName" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].ExternalColumns[SupplierKey]"
+                          dataType="i4"
+                          name="SupplierKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].ExternalColumns[TargetStockLevel]"
+                          dataType="i4"
+                          name="TargetStockLevel" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].ExternalColumns[ProductSubCategory]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="ProductSubCategory" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].ExternalColumns[ProductCategory]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="ProductCategory" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].ExternalColumns[LeadTimeDays]"
+                          dataType="i4"
+                          name="LeadTimeDays" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].ExternalColumns[QuantityPerOuter]"
+                          dataType="i4"
+                          name="QuantityPerOuter" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].ExternalColumns[UnitPackageName]"
+                          dataType="wstr"
+                          length="50"
+                          name="UnitPackageName" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].ExternalColumns[OuterPackageName]"
+                          dataType="wstr"
+                          length="50"
+                          name="OuterPackageName" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].ExternalColumns[Color]"
+                          dataType="wstr"
+                          length="50"
+                          name="Color" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].ExternalColumns[OuterSize]"
+                          dataType="numeric"
+                          name="OuterSize"
+                          precision="28"
+                          scale="6" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input].ExternalColumns[LastExtract]"
+                          dataType="dbDate"
+                          name="LastExtract" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Load DIMProducts\DIMProducts.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\DIMProducts.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Load DIMProducts\DIMProducts.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\DIMProducts.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Load DIMProducts\DIMProducts.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\Load DIMProducts\STG Products"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="STG Products"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[STGProducts]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\Load DIMProducts\STG Products.Connections[OleDbConnection]"
+                      connectionManagerID="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.ProjectWWIDW]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].Columns[ProductKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].ExternalColumns[ProductKey]"
+                          lineageId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].Columns[ProductKey]"
+                          name="ProductKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].Columns[ProductName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].ExternalColumns[ProductName]"
+                          length="100"
+                          lineageId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].Columns[ProductName]"
+                          name="ProductName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].Columns[SupplierKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].ExternalColumns[SupplierKey]"
+                          lineageId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].Columns[SupplierKey]"
+                          name="SupplierKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].Columns[TargetStockLevel]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].ExternalColumns[TargetStockLevel]"
+                          lineageId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].Columns[TargetStockLevel]"
+                          name="TargetStockLevel"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].Columns[ProductSubCategory]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].ExternalColumns[ProductSubCategory]"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].Columns[ProductSubCategory]"
+                          name="ProductSubCategory"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].Columns[ProductCategory]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].ExternalColumns[ProductCategory]"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].Columns[ProductCategory]"
+                          name="ProductCategory"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].Columns[LeadTimeDays]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].ExternalColumns[LeadTimeDays]"
+                          lineageId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].Columns[LeadTimeDays]"
+                          name="LeadTimeDays"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].Columns[QuantityPerOuter]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].ExternalColumns[QuantityPerOuter]"
+                          lineageId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].Columns[QuantityPerOuter]"
+                          name="QuantityPerOuter"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].Columns[UnitPackageName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].ExternalColumns[UnitPackageName]"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].Columns[UnitPackageName]"
+                          name="UnitPackageName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].Columns[OuterPackageName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].ExternalColumns[OuterPackageName]"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].Columns[OuterPackageName]"
+                          name="OuterPackageName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].Columns[Color]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].ExternalColumns[Color]"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].Columns[Color]"
+                          name="Color"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].Columns[OuterSize]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].ExternalColumns[OuterSize]"
+                          lineageId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].Columns[OuterSize]"
+                          name="OuterSize"
+                          precision="28"
+                          scale="6"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].ExternalColumns[ProductKey]"
+                          dataType="i4"
+                          name="ProductKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].ExternalColumns[ProductName]"
+                          dataType="wstr"
+                          length="100"
+                          name="ProductName" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].ExternalColumns[SupplierKey]"
+                          dataType="i4"
+                          name="SupplierKey" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].ExternalColumns[TargetStockLevel]"
+                          dataType="i4"
+                          name="TargetStockLevel" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].ExternalColumns[ProductSubCategory]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="ProductSubCategory" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].ExternalColumns[ProductCategory]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="ProductCategory" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].ExternalColumns[LeadTimeDays]"
+                          dataType="i4"
+                          name="LeadTimeDays" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].ExternalColumns[QuantityPerOuter]"
+                          dataType="i4"
+                          name="QuantityPerOuter" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].ExternalColumns[UnitPackageName]"
+                          dataType="wstr"
+                          length="50"
+                          name="UnitPackageName" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].ExternalColumns[OuterPackageName]"
+                          dataType="wstr"
+                          length="50"
+                          name="OuterPackageName" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].ExternalColumns[Color]"
+                          dataType="wstr"
+                          length="50"
+                          name="Color" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output].ExternalColumns[OuterSize]"
+                          dataType="numeric"
+                          name="OuterSize"
+                          precision="28"
+                          scale="6" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Error Output].Columns[ProductKey]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Error Output].Columns[ProductKey]"
+                          name="ProductKey" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Error Output].Columns[ProductName]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Error Output].Columns[ProductName]"
+                          name="ProductName" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Error Output].Columns[ProductSubCategory]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Error Output].Columns[ProductSubCategory]"
+                          name="ProductSubCategory" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Error Output].Columns[ProductCategory]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Error Output].Columns[ProductCategory]"
+                          name="ProductCategory" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Error Output].Columns[SupplierKey]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Error Output].Columns[SupplierKey]"
+                          name="SupplierKey" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Error Output].Columns[LeadTimeDays]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Error Output].Columns[LeadTimeDays]"
+                          name="LeadTimeDays" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Error Output].Columns[QuantityPerOuter]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Error Output].Columns[QuantityPerOuter]"
+                          name="QuantityPerOuter" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Error Output].Columns[OuterSize]"
+                          dataType="numeric"
+                          lineageId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Error Output].Columns[OuterSize]"
+                          name="OuterSize"
+                          precision="28"
+                          scale="6" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Error Output].Columns[TargetStockLevel]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Error Output].Columns[TargetStockLevel]"
+                          name="TargetStockLevel" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Error Output].Columns[UnitPackageName]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Error Output].Columns[UnitPackageName]"
+                          name="UnitPackageName" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Error Output].Columns[OuterPackageName]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Error Output].Columns[OuterPackageName]"
+                          name="OuterPackageName" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Error Output].Columns[Color]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Error Output].Columns[Color]"
+                          name="Color" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Sequence Container\Load DIMProducts.Paths[Derived Column Output]"
+                  endId="Package\Sequence Container\Load DIMProducts\DIMProducts.Inputs[OLE DB Destination Input]"
+                  name="Derived Column Output"
+                  startId="Package\Sequence Container\Load DIMProducts\Derived Column.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\Sequence Container\Load DIMProducts.Paths[OLE DB Source Output]"
+                  endId="Package\Sequence Container\Load DIMProducts\Derived Column.Inputs[Derived Column Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Sequence Container\Load DIMProducts\STG Products.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\TRUNCATETable"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{F7CC90F9-2BFB-4C95-9EB1-8FD73DDFA361}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="TRUNCATETable"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}"
+              SQLTask:SqlStatementSource="IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES&#xA;           WHERE TABLE_NAME = N'DIMProducts')&#xA;TRUNCATE TABLE DIMProducts" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{45E1400B-8AEB-41A0-952F-8FCDE644A6F6}"
+          DTS:From="Package\Sequence Container\TRUNCATETable"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Sequence Container\Load DIMProducts" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Write Failure To Log"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{B3EBCB31-2D62-4D25-81B1-A837B0DD4D9A}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Write Failure To Log"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}"
+          SQLTask:SqlStatementSource="INSERT INTO ExtractLog (PackageName,TableName,Status)&#xA;VALUES(?,'DIMProducts','Failure')&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Write Success To Log"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{205FC0D5-90B2-4D66-BEA0-C7A71DD23CDB}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Write Success To Log"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7FDEB809-C2DD-4E2F-A081-CC6C143F4BD8}"
+          SQLTask:SqlStatementSource="INSERT INTO ExtractLog (PackageName,TableName,Status)&#xA;VALUES(?,'DIMProducts','Success')&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{F1F10572-2470-4BA6-9F1F-D54D3B01557C}"
+      DTS:From="Package\Sequence Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Write Success To Log" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{39C7C64F-2B7A-46FF-A859-75C710D27C85}"
+      DTS:From="Package\Sequence Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Write Failure To Log"
+      DTS:Value="1" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="165.333333333334,42.6666666666667"
+          Id="Package\Sequence Container\Load DIMProducts"
+          TopLeft="39.0833312906325,107.699997311235" />
+        <NodeLayout
+          Size="133.333333333334,42.6666666666667"
+          Id="Package\Sequence Container\TRUNCATETable"
+          TopLeft="54.583333414048,20.1333340462049" />
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          TopLeft="121.499999019007,62.8000007128716">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,44.8999965983634"
+              Start="0,0"
+              End="0,37.3999965983634">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.3999965983634" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="266,284"
+          Size="266,326.666666666667"
+          Id="Package\Sequence Container"
+          TopLeft="122.08333240822,60" />
+        <NodeLayout
+          Size="184,42.6666666666667"
+          Id="Package\Write Failure To Log"
+          TopLeft="299.750000018627,389.233331093988" />
+        <NodeLayout
+          Size="180,42"
+          Id="Package\Write Success To Log"
+          TopLeft="60,386.466663892668" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="122.08333240822,223.333333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="27.91666759178,163.133330559335"
+              Start="0,0"
+              End="27.91666759178,155.633330559335">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="23.91666759178,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="23.91666759178,0"
+                    Point2="27.91666759178,0"
+                    Point3="27.91666759178,4" />
+                  <mssgle:LineSegment
+                    End="27.91666759178,155.633330559335" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="388.08333240822,223.333333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="3.66666761040699,165.899997760655"
+              Start="0,0"
+              End="3.66666761040699,158.399997760655">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-0.333332389593011,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-0.333332389593011,0"
+                    Point2="3.66666761040699,0"
+                    Point3="3.66666761040699,4" />
+                  <mssgle:LineSegment
+                    End="3.66666761040699,158.399997760655" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-11.574680045843,-15.7490234375,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Sequence Container\Load DIMProducts">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="140,42.6666666666667"
+          Id="Package\Sequence Container\Load DIMProducts\DIMProducts"
+          TopLeft="165.916664276272,172.999997016788" />
+        <NodeLayout
+          Size="154.666666666667,42.6666666666667"
+          Id="Package\Sequence Container\Load DIMProducts\Derived Column"
+          TopLeft="359.166661314666,108.766664721767" />
+        <NodeLayout
+          Size="142.666666666667,42.6666666666667"
+          Id="Package\Sequence Container\Load DIMProducts\STG Products"
+          TopLeft="131.666664704681,33.7999993956089" />
+        <EdgeLayout
+          Id="Package\Sequence Container\Load DIMProducts.Paths[OLE DB Source Output]"
+          TopLeft="202.999998038014,76.4666660622756">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="233.499996609985,32.2999986594916"
+              Start="0,0"
+              End="233.499996609985,24.7999986594916">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,12.1499993297458" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,12.1499993297458"
+                    Point2="0,16.1499993297458"
+                    Point3="4,16.1499993297458" />
+                  <mssgle:LineSegment
+                    End="229.499996609985,16.1499993297458" />
+                  <mssgle:CubicBezierSegment
+                    Point1="229.499996609985,16.1499993297458"
+                    Point2="233.499996609985,16.1499993297458"
+                    Point3="233.499996609985,20.1499993297458" />
+                  <mssgle:LineSegment
+                    End="233.499996609985,24.7999986594916" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\Load DIMProducts.Paths[Derived Column Output]"
+          TopLeft="359.166661314666,130.0999980551">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-53.2499970383943,64.2333322950209"
+              Start="0,0"
+              End="-45.7499970383943,64.2333322950209">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-22.6249985191972,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.6249985191972,0"
+                    Point2="-26.6249985191972,0"
+                    Point3="-26.6249985191972,4" />
+                  <mssgle:LineSegment
+                    End="-26.6249985191972,60.2333322950209" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-26.6249985191972,60.2333322950209"
+                    Point2="-26.6249985191972,64.2333322950209"
+                    Point3="-30.6249985191972,64.2333322950209" />
+                  <mssgle:LineSegment
+                    End="-45.7499970383943,64.2333322950209" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\Load DIMProducts\DIMProducts">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\Load DIMProducts\STG Products">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
