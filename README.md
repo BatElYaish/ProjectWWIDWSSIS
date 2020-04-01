@@ -1,6 +1,5 @@
-# ProjectWWIDWSSIS \n
-Project WWI DW with SSIS\n
-Hi All,\n
+
+Hi All,
 This is a project based on the Wide World Importers sample databases for Microsoft SQL by Microsoft. 
   (Information on the sample database can be found here -> 
     https://docs.microsoft.com/en-us/sql/samples/wide-world-importers-what-is?view=sql-server-ver15)
